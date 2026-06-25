@@ -1,0 +1,3042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pricing — VALOES Yachting Advisors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:       #0B0F14;
+    --ink-soft:  #121923;
+    --ink-line:  #1C2836;
+    --paper:     #F3EEE4;
+    --paper-2:   #E9E2D3;
+    --paper-line:#D9CFB9;
+    --azure:     #2F7DD8;
+    --azure-dk:  #1E5FAC;
+    --brass:     #B89766;
+    --brass-dk:  #8E7348;
+    --muted:     #6B7682;
+    --ok:        #3A8F6B;
+  }
+  * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+  html { scroll-behavior: smooth; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Instrument Sans", system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+  .serif { font-family: "Cormorant Garamond", "Times New Roman", serif; font-weight: 400; letter-spacing: -0.01em; }
+  .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+  .eyebrow {
+    font-family: "Instrument Sans", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  a { color: inherit; }
+
+  /* ───── NAV ───── */
+  .nav {
+    background: var(--ink);
+    color: var(--paper);
+    border-bottom: 1px solid #000;
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 32px; max-width: 1280px; margin: 0 auto;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo img {
+    height: 44px;
+    width: auto;
+    display: block;
+  }
+  .logo .mark {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500;
+    font-size: 28px;
+    letter-spacing: 0.18em;
+  }
+  .logo .sub {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #9AA6B2;
+    font-weight: 500;
+  }
+  .nav-links { display: flex; gap: 32px; align-items: center; font-size: 13px; font-weight: 500; }
+  .nav-links a { text-decoration: none; color: #D4DCE4; letter-spacing: 0.04em; }
+  .nav-links a.active { color: var(--azure); }
+  .nav-links a:hover { color: var(--paper); }
+
+  /* ───── HERO ───── */
+  .hero {
+    position: relative;
+    background: var(--ink);
+    color: var(--paper);
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(11,15,20,0.35), rgba(11,15,20,0.85)),
+      linear-gradient(180deg, rgba(11,15,20,0.4) 0%, rgba(11,15,20,0.95) 100%);
+  }
+  .hero-inner {
+    position: relative;
+    max-width: 1280px; margin: 0 auto;
+    padding: 80px 32px 96px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 72px;
+    align-items: center;
+  }
+  .hero h1 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 300;
+    font-size: clamp(44px, 5.2vw, 78px);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+    margin: 20px 0 0;
+    color: var(--paper);
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--brass);
+    font-weight: 400;
+  }
+  .hero .lede {
+    max-width: 520px;
+    margin-top: 28px;
+    color: #C7CFD8;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .hero .meta-row {
+    margin-top: 40px;
+    display: flex; align-items: center; gap: 28px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    max-width: 520px;
+    flex-wrap: wrap;
+  }
+  .hero .meta-row .item { font-size: 12px; color: #9AA6B2; letter-spacing: 0.04em;}
+  .hero .meta-row .item b { color: var(--paper); font-weight: 500; display:block; font-size: 13px; margin-bottom: 2px;}
+
+  /* pricing summary card floating right */
+  .hero-card {
+    background: rgba(15,22,32,0.72);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(184,151,102,0.3);
+    padding: 36px;
+    color: var(--paper);
+    position: relative;
+  }
+  .hero-card::before {
+    content: "";
+    position: absolute; top: -1px; left: -1px; right: -1px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--brass) 0%, var(--azure) 100%);
+  }
+  .hero-card .eyebrow { color: var(--brass); margin-bottom: 18px; }
+  .hero-card h3 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1.15;
+    margin: 0 0 24px;
+    letter-spacing: -0.01em;
+  }
+  .bundle-rows { border-top: 1px solid rgba(255,255,255,0.1); }
+  .bundle-row {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    font-size: 14px;
+  }
+  .bundle-row .lbl { color: #D4DCE4; }
+  .bundle-row .val { font-family: "Cormorant Garamond", serif; font-size: 22px; color: var(--paper); letter-spacing: 0.01em; }
+  .bundle-total {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding-top: 20px;
+    margin-top: 10px;
+  }
+  .bundle-total .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--brass); }
+  .bundle-total .val {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--paper);
+    line-height: 1;
+  }
+  .bundle-total .val small { font-size: 15px; color: #9AA6B2; margin-left: 2px; font-family: "Instrument Sans", sans-serif; letter-spacing: 0; font-weight: 400;}
+
+  /* ───── SECTION FRAME ───── */
+  section { padding: 96px 0; }
+  .section-head {
+    display: grid; grid-template-columns: 1fr 2fr; gap: 72px;
+    align-items: end;
+    margin-bottom: 56px;
+  }
+  .section-head h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 300;
+    font-size: 54px;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 14px 0 0;
+  }
+  .section-head h2 em { font-style: italic; color: var(--brass-dk); }
+  .section-head p {
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0;
+    padding-bottom: 8px;
+  }
+
+  /* ───── PRICING ───── */
+  #pricing { background: var(--paper); }
+  .price-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--paper-line);
+    background: #FBF8F1;
+  }
+  .card {
+    padding: 40px 36px 36px;
+    border-right: 1px solid var(--paper-line);
+    position: relative;
+    display: flex; flex-direction: column;
+    min-height: 560px;
+  }
+  .card:last-child { border-right: none; }
+  .card .idx {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    color: var(--brass-dk);
+    letter-spacing: 0.12em;
+  }
+  .card h3 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 400;
+    font-size: 38px;
+    letter-spacing: -0.01em;
+    margin: 8px 0 2px;
+    line-height: 1.05;
+  }
+  .card .sub {
+    color: var(--muted);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  .card .price {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 300;
+    font-size: 84px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin: 36px 0 4px;
+  }
+  .card .price .price-prefix {
+    display: block;
+    font-family: "Instrument Sans", sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brass-dk);
+    margin-bottom: 6px;
+  }
+  .card.featured .price .price-prefix { color: var(--brass); }
+  .card .price .cents { font-size: 36px; vertical-align: 30px; color: var(--brass-dk); letter-spacing: 0; }
+  .card .price small {
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0;
+    font-weight: 400;
+    display: inline-block;
+    margin-left: 4px;
+    vertical-align: 12px;
+  }
+  .card ul {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 28px;
+    font-size: 14px;
+    border-top: 1px solid var(--paper-line);
+  }
+  .card li {
+    padding: 12px 0;
+    border-bottom: 1px dotted var(--paper-line);
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+    color: #1F2A36;
+  }
+  .card li::before {
+    content: "";
+    flex: none;
+    width: 6px; height: 6px;
+    background: var(--brass);
+    border-radius: 50%;
+    transform: translateY(-2px);
+  }
+  .card .btn-row { margin-top: auto; }
+
+  /* recommended ribbon */
+  .card.featured {
+    background: var(--ink);
+    color: var(--paper);
+    border-right: 1px solid var(--ink);
+  }
+  .card.featured h3 { color: var(--paper); }
+  .card.featured .sub { color: #9AA6B2; }
+  .card.featured .idx { color: var(--brass); }
+  .card.featured .price { color: var(--paper); }
+  .card.featured .price .cents { color: var(--brass); }
+  .card.featured .price small { color: #9AA6B2; }
+  .card.featured ul { border-color: rgba(255,255,255,0.12); }
+  .card.featured li { color: #D4DCE4; border-color: rgba(255,255,255,0.08);}
+  .card.featured .ribbon {
+    position: absolute;
+    top: 0; right: 0;
+    background: var(--brass);
+    color: var(--ink);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    white-space: nowrap;
+    z-index: 2;
+  }
+
+  /* ───── BUTTONS ───── */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 10px;
+    padding: 16px 28px;
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+  }
+  .btn:hover { background: var(--azure); border-color: var(--azure); }
+  .btn.ghost { background: transparent; color: var(--ink); }
+  .btn.ghost:hover { background: var(--ink); color: var(--paper); }
+  .btn.brass { background: var(--brass); border-color: var(--brass); color: var(--ink); }
+  .btn.brass:hover { background: var(--brass-dk); border-color: var(--brass-dk); color: var(--paper); }
+  .btn.azure { background: var(--azure); border-color: var(--azure); color: white; }
+  .btn.azure:hover { background: var(--azure-dk); border-color: var(--azure-dk); }
+  .btn .arrow { font-family: "Cormorant Garamond", serif; font-size: 18px; letter-spacing: 0; }
+
+  /* card featured btn override */
+  .card.featured .btn { background: var(--brass); border-color: var(--brass); color: var(--ink); }
+  .card.featured .btn:hover { background: var(--paper); border-color: var(--paper); color: var(--ink); }
+
+  /* ───── GUARANTEE STRIP ───── */
+  .guarantee {
+    background: var(--ink);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  .guarantee::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(90deg, transparent 0 100px, rgba(184,151,102,0.04) 100px 101px),
+      repeating-linear-gradient(0deg, transparent 0 100px, rgba(184,151,102,0.04) 100px 101px);
+  }
+  .guarantee-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 72px;
+    padding: 96px 32px;
+    max-width: 1280px; margin: 0 auto;
+    align-items: center;
+  }
+  .guarantee .eyebrow { color: var(--brass); }
+  .guarantee h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 300;
+    font-size: 62px;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 18px 0 24px;
+  }
+  .guarantee h2 em { font-style: italic; color: var(--brass); }
+  .guarantee p.lede {
+    color: #C7CFD8;
+    font-size: 17px;
+    line-height: 1.6;
+    max-width: 520px;
+  }
+  /* math panel */
+  .math {
+    background: rgba(243,238,228,0.04);
+    border: 1px solid rgba(184,151,102,0.28);
+    padding: 36px;
+    font-family: "JetBrains Mono", monospace;
+  }
+  .math h4 {
+    margin: 0 0 20px;
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--brass);
+  }
+  .math-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    padding: 10px 0;
+    font-size: 13px;
+    color: #D4DCE4;
+    border-bottom: 1px dashed rgba(255,255,255,0.1);
+  }
+  .math-row .val { color: var(--paper); text-align: right; font-variant-numeric: tabular-nums; }
+  .math-row.plus .val::before { content: "+ "; color: var(--brass); }
+  .math-row.eq {
+    border-bottom: none;
+    border-top: 1px solid rgba(184,151,102,0.4);
+    margin-top: 8px;
+    padding-top: 20px;
+    font-size: 14px;
+  }
+  .math-row.eq .lbl { color: var(--brass); font-weight: 500; }
+  .math-row.eq .val {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 32px;
+    color: var(--paper);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .math-note {
+    margin-top: 20px;
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 12px;
+    color: #9AA6B2;
+    line-height: 1.5;
+  }
+  .math-note .badge {
+    display: inline-block;
+    background: var(--brass);
+    color: var(--ink);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    margin-right: 10px;
+  }
+
+  /* ───── HOW IT WORKS ───── */
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .step {
+    border-top: 1px solid var(--paper-line);
+    padding-top: 24px;
+  }
+  .step .num {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--brass-dk);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-style: italic;
+  }
+  .step h4 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500;
+    font-size: 24px;
+    margin: 18px 0 10px;
+    letter-spacing: -0.01em;
+  }
+  .step p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ───── FLEET HEADER VIDEO ───── */
+  .fleet {
+    position: relative;
+    height: 100vh;
+    min-height: 640px;
+    width: 100%;
+    overflow: hidden;
+    background: #000;
+  }
+  .fleet-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transform: scale(1.12) translateY(-4%);
+    transform-origin: center top;
+    will-change: transform, opacity, filter;
+    transition: opacity 700ms cubic-bezier(.4,0,.6,1), filter 0.6s ease;
+    z-index: 1;
+  }
+  .fleet-video-a { opacity: 1; z-index: 2; }
+  .fleet-video-b { opacity: 0; z-index: 1; }
+  .fleet-video-fallback {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 30% 40%, rgba(40,80,120,0.4) 0%, transparent 60%),
+      radial-gradient(ellipse 70% 50% at 75% 65%, rgba(184,151,102,0.18) 0%, transparent 55%),
+      linear-gradient(180deg, #0a1018 0%, #0f1a24 40%, #1a2838 100%);
+  }
+  .fleet-video-fallback::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 80px,
+        rgba(184,151,102,0.04) 80px,
+        rgba(184,151,102,0.04) 81px
+      );
+    animation: drift 20s linear infinite;
+  }
+  @keyframes drift {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-80px); }
+  }
+  .fleet-vignette {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 70% at var(--mx, 50%) var(--my, 50%),
+        rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.55) 75%, rgba(0,0,0,0.85) 100%);
+    pointer-events: none;
+    transition: background 0.3s ease;
+  }
+  .fleet-scrim-top {
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 200px;
+    background: linear-gradient(180deg, rgba(11,15,20,0.75) 0%, transparent 100%);
+    pointer-events: none;
+  }
+  .fleet-scrim-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 260px;
+    background: linear-gradient(0deg, rgba(11,15,20,0.95) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  /* custom cursor */
+  .fleet-cursor {
+    position: absolute;
+    width: 42px; height: 42px;
+    border: 1px solid var(--brass);
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform, width, height;
+    transition: width 0.22s ease, height 0.22s ease, background 0.3s, border-color 0.3s;
+    mix-blend-mode: difference;
+    z-index: 10;
+  }
+  .fleet-cursor::after {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 4px; height: 4px;
+    background: var(--brass);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .fleet.hover-vessel .fleet-cursor {
+    width: 96px; height: 96px;
+    border-color: var(--paper);
+    background: rgba(255,255,255,0.08);
+  }
+
+  /* vessel chips — three hotspots mapped to services */
+  .fleet-chips {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    z-index: 5;
+  }
+  .fleet-chip {
+    position: absolute;
+    pointer-events: auto;
+    padding: 14px 20px 16px;
+    background: rgba(11,15,20,0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(184,151,102,0.35);
+    color: var(--paper);
+    text-decoration: none;
+    min-width: 200px;
+    cursor: pointer;
+    transition: background 0.35s, border-color 0.35s, box-shadow 0.35s, transform 0.35s;
+    /* opacity + transform managed by JS */
+  }
+  .fleet-chip:hover {
+    background: rgba(11,15,20,0.85);
+    border-color: var(--brass);
+    transform: translateY(-2px) !important;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  /* Three chips arranged at the top of the frame — one per vessel panel */
+  .fleet-chip[data-chip="1"] { top: 14%; left: 5%; }
+  .fleet-chip[data-chip="2"] { top: 14%; left: 50%; transform: translateX(-50%); }
+  .fleet-chip[data-chip="3"] { top: 14%; right: 5%; }
+  .fleet-chip[data-chip="2"]:hover { transform: translateX(-50%) translateY(-2px) !important; }
+  .fleet-chip-tag {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--brass);
+    margin-bottom: 6px;
+  }
+  .fleet-chip-name {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+  .fleet-chip-service {
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 12px;
+    color: #C7CFD8;
+    letter-spacing: 0.04em;
+  }
+  .fleet-chip-price {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--brass);
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(184,151,102,0.4);
+  }
+
+  /* tagline — lower-center, text floats over footage */
+  .fleet-tagline {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0 32px 14vh;
+    pointer-events: none;
+    z-index: 6;
+    transform-style: preserve-3d;
+    perspective: 1200px;
+  }
+  .fleet-tagline-inner {
+    background: rgba(11,15,20,0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(184,151,102,0.35);
+    padding: 36px 56px 40px;
+    text-align: center;
+    pointer-events: auto;
+    max-width: 720px;
+    position: relative;
+    opacity: 1;
+  }
+  .fleet-tagline-inner::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: 50%;
+    transform: translateX(-50%);
+    width: 64px; height: 2px;
+    background: var(--brass);
+    box-shadow: 0 0 18px rgba(184,151,102,0.4);
+  }
+  .fleet-eyebrow {
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 16px;
+  }
+  .fleet-headline {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 300;
+    font-size: clamp(32px, 3.6vw, 54px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    margin: 0 0 28px;
+    padding-bottom: 0.1em;
+    text-wrap: balance;
+  }
+  .fleet-headline em { display: inline-block; }
+  .fleet-headline em { font-style: italic; color: var(--brass); font-weight: 400; }
+  .fleet-sub {
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 13px;
+    color: #D4DCE4;
+    letter-spacing: 0.06em;
+    margin-bottom: 26px;
+  }
+  .fleet-cta { display: inline-flex; text-decoration: none; }
+
+  /* scroll indicator */
+  .fleet-scroll-hint {
+    position: absolute;
+    bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    color: var(--paper);
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 5;
+    animation: hint-pulse 3s ease-in-out 2s infinite;
+  }
+  .fleet-scroll-hint::after {
+    content: "";
+    display: block;
+    margin: 12px auto 0;
+    width: 1px; height: 36px;
+    background: linear-gradient(180deg, var(--brass) 0%, transparent 100%);
+  }
+  @keyframes hint-pulse {
+    0%, 100% { opacity: 0.4; transform: translate(-50%, 0); }
+    50%      { opacity: 0.9; transform: translate(-50%, 6px); }
+  }
+
+  
+  @media (hover: none) {
+    .fleet { cursor: default; }
+    .fleet-cursor { display: none; }
+  }
+  @media (max-width: 960px) {
+    .fleet { height: 80vh; min-height: 560px; cursor: default;}
+    .fleet-cursor { display: none; }
+    .fleet-chip { display: none; }
+    .fleet-tagline { padding-bottom: 10vh; }
+    .fleet-tagline-inner { padding: 0 20px; }
+    .fleet-headline { font-size: 38px; }
+  }
+
+  /* ───── BUNDLE BUILDER ───── */
+  .bundle-card { position: relative; transition: box-shadow 0.3s, transform 0.3s; }
+  .bundle-card.selected { box-shadow: inset 0 0 0 2px var(--brass); }
+  .bundle-card.featured.selected { box-shadow: inset 0 0 0 2px var(--brass), 0 0 0 1px var(--brass); }
+
+  .svc-toggle {
+    position: absolute;
+    top: 18px; right: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px 8px 10px;
+    background: rgba(243,238,228,0.7);
+    border: 1px solid var(--paper-line);
+    cursor: pointer;
+    user-select: none;
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: all 0.25s ease;
+    z-index: 3;
+  }
+  .svc-toggle.dark {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.2);
+    color: #C7CFD8;
+  }
+  .svc-toggle input { position: absolute; opacity: 0; pointer-events: none; }
+  .svc-check {
+    width: 16px; height: 16px;
+    border: 1.5px solid var(--muted);
+    background: transparent;
+    position: relative;
+    transition: all 0.2s ease;
+    flex: none;
+  }
+  .svc-toggle.dark .svc-check { border-color: #9AA6B2; }
+  .svc-check::after {
+    content: "";
+    position: absolute;
+    left: 4px; top: 0px;
+    width: 5px; height: 9px;
+    border: solid var(--paper);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) scale(0);
+    transform-origin: center;
+    transition: transform 0.18s cubic-bezier(.2,.8,.2,1);
+  }
+  .svc-toggle:hover { border-color: var(--brass); color: var(--ink); }
+  .svc-toggle.dark:hover { border-color: var(--brass); color: var(--paper); }
+  .bundle-card.selected .svc-toggle {
+    background: var(--brass);
+    border-color: var(--brass);
+    color: var(--ink);
+  }
+  .bundle-card.selected .svc-toggle.dark {
+    background: var(--brass);
+    border-color: var(--brass);
+    color: var(--ink);
+  }
+  .bundle-card.selected .svc-check {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  .bundle-card.selected .svc-check::after { transform: rotate(45deg) scale(1); }
+
+  .bundle-rail {
+    position: sticky;
+    bottom: 16px;
+    margin-top: 32px;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--ink-line);
+    z-index: 50;
+    box-shadow: 0 24px 60px -20px rgba(11,15,20,0.45);
+    overflow: hidden;
+  }
+  .bundle-rail::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--brass) 0%, var(--azure) 100%);
+  }
+  .bundle-rail-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 2.4fr 1fr auto;
+    align-items: center;
+    gap: 32px;
+    padding: 22px 28px;
+  }
+  .bundle-rail .eyebrow { color: var(--brass); margin-bottom: 4px;}
+  .bundle-rail-hint {
+    font-size: 13px;
+    color: #C7CFD8;
+    line-height: 1.35;
+  }
+  .bundle-rail-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .bundle-rail-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border: 1px dashed rgba(255,255,255,0.18);
+    font-size: 12px;
+    color: #9AA6B2;
+    letter-spacing: 0.04em;
+    transition: all 0.35s cubic-bezier(.2,.8,.2,1);
+  }
+  .bundle-rail-item .tag {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+  }
+  .bundle-rail-item .amt {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 20px;
+    color: var(--paper);
+    letter-spacing: 0.01em;
+  }
+  .bundle-rail-item.placeholder { opacity: 0.55; }
+  .bundle-rail-item.placeholder .amt { color: #4a5561; letter-spacing: 0.2em;}
+  .bundle-rail-item.active {
+    border: 1px solid var(--brass);
+    background: rgba(184,151,102,0.08);
+    color: var(--paper);
+    opacity: 1;
+  }
+  .bundle-rail-item.active .tag { color: var(--brass); }
+  .bundle-rail-item.active .amt { color: var(--paper); }
+  .bundle-rail-item.pop { animation: rail-pop 0.45s cubic-bezier(.2,.8,.2,1); }
+  @keyframes rail-pop {
+    0%   { transform: scale(0.96); }
+    50%  { transform: scale(1.04); }
+    100% { transform: scale(1); }
+  }
+
+  .bundle-rail-total {
+    text-align: right;
+    border-left: 1px solid rgba(255,255,255,0.1);
+    padding-left: 28px;
+  }
+  .bundle-rail-total-lbl {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 4px;
+  }
+  .bundle-rail-total-val {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 300;
+    font-size: 46px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    display: inline-flex;
+    align-items: baseline;
+  }
+  .bundle-rail-total-val .currency {
+    font-size: 22px;
+    color: var(--brass);
+    margin-right: 2px;
+  }
+  .bundle-rail-total-val .odometer {
+    font-variant-numeric: tabular-nums;
+  }
+  .bundle-rail-total-val small {
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 12px;
+    color: #9AA6B2;
+    font-weight: 400;
+    letter-spacing: 0;
+    margin-left: 2px;
+  }
+  .bundle-rail-cta {
+    width: auto;
+    padding: 16px 22px;
+    white-space: nowrap;
+    opacity: 0.4;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .bundle-rail.has-selection .bundle-rail-cta {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .bundle-rail-bonus {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 14px 28px;
+    background: rgba(184,151,102,0.12);
+    border-top: 1px solid rgba(184,151,102,0.3);
+    font-size: 12px;
+    color: #D4DCE4;
+    letter-spacing: 0.02em;
+  }
+  .bundle-rail-bonus[hidden] { display: none !important; }
+  .bundle-rail-bonus b { color: var(--brass); }
+  .bundle-rail-bonus .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--ok);
+    box-shadow: 0 0 0 4px rgba(58,143,107,0.2);
+    flex: none;
+  }
+
+  @media (max-width: 960px) {
+    .bundle-rail { position: static; margin-top: 24px; }
+    .bundle-rail-inner {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      text-align: center;
+    }
+    .bundle-rail-total { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; text-align: center;}
+    .bundle-rail-total-val { justify-content: center; }
+    .bundle-rail-cta { width: 100%; }
+    .bundle-rail-bonus { flex-direction: column; text-align: center; padding: 14px 20px;}
+  }
+
+  /* ───── FAQ ───── */
+  #faq { background: var(--paper-2); }
+  .faq-list { border-top: 1px solid var(--paper-line); }
+  .faq-item {
+    border-bottom: 1px solid var(--paper-line);
+    padding: 24px 0;
+  }
+  .faq-q {
+    display: flex; align-items: baseline; justify-content: space-between;
+    cursor: pointer;
+    gap: 24px;
+  }
+  .faq-q h5 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500;
+    font-size: 22px;
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+  .faq-q .plus {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 28px;
+    color: var(--brass-dk);
+    font-weight: 300;
+    transition: transform 0.25s ease;
+    line-height: 1;
+  }
+  .faq-item[open] .plus { transform: rotate(45deg); }
+  .faq-a {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.65;
+    max-width: 720px;
+    margin-top: 14px;
+  }
+  .faq-item:not([open]) .faq-a { display: none; }
+  .faq-item summary { list-style: none; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+
+  /* ───── FINAL CTA ───── */
+  .final {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+    padding: 120px 32px;
+  }
+  .final h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 300;
+    font-size: 72px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0 0 20px;
+    max-width: 900px;
+    margin-left: auto; margin-right: auto;
+  }
+  .final h2 em { font-style: italic; color: var(--brass); }
+  .final p { color: #9AA6B2; font-size: 16px; max-width: 540px; margin: 0 auto 40px; }
+  .final .btn-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .final .btn { width: auto; padding: 18px 32px;}
+
+  /* ───── FOOTER ───── */
+  footer {
+    background: #06090D;
+    color: #7A8593;
+    padding: 40px 32px;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+  .foot-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 1280px; margin: 0 auto;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .foot-inner a { color: #7A8593; text-decoration: none; margin-left: 24px; }
+  .foot-inner a:hover { color: var(--paper); }
+
+  /* ───── DASHBOARD DEMO MODAL ───── */
+  .dash-scrim {
+    position: fixed; inset: 0;
+    background: rgba(6,9,13,0.85);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center; justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    padding: 24px;
+  }
+  .dash-scrim[hidden] { display: none !important; }
+  .dash-scrim.active { display: flex; opacity: 1; }
+  .dash-modal {
+    width: 100%; max-width: 1180px;
+    height: min(92vh, 780px);
+    background: #F7F3EA;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--paper-line);
+    box-shadow: 0 40px 120px rgba(0,0,0,0.6);
+    transform: translateY(20px) scale(0.98);
+    transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
+    overflow: hidden;
+  }
+  .dash-scrim.active .dash-modal { transform: translateY(0) scale(1); }
+  .dash-close {
+    position: absolute; top: 12px; right: 14px;
+    background: transparent; border: none;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 28px; cursor: pointer; color: var(--muted);
+    line-height: 1; width: 32px; height: 32px;
+    z-index: 3;
+  }
+  .dash-close:hover { color: var(--ink); }
+
+  .dash-chrome {
+    display: flex; align-items: center;
+    background: #E9E3D3;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--paper-line);
+    gap: 16px;
+    flex: none;
+  }
+  .dash-traffic { display: flex; gap: 6px; }
+  .dash-traffic span {
+    width: 11px; height: 11px; border-radius: 50%;
+    background: #D9CFB9;
+  }
+  .dash-traffic span:nth-child(1) { background: #E56C63; }
+  .dash-traffic span:nth-child(2) { background: #E5B35F; }
+  .dash-traffic span:nth-child(3) { background: #7EC082; }
+  .dash-url {
+    flex: 1;
+    background: var(--paper);
+    border: 1px solid var(--paper-line);
+    padding: 6px 14px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 0.03em;
+  }
+  .dash-url b { color: var(--ink); font-weight: 500;}
+  .dash-lock { color: var(--ok); font-size: 9px;}
+  .dash-chrome-spacer { width: 32px; }
+
+  .dash-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  /* sidebar */
+  .dash-nav {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 24px 0;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .dash-brand {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid var(--ink-line);
+    display: flex; flex-direction: column;
+    margin-bottom: 12px;
+  }
+  .dash-brand .mark {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: 0.18em;
+  }
+  .dash-brand .sub {
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #9AA6B2;
+    font-weight: 500;
+    margin-top: 2px;
+  }
+  .dash-nav nav {
+    display: flex; flex-direction: column;
+    flex: 1;
+  }
+  .dash-nav nav a {
+    padding: 11px 20px;
+    font-size: 12px;
+    color: #9AA6B2;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    display: flex; align-items: center; gap: 8px;
+    justify-content: space-between;
+  }
+  .dash-nav nav a:hover { color: var(--paper); }
+  .dash-nav nav a.active {
+    color: var(--paper);
+    background: rgba(255,255,255,0.04);
+    border-left-color: var(--brass);
+  }
+  .nav-badge {
+    background: var(--brass);
+    color: var(--ink);
+    font-size: 9px;
+    padding: 2px 6px;
+    font-family: "JetBrains Mono", monospace;
+    letter-spacing: 0.1em;
+  }
+  .dash-concierge {
+    padding: 14px 20px;
+    margin: auto 12px 8px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--ink-line);
+    display: grid;
+    grid-template-columns: 32px 1fr auto;
+    gap: 10px;
+    align-items: center;
+  }
+  .dash-avatar {
+    width: 32px; height: 32px;
+    background: var(--brass);
+    color: var(--ink);
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500;
+    font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    letter-spacing: 0.04em;
+  }
+  .dash-name { font-size: 12px; color: var(--paper); font-weight: 500;}
+  .dash-role { font-size: 10px; color: #9AA6B2; letter-spacing: 0.05em;}
+  .dash-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--ok);
+    box-shadow: 0 0 0 3px rgba(58,143,107,0.2);
+  }
+
+  /* main */
+  .dash-main {
+    padding: 24px 28px 0;
+    overflow-y: auto;
+    background: #F7F3EA;
+  }
+  .dash-head {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 20px;
+  }
+  .dash-eyebrow {
+    font-family: "Instrument Sans", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .dash-head h3 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 300;
+    font-size: 30px;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .dash-head h3 em { font-style: italic; color: var(--brass-dk); }
+  .dash-range {
+    display: inline-flex;
+    border: 1px solid var(--paper-line);
+    background: var(--paper);
+  }
+  .dash-range button {
+    background: transparent; border: none;
+    padding: 8px 14px;
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    border-right: 1px solid var(--paper-line);
+  }
+  .dash-range button:last-child { border-right: none; }
+  .dash-range button.active { background: var(--ink); color: var(--paper); }
+
+  /* KPI tiles */
+  .dash-tiles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .dash-tile {
+    background: var(--paper);
+    border: 1px solid var(--paper-line);
+    padding: 16px 18px 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .t-lbl {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .t-val {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 300;
+    font-size: 34px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 4px;
+  }
+  .t-val .t-pre { font-size: 18px; color: var(--brass-dk); vertical-align: 8px; }
+  .t-val .t-suf { font-size: 16px; color: var(--muted); vertical-align: 8px; letter-spacing: 0;}
+  .t-delta {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+    margin-bottom: 4px;
+  }
+  .t-delta.up { color: var(--ok); }
+  .t-delta.down { color: var(--ok); }
+  .t-spark {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    width: 100%; height: 24px;
+    color: var(--brass);
+    opacity: 0.65;
+  }
+
+  /* Lower grid */
+  .dash-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "leads queue"
+      "perf  perf";
+    gap: 14px;
+  }
+  .dash-card {
+    background: var(--paper);
+    border: 1px solid var(--paper-line);
+    padding: 18px 20px;
+  }
+  .dash-card.lead-feed { grid-area: leads; }
+  .dash-card.content-queue { grid-area: queue; }
+  .dash-card.ad-perf { grid-area: perf; }
+  .dash-card header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 14px;
+    gap: 12px;
+  }
+  .dash-card h4 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500;
+    font-size: 18px;
+    margin: 2px 0 0;
+    letter-spacing: -0.005em;
+  }
+  .dash-link {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--brass-dk);
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .dash-link:hover { color: var(--ink); }
+
+  .lead-list { list-style: none; padding: 0; margin: 0; }
+  .lead-list li {
+    display: grid;
+    grid-template-columns: 32px 1fr auto;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px dotted var(--paper-line);
+    align-items: center;
+  }
+  .lead-list li:first-child { border-top: none; padding-top: 4px; }
+  .lead-avatar {
+    width: 32px; height: 32px;
+    background: var(--ink); color: var(--paper);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 13px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    letter-spacing: 0.02em;
+  }
+  .lead-name {
+    font-size: 13px; font-weight: 500; color: var(--ink);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .lead-tag {
+    background: #C94B4B; color: white;
+    font-size: 8px; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 2px 6px;
+    font-family: "Instrument Sans", sans-serif;
+  }
+  .lead-tag.warm { background: var(--brass); color: var(--ink);}
+  .lead-meta { font-size: 11px; color: var(--muted); letter-spacing: 0.02em;}
+  .lead-time {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px; color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .post-list { list-style: none; padding: 0; margin: 0; }
+  .post-list li {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    gap: 10px;
+    padding: 10px 0;
+    border-top: 1px dotted var(--paper-line);
+    align-items: center;
+  }
+  .post-list li:first-child { border-top: none; padding-top: 4px; }
+  .post-icon {
+    width: 22px; height: 22px;
+    display: inline-block;
+    background: var(--paper-2);
+    position: relative;
+  }
+  .post-icon.ig { background: linear-gradient(135deg, #F58529 0%, #DD2A7B 50%, #8134AF 100%); }
+  .post-icon.fb { background: #1877F2; }
+  .post-icon.article { background: var(--ink); }
+  .post-icon.article::after {
+    content: ""; position: absolute; inset: 5px;
+    background-image: linear-gradient(var(--paper) 1.5px, transparent 1.5px);
+    background-size: 100% 4px;
+  }
+  .post-icon.ads { background: var(--brass); }
+  .post-title { font-size: 12px; font-weight: 500; color: var(--ink);}
+  .post-meta { font-size: 10px; color: var(--muted); letter-spacing: 0.03em;}
+  .post-status {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    font-family: "Instrument Sans", sans-serif;
+    font-weight: 500;
+  }
+  .post-status.scheduled { background: rgba(58,143,107,0.14); color: var(--ok);}
+  .post-status.draft { background: rgba(107,118,130,0.15); color: var(--muted);}
+  .post-status.review { background: var(--brass); color: var(--ink);}
+
+  .ad-perf header { margin-bottom: 8px; }
+  .chart-legend { display: flex; gap: 16px; font-size: 10px; color: var(--muted); letter-spacing: 0.08em;}
+  .chart-legend i {
+    display: inline-block; width: 10px; height: 2px;
+    margin-right: 6px; vertical-align: middle;
+  }
+  .chart-legend i.brass { background: var(--brass); }
+  .chart-legend i.azure { background: var(--azure); }
+  .perf-chart {
+    width: 100%;
+    height: 180px;
+    display: block;
+  }
+  .perf-chart .grid line {
+    stroke: var(--paper-line);
+    stroke-width: 1;
+    stroke-dasharray: 2 3;
+  }
+  .perf-chart .line-leads {
+    fill: none;
+    stroke: var(--brass-dk);
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+  .perf-chart .line-spend {
+    fill: none;
+    stroke: var(--azure);
+    stroke-width: 1.5;
+    opacity: 0.7;
+  }
+  .perf-chart .area { opacity: 0.9; }
+
+  .dash-footer {
+    padding: 18px 0 22px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+    font-style: italic;
+    font-family: "Cormorant Garamond", serif;
+  }
+
+  @media (max-width: 960px) {
+    .dash-modal { height: 94vh; }
+    .dash-body { grid-template-columns: 1fr; }
+    .dash-nav { display: none; }
+    .dash-tiles { grid-template-columns: 1fr 1fr; }
+    .dash-grid { grid-template-columns: 1fr; grid-template-areas: "leads" "queue" "perf"; }
+    .dash-main { padding: 18px; }
+  }
+
+  /* ───── CHAT WIDGET ───── */
+  .chat-launcher {
+    position: fixed;
+    bottom: 24px; left: 24px;
+    z-index: 800;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--ink-line);
+    padding: 12px 18px 12px 12px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer;
+    font-family: "Instrument Sans", sans-serif;
+    box-shadow: 0 20px 50px -10px rgba(11,15,20,0.5);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .chat-launcher:hover { transform: translateY(-2px); background: var(--ink-soft);}
+  .chat-launcher .chat-avatar {
+    width: 36px; height: 36px;
+    background: var(--brass); color: var(--ink);
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500; font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+    letter-spacing: 0.02em;
+    flex: none;
+  }
+  .chat-launcher-text {
+    font-size: 12px; color: #C7CFD8;
+    text-align: left; line-height: 1.3;
+  }
+  .chat-launcher-text b { color: var(--paper); font-weight: 500; font-size: 13px;}
+  .chat-launcher-sub {
+    display: block; font-size: 10px; color: #9AA6B2;
+    letter-spacing: 0.04em; margin-top: 1px;
+  }
+  .chat-launcher-pulse {
+    position: absolute;
+    top: 12px; left: 42px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--ok);
+    box-shadow: 0 0 0 0 rgba(58,143,107,0.5);
+    animation: chat-pulse 2s infinite;
+  }
+  @keyframes chat-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(58,143,107,0.5);}
+    70% { box-shadow: 0 0 0 10px rgba(58,143,107,0);}
+    100% { box-shadow: 0 0 0 0 rgba(58,143,107,0);}
+  }
+  .chat-launcher.hidden { display: none;}
+
+  .chat-panel {
+    position: fixed;
+    bottom: 24px; left: 24px;
+    width: 380px;
+    max-width: calc(100vw - 48px);
+    height: 540px;
+    max-height: calc(100vh - 48px);
+    background: var(--paper);
+    border: 1px solid var(--paper-line);
+    box-shadow: 0 30px 80px -10px rgba(11,15,20,0.45);
+    z-index: 810;
+    display: none;
+    flex-direction: column;
+    transform: translateY(12px) scale(0.98);
+    transition: transform 0.28s cubic-bezier(.2,.8,.2,1), opacity 0.28s ease;
+    opacity: 0;
+  }
+  .chat-panel.active { display: flex; transform: translateY(0) scale(1); opacity: 1; }
+  .chat-panel::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--brass) 0%, var(--azure) 100%);
+  }
+
+  .chat-head {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 18px 18px 16px;
+    border-bottom: 1px solid var(--paper-line);
+  }
+  .chat-avatar.big {
+    width: 44px; height: 44px;
+    background: var(--ink); color: var(--paper);
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500; font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+    letter-spacing: 0.02em;
+  }
+  .chat-head-name {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 20px; font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.005em;
+  }
+  .chat-head-role {
+    font-size: 11px; color: var(--muted);
+    letter-spacing: 0.04em;
+    display: flex; align-items: center; gap: 6px;
+    margin-top: 2px;
+  }
+  .chat-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--ok);
+    box-shadow: 0 0 0 3px rgba(58,143,107,0.2);
+  }
+  .chat-close {
+    background: transparent; border: none;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 24px; color: var(--muted);
+    cursor: pointer; line-height: 1; width: 28px; height: 28px;
+  }
+  .chat-close:hover { color: var(--ink); }
+
+  .chat-log {
+    flex: 1;
+    overflow-y: auto;
+    padding: 18px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .chat-msg {
+    max-width: 85%;
+    padding: 10px 14px;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0.005em;
+  }
+  .chat-msg.them {
+    background: white;
+    border: 1px solid var(--paper-line);
+    color: var(--ink);
+    align-self: flex-start;
+  }
+  .chat-msg.you {
+    background: var(--ink);
+    color: var(--paper);
+    align-self: flex-end;
+  }
+  .chat-msg.typing {
+    display: inline-flex; gap: 4px; padding: 14px 16px;
+  }
+  .chat-msg.typing span {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--muted);
+    animation: chat-bounce 1.2s infinite;
+  }
+  .chat-msg.typing span:nth-child(2) { animation-delay: 0.2s;}
+  .chat-msg.typing span:nth-child(3) { animation-delay: 0.4s;}
+  @keyframes chat-bounce {
+    0%, 80%, 100% { transform: translateY(0); opacity: 0.4;}
+    40% { transform: translateY(-4px); opacity: 1;}
+  }
+
+  .chat-suggest {
+    padding: 0 18px 10px;
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .chat-suggest button {
+    background: transparent;
+    border: 1px solid var(--paper-line);
+    padding: 7px 11px;
+    font-family: inherit; font-size: 11px;
+    color: var(--ink);
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: all 0.15s ease;
+  }
+  .chat-suggest button:hover { background: var(--ink); color: var(--paper); border-color: var(--ink);}
+  .chat-suggest.hidden { display: none;}
+
+  .chat-form {
+    display: flex;
+    border-top: 1px solid var(--paper-line);
+  }
+  .chat-form input {
+    flex: 1;
+    border: none;
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 14px;
+    background: transparent;
+    color: var(--ink);
+    outline: none;
+  }
+  .chat-form input::placeholder { color: var(--muted);}
+  .chat-form button {
+    background: var(--brass);
+    color: var(--ink);
+    border: none;
+    padding: 0 22px;
+    cursor: pointer;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 22px;
+    line-height: 1;
+  }
+  .chat-form button:hover { background: var(--brass-dk); color: var(--paper);}
+  .chat-disclaimer {
+    padding: 8px 18px 12px;
+    font-size: 10px; color: var(--muted);
+    letter-spacing: 0.04em; text-align: center;
+    border-top: 1px solid var(--paper-line);
+    background: var(--paper-2);
+  }
+
+  @media (max-width: 560px) {
+    .chat-launcher .chat-launcher-text { display: none;}
+    .chat-launcher { padding: 10px;}
+    .chat-launcher-pulse { top: 8px; left: 38px;}
+    .chat-panel {
+      bottom: 0; left: 0; width: 100%;
+      height: 75vh; max-height: none;
+      border-bottom: none;
+    }
+  }
+
+  /* ───── EXIT MODAL ───── */
+  .modal-scrim {
+    position: fixed; inset: 0;
+    background: rgba(6,9,13,0.75);
+    backdrop-filter: blur(6px);
+    display: none;
+    align-items: center; justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .modal-scrim.active { display: flex; opacity: 1; }
+  .modal {
+    background: var(--paper);
+    max-width: 560px;
+    width: calc(100% - 48px);
+    position: relative;
+    border: 1px solid var(--paper-line);
+    transform: translateY(12px) scale(0.98);
+    transition: transform 0.35s cubic-bezier(.2,.8,.2,1);
+    overflow: hidden;
+  }
+  .modal-scrim.active .modal { transform: translateY(0) scale(1); }
+  .modal::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--brass) 0%, var(--azure) 100%);
+  }
+  .modal-close {
+    position: absolute; top: 16px; right: 16px;
+    background: transparent; border: none;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 28px;
+    cursor: pointer; color: var(--muted);
+    line-height: 1;
+    width: 32px; height: 32px;
+  }
+  .modal-close:hover { color: var(--ink); }
+  .modal-body { padding: 48px 44px 40px;}
+  .modal .eyebrow { color: var(--brass-dk); }
+  .modal h3 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 300;
+    font-size: 40px;
+    line-height: 1.05;
+    margin: 14px 0 12px;
+    letter-spacing: -0.015em;
+  }
+  .modal h3 em { font-style: italic; color: var(--brass-dk); }
+  .modal p { color: var(--muted); font-size: 15px; line-height: 1.55; margin: 0 0 28px;}
+  .modal form { display: grid; gap: 10px; }
+  .modal .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  @media (max-width: 560px) {
+    .modal .form-grid { grid-template-columns: 1fr; }
+  }
+  .modal input[type=text],
+  .modal input[type=email],
+  .modal input[type=tel],
+  .modal textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    box-sizing: border-box;
+  }
+  .modal textarea {
+    resize: vertical;
+    min-height: 84px;
+    line-height: 1.5;
+    font-family: "Instrument Sans", sans-serif;
+  }
+  .modal input:focus,
+  .modal textarea:focus {
+    border-color: var(--azure);
+    box-shadow: 0 0 0 3px rgba(78, 125, 150, 0.15);
+  }
+  .modal input::placeholder,
+  .modal textarea::placeholder { color: var(--muted); }
+  .modal button[type=submit] {
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 16px 28px;
+    margin-top: 4px;
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .modal button[type=submit]:hover { background: var(--azure); }
+  .modal button[type=submit][disabled] { opacity: 0.6; cursor: not-allowed; }
+  .modal .fine { font-size: 11px; color: var(--muted); margin-top: 16px; letter-spacing: 0.04em;}
+  .modal .ship {
+    display: flex; gap: 14px; align-items: center;
+    padding: 16px 18px;
+    background: rgba(184,151,102,0.08);
+    border: 1px solid rgba(184,151,102,0.3);
+    margin-bottom: 28px;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .modal .ship .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--ok);
+    box-shadow: 0 0 0 4px rgba(58,143,107,0.15);
+    flex: none;
+  }
+  .modal .success {
+    text-align: center;
+    padding: 20px 0;
+  }
+  .modal .success h3 { color: var(--ok); }
+
+  /* ───── TWEAKS ───── */
+  .tweaks {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    background: var(--ink);
+    color: var(--paper);
+    width: 280px;
+    padding: 20px;
+    z-index: 900;
+    font-size: 12px;
+    display: none;
+    border: 1px solid var(--ink-line);
+  }
+  .tweaks.active { display: block; }
+  .tweaks h6 {
+    margin: 0 0 14px;
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--brass);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .tweaks label { display: block; margin-bottom: 12px; color: #C7CFD8; }
+  .tweaks label span { display: block; margin-bottom: 4px; font-size: 10px; color: #9AA6B2; text-transform: uppercase; letter-spacing: 0.12em;}
+  .tweaks input[type=text], .tweaks input[type=number] {
+    width: 100%; background: var(--ink-soft); border: 1px solid var(--ink-line);
+    color: var(--paper); padding: 6px 8px; font-family: inherit; font-size: 12px;
+  }
+  .tweaks .swatches { display: flex; gap: 6px;}
+  .tweaks .swatch { width: 24px; height: 24px; cursor: pointer; border: 2px solid transparent;}
+  .tweaks .swatch.active { border-color: var(--paper);}
+  .tweaks .variant-row { display: flex; gap: 6px;}
+  .tweaks .variant-row button {
+    flex: 1; padding: 6px; background: var(--ink-soft); color: #C7CFD8; border: 1px solid var(--ink-line);
+    cursor: pointer; font-family: inherit; font-size: 11px;
+  }
+  .tweaks .variant-row button.active { background: var(--brass); color: var(--ink); border-color: var(--brass);}
+
+  /* ───── RESPONSIVE ───── */
+  @media (max-width: 960px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+    .section-head { grid-template-columns: 1fr; gap: 20px; }
+    .price-grid { grid-template-columns: 1fr; }
+    .card { border-right: none; border-bottom: 1px solid var(--paper-line); }
+    .guarantee-inner { grid-template-columns: 1fr; padding: 64px 32px;}
+    .how-grid { grid-template-columns: 1fr;}
+    .section-head h2, .guarantee h2, .final h2 { font-size: 42px;}
+    .card .price { font-size: 72px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════ NAV ════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#">
+      <img src="https://yachtingadvisors.com/wp-content/uploads/2024/04/valoes-yachting-advisors-WHITE.png" alt="VALOES Yachting Advisors" />
+    </a>
+    <div class="nav-links">
+      <a href="#">Ai &amp; Marketing Advisors</a>
+      <a href="#" class="active">Ai Marketer</a>
+      <a href="#">Yachting News</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════ FLEET HEADER VIDEO ════════ -->
+
+<section class="fleet" id="fleet" aria-label="Marketing fleet header">
+  <video class="fleet-video fleet-video-a" autoplay muted playsinline preload="auto" poster="" id="fleet-video-a">
+    <source src="https://yachtingadvisors.s3.us-east-1.amazonaws.com/9b42f35b-5856-4a73-a05f-ae27b85dd6f4.mp4" type="video/mp4">
+  </video>
+  <video class="fleet-video fleet-video-b" muted playsinline preload="auto" poster="" id="fleet-video-b">
+    <source src="https://yachtingadvisors.s3.us-east-1.amazonaws.com/9b42f35b-5856-4a73-a05f-ae27b85dd6f4.mp4" type="video/mp4">
+  </video>
+  <!-- cinematic fallback while video loads / if blocked -->
+  <div class="fleet-video-fallback" aria-hidden="true"></div>
+
+  <div class="fleet-scrim-top"></div>
+  <div class="fleet-vignette" data-vignette></div>
+
+  <!-- vessel chips -->
+  <div class="fleet-chips">
+    <a href="#website" class="fleet-chip" data-chip="1" data-hover-vessel>
+      <div class="fleet-chip-tag">01 · WEB</div>
+      <div class="fleet-chip-name">Flagship Website</div>
+      <div class="fleet-chip-price"><span style="font-size:10px;color:#9AA6B2;font-family:'Instrument Sans';letter-spacing:0.18em;text-transform:uppercase;display:block;margin-bottom:2px;">Starting at</span>$99<span style="font-size:12px;color:#9AA6B2;font-family:'Instrument Sans';"> /mo</span></div>
+    </a>
+    <a href="#socials" class="fleet-chip" data-chip="2" data-hover-vessel>
+      <div class="fleet-chip-tag">02 · SOCIAL</div>
+      <div class="fleet-chip-name">Organic Socials</div>
+      <div class="fleet-chip-price">$99<span style="font-size:12px;color:#9AA6B2;font-family:'Instrument Sans';"> /mo</span></div>
+    </a>
+    <a href="#ads" class="fleet-chip" data-chip="3" data-hover-vessel>
+      <div class="fleet-chip-tag">03 · ADS</div>
+      <div class="fleet-chip-name">Targeted Ads</div>
+      <div class="fleet-chip-price">$99<span style="font-size:12px;color:#9AA6B2;font-family:'Instrument Sans';"> /mo</span></div>
+    </a>
+  </div>
+
+  <!-- tagline card -->
+  <div class="fleet-tagline">
+    <div class="fleet-tagline-inner" data-tilt>
+      <div class="fleet-eyebrow">The Complete Bundle</div>
+      <h2 class="fleet-headline">Unleash your <em>marketing&nbsp;engine.</em></h2>
+      <div class="fleet-sub">Three services. One complete bundle. $297 all-in.</div>
+      <a href="#pricing" class="btn fleet-cta" style="background:var(--brass);border-color:var(--brass);color:var(--ink);width:auto;padding:16px 28px;">
+        Commission your bundle <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="fleet-scrim-bottom"></div>
+  <div class="fleet-scroll-hint">Scroll to pricing</div>
+</section>
+
+<!-- ════════ HERO ════════ -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow" style="color: var(--brass);">Ai Marketer · Essentials</div>
+      <h1>A complete growth engine<br/>for your brokerage — <em>$297/mo.</em></h1>
+      <p class="lede">
+        Three AI-powered services working in concert: your own website, organic social publishing, and targeted social ads. Month-to-month, no long-term contract, launched in under 14 days.
+      </p>
+      <div class="meta-row">
+        <div class="item"><b>14 days</b>To launch</div>
+        <div class="item"><b>Month-to-month</b>No contract</div>
+        <div class="item"><b>Lead guarantee</b>With only $200/mo ad spend</div>
+      </div>
+      <div style="margin-top: 28px; display: flex; gap: 14px; flex-wrap: wrap;">
+        <button class="btn brass" id="open-dashboard" style="width:auto; padding: 14px 22px;">
+          See a live dashboard <span class="arrow">→</span>
+        </button>
+        <a class="btn ghost" href="#pricing" style="width:auto; padding: 14px 22px; color: var(--paper); border-color: rgba(255,255,255,0.3);">
+          Build your bundle <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+    <aside class="hero-card">
+      <div class="eyebrow">The Essentials Bundle</div>
+      <h3>Everything a modern yacht broker needs to capture demand online.</h3>
+      <div class="bundle-rows">
+        <div class="bundle-row"><span class="lbl">01 · Custom Website</span><span class="val">from $99</span></div>
+        <div class="bundle-row"><span class="lbl">02 · Organic Socials</span><span class="val">$99</span></div>
+        <div class="bundle-row"><span class="lbl">03 · Targeted Social Ads</span><span class="val">$99</span></div>
+      </div>
+      <div class="bundle-total">
+        <span class="lbl">Total / mo</span>
+        <span class="val">$297<small>/mo</small></span>
+      </div>
+    </aside>
+  </div>
+</header>
+
+<!-- ════════ PRICING ════════ -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Pricing</div>
+        <h2>Three services,<br/><em>one flat price each.</em></h2>
+      </div>
+      <p>
+        Pick the services you want à la carte — or bundle all three and activate our lead guarantee. Every plan includes a dedicated human marketing manager, our AI content engine, and your broker dashboard.
+      </p>
+    </div>
+
+    <div class="price-grid">
+
+      <!-- Card 1 -->
+      <article class="card bundle-card" data-svc="web" data-price="99">
+        <label class="svc-toggle" aria-label="Include Website in bundle">
+          <input type="checkbox" data-svc-input="web" />
+          <span class="svc-check" aria-hidden="true"></span>
+          <span class="svc-label">Include</span>
+        </label>
+        <div class="idx">01 / WEB</div>
+        <h3>Website</h3>
+        <div class="sub">Your personal broker site</div>
+        <div class="price"><span class="price-prefix">Starting at</span><span class="cents">$</span>99<small>/mo</small></div>
+        <ul>
+          <li>Custom-designed broker site (no templates)</li>
+          <li>Any-boat MLS feed + listing showcase</li>
+          <li>Optimized for AI &amp; search engines</li>
+          <li>Website AI chat trained on yachting</li>
+          <li>Fully managed &amp; hosted</li>
+        </ul>
+        <div class="btn-row">
+          <a class="btn ghost" href="https://link.waveapps.com/hsb3e8-umxsh6" target="_blank">
+            Check out with Wave <span class="arrow">→</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Card 2 - featured -->
+      <article class="card featured bundle-card" data-svc="ads" data-price="99">
+        <label class="svc-toggle dark" aria-label="Include Targeted Ads in bundle">
+          <input type="checkbox" data-svc-input="ads" />
+          <span class="svc-check" aria-hidden="true"></span>
+          <span class="svc-label">Include</span>
+        </label>
+        <div class="ribbon">Popular</div>
+        <div class="idx">03 / ADS</div>
+        <h3>Targeted Ads</h3>
+        <div class="sub">Instagram &amp; Facebook paid</div>
+        <div class="price"><span class="cents">$</span>99<small>/mo</small></div>
+        <ul>
+          <li>2 ongoing targeted ads — managed monthly</li>
+          <li>Buyer-intent audience targeting</li>
+          <li>Creative built from your listings</li>
+          <li>Re-engagement of qualified prospects</li>
+          <li>Monthly performance reporting</li>
+        </ul>
+        <div class="btn-row">
+          <a class="btn" href="https://link.waveapps.com/hsb3e8-umxsh6" target="_blank">
+            Check out with Wave <span class="arrow">→</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="card bundle-card" data-svc="social" data-price="99">
+        <label class="svc-toggle" aria-label="Include Organic Socials in bundle">
+          <input type="checkbox" data-svc-input="social" />
+          <span class="svc-check" aria-hidden="true"></span>
+          <span class="svc-label">Include</span>
+        </label>
+        <div class="idx">02 / SOCIAL</div>
+        <h3>Organic Socials</h3>
+        <div class="sub">Content engine, on autopilot</div>
+        <div class="price"><span class="cents">$</span>99<small>/mo</small></div>
+        <ul>
+          <li>2 weekly social posts — video reels + news</li>
+          <li>2 weekly SEO articles on your website</li>
+          <li>AI-written captions with trending hashtags</li>
+          <li>Cross-posted to all your accounts</li>
+          <li>Human concierge proofs &amp; publishes</li>
+        </ul>
+        <div class="btn-row">
+          <a class="btn ghost" href="https://link.waveapps.com/3vz866-ffyxmc" target="_blank">
+            Check out with Wave <span class="arrow">→</span>
+          </a>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Live bundle rail -->
+    <div class="bundle-rail" id="bundle-rail" aria-live="polite">
+      <div class="bundle-rail-inner">
+        <div class="bundle-rail-lead">
+          <div class="eyebrow">Your bundle</div>
+          <div class="bundle-rail-hint" id="bundle-hint">Toggle services above to build your plan</div>
+        </div>
+        <div class="bundle-rail-items" id="bundle-items">
+          <div class="bundle-rail-item placeholder" data-svc="web">
+            <span class="tag">01 · WEB</span><span class="amt">— — —</span>
+          </div>
+          <div class="bundle-rail-item placeholder" data-svc="social">
+            <span class="tag">02 · SOCIAL</span><span class="amt">— — —</span>
+          </div>
+          <div class="bundle-rail-item placeholder" data-svc="ads">
+            <span class="tag">03 · ADS</span><span class="amt">— — —</span>
+          </div>
+        </div>
+        <div class="bundle-rail-total">
+          <div class="bundle-rail-total-lbl">Total / mo</div>
+          <div class="bundle-rail-total-val">
+            <span class="currency">$</span><span class="odometer" id="bundle-total">0</span><small>/mo</small>
+          </div>
+        </div>
+        <a class="btn brass bundle-rail-cta" id="bundle-cta" href="#pricing">
+          <span id="bundle-cta-label">Select a service</span> <span class="arrow">→</span>
+        </a>
+      </div>
+      <div class="bundle-rail-bonus" id="bundle-bonus" hidden>
+        <span class="dot"></span>
+        Add <b>$200/mo</b> in ad spend at checkout to activate the lead guarantee — total $500/mo.
+      </div>
+    </div>
+
+  </div>
+</section>
+<section class="guarantee" style="padding: 0;">
+  <div class="guarantee-inner">
+    <div>
+      <div class="eyebrow">The Lead Guarantee</div>
+      <h2>Add <em>$200/mo</em> in ad&nbsp;spend &mdash;<br/>we guarantee&nbsp;leads.</h2>
+      <p class="lede">
+        When you subscribe to all three Essentials and commit $200/month to the ad platforms on top of management, your total investment is just <b style="color:var(--paper)">$500/month</b>. At that spend, we guarantee leads in your inbox — or we keep working for free until we deliver.
+      </p>
+      <div style="margin-top: 36px;">
+        <a class="btn brass" href="#pricing" style="width:auto; padding: 16px 28px;">Activate the bundle <span class="arrow">→</span></a>
+      </div>
+    </div>
+    <aside class="math">
+      <h4>Monthly Investment · Breakdown</h4>
+      <div class="math-row plus"><span class="lbl">Website management</span><span class="val">$99</span></div>
+      <div class="math-row plus"><span class="lbl">Organic socials</span><span class="val">$99</span></div>
+      <div class="math-row plus"><span class="lbl">Targeted ad management</span><span class="val">$99</span></div>
+      <div class="math-row plus"><span class="lbl">Ad platform spend (IG/FB)</span><span class="val">$200</span></div>
+      <div class="math-row eq"><span class="lbl">Total invested per month</span><span class="val">$500.00</span></div>
+      <div class="math-note">
+        <span class="badge">Guaranteed</span>
+        Leads delivered — or we continue working at no cost until we do.
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ════════ HOW IT WORKS ════════ -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">How it works</div>
+        <h2>From signature<br/>to <em>first lead.</em></h2>
+      </div>
+      <p>A short, well-choreographed onboarding. Sign up through Wave, meet your dedicated concierge, and we handle the rest — your site, socials, and ad funnel go live within two weeks.</p>
+    </div>
+    <div class="how-grid">
+      <div class="step">
+        <div class="num">I.</div>
+        <h4>Checkout via Wave</h4>
+        <p>Secure, instant signup through our Wave payment link. Month-to-month, cancel anytime, no setup fees hidden in the fine print.</p>
+      </div>
+      <div class="step">
+        <div class="num">II.</div>
+        <h4>Kickoff with your concierge</h4>
+        <p>Within 48 hours your dedicated marketing manager schedules a call to gather brand assets, listings, and audience priorities.</p>
+      </div>
+      <div class="step">
+        <div class="num">III.</div>
+        <h4>Launch &amp; iterate</h4>
+        <p>Your site ships in 10–14 days. Organic posts begin immediately. Ads launch the moment your pixel is live and learning.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FAQ ════════ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Questions</div>
+        <h2>Answers <em>before</em> you ask.</h2>
+      </div>
+      <p>The quick version of what brokers ask us most often. Have something specific? Your concierge is on call the moment you sign up.</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary class="faq-q"><h5>What exactly do I get for $297/month?</h5><span class="plus">+</span></summary>
+        <div class="faq-a">A custom website (design, hosting, SEO, AI chat, listing feed), an ongoing organic social + article engine, and managed paid social on Instagram and Facebook. Every service is delivered by a dedicated human marketing manager backed by our AI stack. No templates, no shared inventory.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><h5>Is the $200/month ad spend included or extra?</h5><span class="plus">+</span></summary>
+        <div class="faq-a">Extra. The $99 for Targeted Social Ads covers our management, creative, and reporting. The $200 is paid directly to Meta (Instagram/Facebook) as the actual media spend and is what activates the lead guarantee.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><h5>Can I subscribe to just one service?</h5><span class="plus">+</span></summary>
+        <div class="faq-a">Yes — any service can be purchased individually for $99/month. The lead guarantee, however, only applies when all three Essentials run together alongside the $200 ad spend.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><h5>How long until I see leads?</h5><span class="plus">+</span></summary>
+        <div class="faq-a">Organic content begins indexing within weeks. Paid social typically produces inquiries inside of 30 days once the pixel is seasoned. If we haven't hit leads by month two under the full bundle, we continue at no cost until we do.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><h5>Am I locked into a contract?</h5><span class="plus">+</span></summary>
+        <div class="faq-a">No. Everything is month-to-month through Wave. Cancel any time with two weeks' notice.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FINAL CTA ════════ -->
+<section class="final">
+  <div class="eyebrow" style="color: var(--brass);">Launch Now</div>
+  <h2>Your brokerage, <em>fully&nbsp;equipped</em>,<br/>by the end of the month.</h2>
+  <p>Check out in under two minutes through our secure Wave link. Your concierge reaches out the same day.</p>
+  <div class="btn-row">
+    <a class="btn brass" href="https://link.waveapps.com/3vz866-ffyxmc" target="_blank" style="padding:18px 36px;">Activate all three — $297/mo <span class="arrow">→</span></a>
+    <a class="btn ghost" href="#pricing" style="padding:18px 32px; color: var(--paper); border-color: rgba(255,255,255,0.3);">Pick one service <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<!-- ════════ CHAT WIDGET — Elena the concierge ════════ -->
+<button class="chat-launcher" id="chat-launcher" aria-label="Chat with Elena">
+  <span class="chat-avatar">EL</span>
+  <span class="chat-launcher-text">
+    <b>Elena</b> · your concierge
+    <span class="chat-launcher-sub">Ask anything — real-time reply</span>
+  </span>
+  <span class="chat-launcher-pulse"></span>
+</button>
+
+<div class="chat-panel" id="chat-panel" aria-hidden="true">
+  <header class="chat-head">
+    <div class="chat-avatar big">EL</div>
+    <div class="chat-head-body">
+      <div class="chat-head-name">Elena Larsen</div>
+      <div class="chat-head-role"><span class="chat-dot"></span>Valoes concierge · online</div>
+    </div>
+    <button class="chat-close" id="chat-close" aria-label="Close">×</button>
+  </header>
+  <div class="chat-log" id="chat-log"></div>
+  <div class="chat-suggest" id="chat-suggest">
+    <button data-q="What exactly do I get for $297/mo?">What's in the $297 bundle?</button>
+    <button data-q="How fast will I get my first lead?">How fast are first leads?</button>
+    <button data-q="Can I keep my existing website?">Can I keep my website?</button>
+  </div>
+  <form class="chat-form" id="chat-form">
+    <input type="text" id="chat-input" placeholder="Ask Elena about the bundle…" autocomplete="off" required />
+    <button type="submit" aria-label="Send">→</button>
+  </form>
+  <div class="chat-disclaimer">AI concierge — for contracts & complex cases, a human takes over.</div>
+</div>
+
+<!-- ════════ FOOTER ════════ -->
+<footer>
+  <div class="foot-inner">
+    <div>© 2026 VALOES Yachting Advisors · All rights reserved</div>
+    <div>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════ DASHBOARD DEMO MODAL ════════ -->
+<div class="dash-scrim" id="dash-scrim" role="dialog" aria-modal="true" aria-labelledby="dash-title" hidden>
+  <div class="dash-modal">
+    <button class="dash-close" aria-label="Close" onclick="closeDashboard()">×</button>
+    <div class="dash-chrome">
+      <div class="dash-traffic"><span></span><span></span><span></span></div>
+      <div class="dash-url">
+        <span class="dash-lock">●</span>
+        <span>dashboard.valoes.ai / <b>Captain Alex Reyes</b></span>
+      </div>
+      <div class="dash-chrome-spacer"></div>
+    </div>
+    <div class="dash-body">
+      <!-- Sidebar -->
+      <aside class="dash-nav">
+        <div class="dash-brand">
+          <span class="mark">VALOES</span>
+          <span class="sub">Advisors</span>
+        </div>
+        <nav>
+          <a class="active">● Overview</a>
+          <a>○ Website</a>
+          <a>○ Social posts</a>
+          <a>○ Ad campaigns</a>
+          <a>○ Leads inbox <span class="nav-badge">12</span></a>
+          <a>○ Concierge chat</a>
+          <a>○ Billing</a>
+        </nav>
+        <div class="dash-concierge">
+          <div class="dash-avatar">EL</div>
+          <div>
+            <div class="dash-name">Elena Larsen</div>
+            <div class="dash-role">Your concierge</div>
+          </div>
+          <span class="dash-dot"></span>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <main class="dash-main">
+        <header class="dash-head">
+          <div>
+            <div class="dash-eyebrow">Overview · Last 30 days</div>
+            <h3 id="dash-title">Welcome back, <em>Alex.</em></h3>
+          </div>
+          <div class="dash-head-meta">
+            <div class="dash-range">
+              <button class="active">30d</button>
+              <button>90d</button>
+              <button>YTD</button>
+            </div>
+          </div>
+        </header>
+
+        <!-- KPI tiles -->
+        <section class="dash-tiles">
+          <div class="dash-tile">
+            <div class="t-lbl">Qualified leads</div>
+            <div class="t-val" data-target="47">0</div>
+            <div class="t-delta up">↑ 18% vs prev 30d</div>
+            <svg class="t-spark" viewBox="0 0 120 36" preserveAspectRatio="none">
+              <polyline points="0,30 12,28 24,25 36,22 48,24 60,19 72,16 84,18 96,12 108,8 120,6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="dash-tile">
+            <div class="t-lbl">Site visitors</div>
+            <div class="t-val" data-target="3284">0</div>
+            <div class="t-delta up">↑ 42% vs prev 30d</div>
+            <svg class="t-spark" viewBox="0 0 120 36" preserveAspectRatio="none">
+              <polyline points="0,28 12,22 24,26 36,18 48,20 60,14 72,16 84,10 96,12 108,6 120,4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="dash-tile">
+            <div class="t-lbl">Ad spend</div>
+            <div class="t-val"><span class="t-pre">$</span><span data-target="500">0</span><span class="t-suf">.00</span></div>
+            <div class="t-delta">Pacing on target</div>
+            <svg class="t-spark" viewBox="0 0 120 36" preserveAspectRatio="none">
+              <polyline points="0,18 12,18 24,18 36,18 48,18 60,18 72,18 84,18 96,18 108,18 120,18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/>
+            </svg>
+          </div>
+          <div class="dash-tile">
+            <div class="t-lbl">Cost per lead</div>
+            <div class="t-val"><span class="t-pre">$</span><span data-target="10">0</span><span class="t-suf">.64</span></div>
+            <div class="t-delta down">↓ 22% vs prev 30d</div>
+            <svg class="t-spark" viewBox="0 0 120 36" preserveAspectRatio="none">
+              <polyline points="0,6 12,10 24,12 36,14 48,18 60,20 72,22 84,24 96,26 108,28 120,30" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+        </section>
+
+        <!-- Two-column lower grid -->
+        <section class="dash-grid">
+          <!-- Lead feed -->
+          <div class="dash-card lead-feed">
+            <header>
+              <div>
+                <div class="dash-eyebrow">Lead inbox</div>
+                <h4>New this week</h4>
+              </div>
+              <a class="dash-link">View all →</a>
+            </header>
+            <ul class="lead-list">
+              <li>
+                <div class="lead-avatar">MC</div>
+                <div class="lead-body">
+                  <div class="lead-name">Marcus Chen <span class="lead-tag">HOT</span></div>
+                  <div class="lead-meta">Interested in Azimut Grande 27M · from Instagram ad</div>
+                </div>
+                <div class="lead-time">2h ago</div>
+              </li>
+              <li>
+                <div class="lead-avatar">SP</div>
+                <div class="lead-body">
+                  <div class="lead-name">Sofia Petrov</div>
+                  <div class="lead-meta">Asked about charter-to-own · from website chat</div>
+                </div>
+                <div class="lead-time">5h ago</div>
+              </li>
+              <li>
+                <div class="lead-avatar">JM</div>
+                <div class="lead-body">
+                  <div class="lead-name">James Whitfield <span class="lead-tag warm">WARM</span></div>
+                  <div class="lead-meta">Requested tour — Sunseeker 88 · from Facebook ad</div>
+                </div>
+                <div class="lead-time">Yesterday</div>
+              </li>
+              <li>
+                <div class="lead-avatar">RD</div>
+                <div class="lead-body">
+                  <div class="lead-name">Rebecca D'Angelo</div>
+                  <div class="lead-meta">Subscribed to listing alerts · from SEO article</div>
+                </div>
+                <div class="lead-time">Yesterday</div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Content queue -->
+          <div class="dash-card content-queue">
+            <header>
+              <div>
+                <div class="dash-eyebrow">Content queue</div>
+                <h4>Scheduled by Elena</h4>
+              </div>
+              <a class="dash-link">Open calendar →</a>
+            </header>
+            <ul class="post-list">
+              <li>
+                <span class="post-icon ig"></span>
+                <div class="post-body">
+                  <div class="post-title">Reel — Azimut Grande walkthrough</div>
+                  <div class="post-meta">Instagram + TikTok · Tue 9:00am</div>
+                </div>
+                <span class="post-status scheduled">Scheduled</span>
+              </li>
+              <li>
+                <span class="post-icon article"></span>
+                <div class="post-body">
+                  <div class="post-title">Article — "Buying your first 25M flybridge"</div>
+                  <div class="post-meta">valoes-alex.com/blog · Wed 11:00am</div>
+                </div>
+                <span class="post-status draft">In draft</span>
+              </li>
+              <li>
+                <span class="post-icon fb"></span>
+                <div class="post-body">
+                  <div class="post-title">Carousel — 3 new Palm Beach listings</div>
+                  <div class="post-meta">Facebook + LinkedIn · Thu 2:00pm</div>
+                </div>
+                <span class="post-status scheduled">Scheduled</span>
+              </li>
+              <li>
+                <span class="post-icon ads"></span>
+                <div class="post-body">
+                  <div class="post-title">Ad creative — HNW repositioning test</div>
+                  <div class="post-meta">IG/FB paid · goes live Fri</div>
+                </div>
+                <span class="post-status review">Your approval</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Ad performance chart -->
+          <div class="dash-card ad-perf">
+            <header>
+              <div>
+                <div class="dash-eyebrow">Ad performance</div>
+                <h4>Leads per day · last 30</h4>
+              </div>
+              <div class="chart-legend">
+                <span><i class="d brass"></i>Leads</span>
+                <span><i class="d azure"></i>Spend</span>
+              </div>
+            </header>
+            <svg class="perf-chart" viewBox="0 0 600 180" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="g-brass" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="var(--brass)" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="var(--brass)" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <g class="grid">
+                <line x1="0" y1="40" x2="600" y2="40"/>
+                <line x1="0" y1="90" x2="600" y2="90"/>
+                <line x1="0" y1="140" x2="600" y2="140"/>
+              </g>
+              <path class="area" d="M0,150 L20,140 L40,145 L60,130 L80,128 L100,110 L120,120 L140,100 L160,95 L180,85 L200,90 L220,70 L240,75 L260,60 L280,68 L300,55 L320,62 L340,48 L360,55 L380,42 L400,50 L420,38 L440,45 L460,32 L480,40 L500,28 L520,35 L540,25 L560,32 L580,20 L600,28 L600,180 L0,180 Z" fill="url(#g-brass)"/>
+              <polyline class="line-leads" points="0,150 20,140 40,145 60,130 80,128 100,110 120,120 140,100 160,95 180,85 200,90 220,70 240,75 260,60 280,68 300,55 320,62 340,48 360,55 380,42 400,50 420,38 440,45 460,32 480,40 500,28 520,35 540,25 560,32 580,20 600,28"/>
+              <polyline class="line-spend" points="0,100 20,100 40,100 60,100 80,100 100,100 120,100 140,100 160,100 180,100 200,100 220,100 240,100 260,100 280,100 300,100 320,100 340,100 360,100 380,100 400,100 420,100 440,100 460,100 480,100 500,100 520,100 540,100 560,100 580,100 600,100" stroke-dasharray="4 3"/>
+            </svg>
+          </div>
+        </section>
+
+        <footer class="dash-footer">
+          Sample dashboard populated with representative data — your numbers will reflect your listings, location, and audience.
+        </footer>
+      </main>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ EXIT MODAL ════════ -->
+<div class="modal-scrim" id="exit-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <button class="modal-close" aria-label="Close" onclick="closeModal()">×</button>
+    <div class="modal-body" id="modal-body">
+      <div class="eyebrow">Before you go —</div>
+      <h3 id="modal-title">Want to <em>see a site</em><br/>built for your business first?</h3>
+      <div class="ship">
+        <span class="dot"></span>
+        <span>We'll design a sample homepage for your business at no cost — yours to keep.</span>
+      </div>
+      <p>Tell us a bit about your business and we'll send over a preview within 3 business days. No call required, no commitment.</p>
+      <form id="sample-form" onsubmit="submitSample(event)">
+        <div class="form-grid">
+          <input type="text" name="name" required placeholder="Full name" autocomplete="name" id="sf-name" />
+          <input type="text" name="company" required placeholder="Company name" autocomplete="organization" id="sf-company" />
+          <input type="email" name="email" required placeholder="you@yourbusiness.com" autocomplete="email" id="sf-email" />
+          <input type="tel" name="phone" required placeholder="Phone number" autocomplete="tel" id="sf-phone" />
+        </div>
+        <textarea name="inspiration" rows="3" placeholder="A few websites you like — in or out of your industry (URLs or brand names)" id="sf-inspiration"></textarea>
+        <button type="submit" id="sf-submit">Send me a sample</button>
+      </form>
+      <div class="fine">We'll only use your details to send your sample and follow up. No newsletters unless you ask.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ─── EXIT INTENT ───
+  let modalShown = false;
+  const modal = document.getElementById('exit-modal');
+
+  function openModal() {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Detect mouse leaving top of viewport = exit intent
+  document.addEventListener('mouseleave', (e) => {
+    if (modalShown) return;
+    if (e.clientY <= 0) {
+      modalShown = true;
+      openModal();
+    }
+  });
+  // Mobile fallback: scroll-up fast after engaging
+  let lastY = window.scrollY;
+  let upCount = 0;
+  window.addEventListener('scroll', () => {
+    if (modalShown) return;
+    const y = window.scrollY;
+    if (y < lastY - 40 && y > 400) { upCount++; }
+    lastY = y;
+    if (upCount >= 3 && y < 200) { modalShown = true; openModal(); }
+  });
+  // close on scrim click
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  // esc
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  async function submitSample(e) {
+    e.preventDefault();
+    const submitBtn = document.getElementById('sf-submit');
+    const name = document.getElementById('sf-name').value.trim();
+    const company = document.getElementById('sf-company').value.trim();
+    const email = document.getElementById('sf-email').value.trim();
+    const phone = document.getElementById('sf-phone').value.trim();
+    const inspiration = document.getElementById('sf-inspiration').value.trim();
+    const body = document.getElementById('modal-body');
+
+    submitBtn.disabled = true;
+    const originalLabel = submitBtn.textContent;
+    submitBtn.textContent = 'Sending…';
+
+    const payload = {
+      name,
+      company,
+      email,
+      phone,
+      inspiration,
+      _subject: `New Free Sample Request — ${company || name}`,
+      _template: 'table',
+      _captcha: 'false'
+    };
+
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/Shawn@yachtingadvisors.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error('Network response was not ok');
+
+      body.innerHTML = `
+        <div class="success">
+          <div class="eyebrow" style="color: var(--ok);">Sample requested</div>
+          <h3>You're on the list, <em>${name ? name.split(' ')[0] : 'broker'}.</em></h3>
+          <p>A mockup of <b>${company || email}</b>'s site will land in your inbox within 3 business days. Meantime, your concierge may text — we like to move fast.</p>
+          <a class="btn brass" style="width:auto;padding:14px 24px;" href="javascript:void(0)" onclick="closeModal()">Close</a>
+        </div>`;
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+      alert("Sorry — we couldn't send that just now. Please email Shawn@yachtingadvisors.com directly and we'll get your sample started.");
+    }
+  }
+
+  // ─── CHAT WIDGET (Elena) ───
+  (function chatWidget(){
+    const launcher = document.getElementById('chat-launcher');
+    const panel = document.getElementById('chat-panel');
+    const closeBtn = document.getElementById('chat-close');
+    const log = document.getElementById('chat-log');
+    const form = document.getElementById('chat-form');
+    const input = document.getElementById('chat-input');
+    const suggest = document.getElementById('chat-suggest');
+    if (!launcher || !panel) return;
+
+    const SYSTEM = `You are Elena Larsen, the AI marketing concierge for VALOES Yachting Advisors. You handle incoming questions from yacht brokers and other small-business owners considering our Ai Marketer Essentials bundle.
+
+Facts to use:
+- Three services, each $99/mo: (1) Flagship Website — custom-designed broker site, MLS feed, SEO, AI chat, fully managed/hosted. (2) Organic Socials — 2 weekly social posts + 2 weekly SEO articles, AI-written, human-proofed, cross-posted to all accounts. (3) Targeted Ads — managed Instagram + Facebook paid, 2 ongoing ads, buyer-intent targeting, monthly reporting.
+- Bundle all three = $297/mo total management.
+- The lead guarantee activates when all three are active AND the broker commits $200/mo to ad-platform spend (paid directly to Meta). Total investment = $500/mo. If leads aren't delivered, Valoes continues working for free until they are.
+- Month-to-month; no contracts. Cancel with 2 weeks' notice.
+- 10–14 day launch from signature.
+- Checkout is via Wave.
+- Clients work with a dedicated human marketing manager (that's "me" in this chat — but be honest if asked that you are an AI concierge standing in before the human call).
+
+Tone: warm, direct, concise. Write like a thoughtful industry pro, not a salesperson. Never exceed 3 short paragraphs. Use a line break between thoughts. If a question needs specifics you don't have (tax, legal, their existing contracts), say so and offer to escalate to the human team. Never invent metrics or client names.`;
+
+    const history = [];
+    let started = false;
+    let sending = false;
+
+    function addMsg(role, text) {
+      const m = document.createElement('div');
+      m.className = 'chat-msg ' + (role === 'user' ? 'you' : 'them');
+      m.textContent = text;
+      log.appendChild(m);
+      log.scrollTop = log.scrollHeight;
+      return m;
+    }
+    function showTyping() {
+      const t = document.createElement('div');
+      t.className = 'chat-msg them typing';
+      t.innerHTML = '<span></span><span></span><span></span>';
+      log.appendChild(t);
+      log.scrollTop = log.scrollHeight;
+      return t;
+    }
+
+    function greet() {
+      if (started) return;
+      started = true;
+      setTimeout(() => {
+        addMsg('them', "Hi — I'm Elena, your marketing concierge at Valoes. Ask me anything about the bundle, what goes live when, or how the lead guarantee actually works.");
+      }, 200);
+    }
+
+    async function send(text) {
+      if (sending || !text.trim()) return;
+      sending = true;
+      addMsg('user', text);
+      history.push({ role: 'user', content: text });
+      suggest.classList.add('hidden');
+      const typing = showTyping();
+      try {
+        const reply = await window.claude.complete({
+          messages: [
+            { role: 'user', content: SYSTEM + '\n\n---\n\nConversation so far:\n' + history.map(h => (h.role === 'user' ? 'Broker' : 'Elena') + ': ' + h.content).join('\n\n') + '\n\nElena:' }
+          ]
+        });
+        typing.remove();
+        const clean = (reply || '').trim() || "Let me loop in the team — drop your email in the exit popup and I'll get back within the hour.";
+        history.push({ role: 'assistant', content: clean });
+        addMsg('assistant', clean);
+      } catch (err) {
+        typing.remove();
+        addMsg('assistant', "I'm having trouble reaching the network. Try again in a moment, or email hello@valoes.ai and I'll follow up directly.");
+      } finally {
+        sending = false;
+      }
+    }
+
+    launcher.addEventListener('click', () => {
+      launcher.classList.add('hidden');
+      panel.classList.add('active');
+      panel.setAttribute('aria-hidden', 'false');
+      greet();
+      setTimeout(() => input.focus(), 250);
+    });
+    closeBtn.addEventListener('click', () => {
+      panel.classList.remove('active');
+      panel.setAttribute('aria-hidden', 'true');
+      launcher.classList.remove('hidden');
+    });
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const v = input.value;
+      input.value = '';
+      send(v);
+    });
+    suggest.querySelectorAll('button').forEach(b => {
+      b.addEventListener('click', () => send(b.dataset.q));
+    });
+  })();
+
+  // ─── DASHBOARD DEMO MODAL ───
+  (function dashboardModal(){
+    const scrim = document.getElementById('dash-scrim');
+    const opener = document.getElementById('open-dashboard');
+    if (!scrim || !opener) return;
+
+    let hasAnimated = false;
+
+    function animateTiles() {
+      if (hasAnimated) return;
+      hasAnimated = true;
+      scrim.querySelectorAll('.t-val [data-target], .t-val[data-target]').forEach(el => {
+        const target = parseFloat(el.dataset.target);
+        const duration = 1100;
+        const start = performance.now();
+        function step(now) {
+          const p = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - p, 3);
+          const v = target * eased;
+          el.textContent = target >= 1000 ? Math.round(v).toLocaleString() : Math.round(v);
+          if (p < 1) requestAnimationFrame(step);
+          else el.textContent = target >= 1000 ? target.toLocaleString() : target.toString();
+        }
+        requestAnimationFrame(step);
+      });
+
+      const leads = scrim.querySelector('.line-leads');
+      const area = scrim.querySelector('.perf-chart .area');
+      if (leads) {
+        const len = leads.getTotalLength ? leads.getTotalLength() : 2000;
+        leads.style.strokeDasharray = len;
+        leads.style.strokeDashoffset = len;
+        leads.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1) 0.2s';
+        requestAnimationFrame(() => { leads.style.strokeDashoffset = 0; });
+      }
+      if (area) {
+        area.style.opacity = 0;
+        area.style.transition = 'opacity 1.2s ease 0.8s';
+        requestAnimationFrame(() => { area.style.opacity = 0.9; });
+      }
+    }
+
+    function open() {
+      scrim.hidden = false;
+      requestAnimationFrame(() => {
+        scrim.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        setTimeout(animateTiles, 250);
+      });
+    }
+    function close() {
+      scrim.classList.remove('active');
+      setTimeout(() => {
+        scrim.hidden = true;
+        document.body.style.overflow = '';
+      }, 350);
+    }
+    window.closeDashboard = close;
+
+    opener.addEventListener('click', open);
+    scrim.addEventListener('click', (e) => { if (e.target === scrim) close(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !scrim.hidden) close();
+    });
+  })();
+
+  // ─── LIVE BUNDLE BUILDER ───
+  (function bundleBuilder(){
+    const WAVE_SINGLE = 'https://link.waveapps.com/hsb3e8-umxsh6';
+    const WAVE_BUNDLE = 'https://link.waveapps.com/3vz866-ffyxmc';
+    const SERVICES = {
+      web:    { label: 'Website',          tag: '01 · WEB',    price: 99, link: WAVE_SINGLE },
+      social: { label: 'Organic Socials',  tag: '02 · SOCIAL', price: 99, link: WAVE_BUNDLE },
+      ads:    { label: 'Targeted Ads',     tag: '03 · ADS',    price: 99, link: WAVE_SINGLE },
+    };
+
+    const rail = document.getElementById('bundle-rail');
+    const hint = document.getElementById('bundle-hint');
+    const totalEl = document.getElementById('bundle-total');
+    const ctaLabel = document.getElementById('bundle-cta-label');
+    const cta = document.getElementById('bundle-cta');
+    const bonus = document.getElementById('bundle-bonus');
+    if (!rail) return;
+
+    const state = { web: false, social: false, ads: false };
+
+    const cards = document.querySelectorAll('.bundle-card');
+    cards.forEach(card => {
+      const svc = card.dataset.svc;
+      const input = card.querySelector('[data-svc-input]');
+      // whole card clickable except on links/buttons
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('a, button, .svc-toggle')) return;
+        input.checked = !input.checked;
+        input.dispatchEvent(new Event('change'));
+      });
+      input.addEventListener('change', () => {
+        state[svc] = input.checked;
+        card.classList.toggle('selected', input.checked);
+        render();
+      });
+    });
+
+    // ─── Odometer (animated count-up/down) ───
+    let current = 0;
+    let target = 0;
+    let rafId = null;
+    function tween() {
+      const diff = target - current;
+      if (Math.abs(diff) < 0.5) {
+        current = target;
+        totalEl.textContent = Math.round(current);
+        rafId = null;
+        return;
+      }
+      current += diff * 0.22;
+      totalEl.textContent = Math.round(current);
+      rafId = requestAnimationFrame(tween);
+    }
+    function setTotal(n) {
+      target = n;
+      // always set final value immediately as a safety net (iframes throttle raf)
+      totalEl.textContent = String(n);
+      // then animate from current → target for polish
+      if (rafId) cancelAnimationFrame(rafId);
+      current = Math.round(current);
+      const start = performance.now();
+      const startVal = current;
+      const dur = 450;
+      function step(now) {
+        const p = Math.min(1, (now - start) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        current = startVal + (n - startVal) * eased;
+        totalEl.textContent = String(Math.round(current));
+        if (p < 1) rafId = requestAnimationFrame(step);
+        else { current = n; totalEl.textContent = String(n); rafId = null; }
+      }
+      rafId = requestAnimationFrame(step);
+    }
+
+    function render() {
+      const selected = Object.keys(state).filter(k => state[k]);
+      const count = selected.length;
+      const total = count * 99;
+
+      // Rail items
+      document.querySelectorAll('.bundle-rail-item').forEach(item => {
+        const svc = item.dataset.svc;
+        const active = state[svc];
+        const wasActive = item.classList.contains('active');
+        item.classList.toggle('active', active);
+        item.classList.toggle('placeholder', !active);
+        const amt = item.querySelector('.amt');
+        if (active) {
+          amt.textContent = '$99';
+          if (!wasActive) {
+            item.classList.remove('pop');
+            void item.offsetWidth; // restart
+            item.classList.add('pop');
+          }
+        } else {
+          amt.textContent = '— — —';
+        }
+      });
+
+      // Total
+      setTotal(total);
+
+      // Hint + CTA
+      rail.classList.toggle('has-selection', count > 0);
+      if (count === 0) {
+        hint.textContent = 'Toggle services above to build your plan';
+        ctaLabel.textContent = 'Select a service';
+        cta.href = '#pricing';
+      } else if (count === 1) {
+        const s = SERVICES[selected[0]];
+        hint.textContent = s.label + ' only — subscribe à la carte for $99/mo.';
+        ctaLabel.textContent = 'Check out — $99/mo';
+        cta.href = s.link;
+        cta.target = '_blank';
+        cta.rel = 'noopener';
+      } else if (count === 2) {
+        const names = selected.map(k => SERVICES[k].label).join(' + ');
+        hint.textContent = names + ' — two services, $' + total + '/mo. Add the third to activate the lead guarantee.';
+        ctaLabel.textContent = 'Check out — $' + total + '/mo';
+        cta.href = WAVE_BUNDLE;
+        cta.target = '_blank';
+      } else {
+        hint.textContent = 'The full bundle — three services, launched in 14 days, covered by our lead guarantee.';
+        ctaLabel.textContent = 'Commission the bundle — $297/mo';
+        cta.href = WAVE_BUNDLE;
+        cta.target = '_blank';
+      }
+
+      bonus.hidden = count < 3;
+    }
+
+    render();
+  })();
+</script>
+
+
+<script>
+// ─── FLEET HEADER INTERACTIONS ───
+(function fleetInteractions(){
+  function init() {
+    const fleet = document.querySelector('#fleet');
+    if (!fleet) return;
+
+    const tagline = fleet.querySelector('[data-tilt]');
+    const chipEls = fleet.querySelectorAll('.fleet-chip');
+    const videoA = fleet.querySelector('#fleet-video-a');
+    const videoB = fleet.querySelector('#fleet-video-b');
+    const videos = [videoA, videoB].filter(Boolean);
+    const video = videoA; // legacy alias used below for initial play()
+
+    // Elements visible by default (CSS keyframes handle any entrance);
+    // flag tagline as ready for tilt immediately.
+    if (tagline) tagline._tiltReady = true;
+
+    // ── Mouse-driven tilt + vignette + cursor + parallax ──
+    let mx = 0, my = 0, cmx = 0, cmy = 0;
+    let rx = 0, ry = 0, crx = 0, cry = 0;
+    let rect = fleet.getBoundingClientRect();
+
+    window.addEventListener('resize', () => { rect = fleet.getBoundingClientRect(); });
+    window.addEventListener('scroll', () => { rect = fleet.getBoundingClientRect(); }, { passive: true });
+
+    fleet.addEventListener('mousemove', (e) => {
+      mx = e.clientX - rect.left;
+      my = e.clientY - rect.top;
+      const nx = (mx / rect.width) - 0.5;
+      const ny = (my / rect.height) - 0.5;
+      ry = nx * 8;
+      rx = -ny * 6;
+      fleet.style.setProperty('--mx', (mx / rect.width * 100) + '%');
+      fleet.style.setProperty('--my', (my / rect.height * 100) + '%');
+    });
+
+    fleet.addEventListener('mouseleave', () => {
+      rx = 0; ry = 0;
+      fleet.style.setProperty('--mx', '50%');
+      fleet.style.setProperty('--my', '50%');
+    });
+
+    function raf() {
+      crx += (rx - crx) * 0.08;
+      cry += (ry - cry) * 0.08;
+
+      if (tagline && tagline._tiltReady) {
+        tagline.style.transform = 'rotateX(' + crx.toFixed(2) + 'deg) rotateY(' + cry.toFixed(2) + 'deg)';
+      }
+      if (videos.length) {
+        const tx = (mx / rect.width - 0.5) * -14;
+        const ty = (my / rect.height - 0.5) * -10;
+        // keep baseline crop (scale 1.12, translateY -4%) so gemini logo stays off-frame
+        const t = 'translate(' + tx.toFixed(1) + 'px, calc(-4% + ' + ty.toFixed(1) + 'px)) scale(1.12)';
+        videos.forEach(v => { v.style.transform = t; });
+      }
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Cursor hover grow on chips
+    chipEls.forEach(c => {
+      c.addEventListener('mouseenter', () => fleet.classList.add('hover-vessel'));
+      c.addEventListener('mouseleave', () => fleet.classList.remove('hover-vessel'));
+    });
+
+    // ─── Seamless loop via dual-video crossfade ───
+    // Two stacked <video> elements play the same source. As the foreground
+    // nears its end, the background starts from t=0 and we crossfade between
+    // them over ~800ms. Roles swap; the loop is continuous forward motion
+    // with no wrap ever visible.
+    if (videoA && videoB) {
+      const FADE_MS = 800;
+
+      // Kick off A; start B paused at 0 ready to take over
+      videoA.play && videoA.play().catch(() => {
+        document.addEventListener('click', () => videoA.play(), { once: true });
+      });
+      // Warm B so the first handoff is ready; then pause and rewind
+      videoB.play && videoB.play().then(() => {
+        videoB.pause();
+        try { videoB.currentTime = 0; } catch(_) {}
+      }).catch(() => {});
+
+      let fg = videoA; // currently visible
+      let bg = videoB; // waiting in wings
+      let fading = false;
+
+      function startFadeTo(next) {
+        if (fading) return;
+        fading = true;
+        // Ensure next starts from the top and is playing before we reveal it
+        try { next.currentTime = 0; } catch(_) {}
+        const playPromise = next.play ? next.play() : null;
+        const doFade = () => {
+          // swap opacities — CSS transition (700ms) handles the blend
+          next.style.opacity = '1';
+          fg.style.opacity = '0';
+          setTimeout(() => {
+            // after the blend completes, pause + reset the old foreground
+            try {
+              fg.pause();
+              fg.currentTime = 0;
+            } catch(_) {}
+            // swap roles
+            const tmp = fg; fg = next; bg = tmp;
+            fading = false;
+          }, FADE_MS + 50);
+        };
+        if (playPromise && playPromise.then) {
+          playPromise.then(doFade).catch(doFade);
+        } else {
+          doFade();
+        }
+      }
+
+      function tick() {
+        if (!fading && fg && fg.duration && isFinite(fg.duration)) {
+          const remaining = fg.duration - fg.currentTime;
+          if (remaining <= FADE_MS / 1000) {
+            startFadeTo(bg);
+          }
+        }
+        requestAnimationFrame(tick);
+      }
+      // also listen for the native 'ended' (in case we overshoot)
+      videoA.addEventListener('ended', () => { if (fg === videoA) startFadeTo(videoB); });
+      videoB.addEventListener('ended', () => { if (fg === videoB) startFadeTo(videoA); });
+
+      requestAnimationFrame(tick);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>

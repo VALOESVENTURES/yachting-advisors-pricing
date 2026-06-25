@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>SMS Consent &amp; Opt-In Process — VALOES Yachting Advisors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:       #0B0F14;
+    --ink-soft:  #121923;
+    --ink-line:  #1C2836;
+    --paper:     #F3EEE4;
+    --paper-2:   #E9E2D3;
+    --paper-line:#D9CFB9;
+    --azure:     #2F7DD8;
+    --azure-dk:  #1E5FAC;
+    --brass:     #B89766;
+    --brass-dk:  #8E7348;
+    --muted:     #6B7682;
+    --ok:        #3A8F6B;
+  }
+  * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+  html { scroll-behavior: smooth; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Instrument Sans", system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 32px; }
+  .serif { font-family: "Cormorant Garamond", "Times New Roman", serif; font-weight: 400; letter-spacing: -0.01em; }
+  .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+  a { color: var(--azure-dk); text-decoration: underline; text-underline-offset: 3px; }
+  a:hover { color: var(--azure); }
+
+  /* ───── HEADER ───── */
+  header.site {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 22px 0;
+    border-bottom: 1px solid #000;
+  }
+  .site-inner {
+    max-width: 880px; margin: 0 auto; padding: 0 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .brand {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    color: var(--paper);
+  }
+  .brand em { color: var(--brass); font-style: normal; }
+  .brand-sub {
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-top: 2px;
+  }
+  .site-meta {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(243,238,228,0.6);
+  }
+
+  /* ───── HERO ───── */
+  .hero {
+    padding: 72px 0 40px;
+    border-bottom: 1px solid var(--paper-line);
+  }
+  .eyebrow {
+    font-family: "Instrument Sans", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--brass-dk);
+    margin-bottom: 18px;
+  }
+  h1.title {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 400;
+    font-size: clamp(36px, 5vw, 54px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin: 0 0 18px;
+  }
+  h1.title em { font-style: italic; color: var(--brass-dk); }
+  .lede {
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 680px;
+    margin: 0;
+  }
+
+  /* ───── SECTIONS ───── */
+  section.block {
+    padding: 52px 0;
+    border-bottom: 1px solid var(--paper-line);
+  }
+  h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500;
+    font-size: clamp(26px, 3.2vw, 34px);
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    margin: 0 0 22px;
+  }
+  h3 {
+    font-family: "Instrument Sans", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+  p { margin: 0 0 14px; }
+  ul.bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  ul.bullets li {
+    position: relative;
+    padding: 12px 0 12px 26px;
+    border-bottom: 1px dashed var(--paper-line);
+    font-size: 15.5px;
+  }
+  ul.bullets li:last-child { border-bottom: 0; }
+  ul.bullets li::before {
+    content: "";
+    position: absolute; left: 0; top: 20px;
+    width: 8px; height: 8px;
+    background: var(--brass);
+    border-radius: 50%;
+  }
+  ul.bullets li b { font-weight: 600; color: var(--ink); }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-top: 24px;
+  }
+  .fact {
+    padding: 18px 20px;
+    background: rgba(11,15,20,0.03);
+    border: 1px solid var(--paper-line);
+  }
+  .fact .lbl {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .fact .val { font-size: 15px; color: var(--ink); }
+  @media (max-width: 640px) {
+    .facts { grid-template-columns: 1fr; }
+  }
+
+  /* ───── FORM MOCKUP ───── */
+  .mockup-frame {
+    margin-top: 24px;
+    border: 1px solid var(--ink-line);
+    background: #FFFDF8;
+    box-shadow: 0 30px 60px -30px rgba(11,15,20,0.18);
+  }
+  .mockup-bar {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .mockup-bar .dots { display: inline-flex; gap: 6px; margin-right: 8px; }
+  .mockup-bar .dots span {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: rgba(243,238,228,0.25);
+  }
+  .mockup-bar .label { color: rgba(243,238,228,0.7); }
+  .mockup-body { padding: 34px 32px 30px; }
+  .mockup-section-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0 0 6px;
+  }
+  .mockup-section-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 22px;
+    letter-spacing: 0.02em;
+  }
+  .consent-row {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 16px 18px;
+    border: 1px solid var(--paper-line);
+    background: var(--paper-2);
+    margin-bottom: 18px;
+  }
+  .consent-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    flex: none;
+    width: 22px; height: 22px;
+    border: 1.5px solid var(--ink);
+    background: #fff;
+    position: relative;
+    cursor: pointer;
+    margin-top: 2px;
+  }
+  .consent-checkbox:checked {
+    background: var(--ink);
+  }
+  .consent-checkbox:checked::after {
+    content: "";
+    position: absolute; left: 6px; top: 2px;
+    width: 6px; height: 12px;
+    border: solid var(--paper);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .consent-text {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .consent-text strong { font-weight: 600; }
+
+  .field {
+    margin-bottom: 18px;
+  }
+  .field label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .field input[type=tel] {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid var(--ink);
+    background: #fff;
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    outline: none;
+  }
+  .field input[type=tel]:focus {
+    box-shadow: 0 0 0 3px rgba(47,125,216,0.18);
+  }
+
+  .ack-title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 22px 0 10px;
+  }
+  ul.acks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  ul.acks li {
+    padding: 6px 0 6px 18px;
+    position: relative;
+    color: var(--ink-soft);
+  }
+  ul.acks li::before {
+    content: "—";
+    position: absolute; left: 0; color: var(--brass);
+  }
+
+  .mockup-note {
+    margin-top: 22px;
+    padding: 14px 16px;
+    background: rgba(47,125,216,0.06);
+    border-left: 3px solid var(--azure);
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  /* ───── DISCLOSURES ───── */
+  .disc-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 6px;
+  }
+  .disc {
+    padding: 16px 18px;
+    border: 1px solid var(--paper-line);
+    background: #fff;
+  }
+  .disc .k {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--brass-dk);
+    margin-bottom: 6px;
+  }
+  .disc .v { font-size: 14.5px; color: var(--ink); }
+  @media (max-width: 640px) {
+    .disc-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ───── FOOTER ───── */
+  footer.site {
+    padding: 40px 0 60px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer.site .doc-note {
+    padding: 18px 20px;
+    background: rgba(11,15,20,0.04);
+    border: 1px dashed var(--paper-line);
+    color: var(--ink-soft);
+    font-size: 13.5px;
+    margin-bottom: 22px;
+  }
+  footer.site .biz {
+    display: flex; flex-wrap: wrap; gap: 8px 24px;
+    align-items: center;
+    font-size: 12.5px;
+  }
+  footer.site .biz b { color: var(--ink); font-weight: 600; }
+  footer.site a { color: var(--ink); }
+
+  /* ───── UTIL ───── */
+  .stop-key {
+    display: inline-block;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 12px;
+    padding: 2px 8px;
+    background: var(--ink);
+    color: var(--paper);
+    letter-spacing: 0.1em;
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════ HEADER ═══════ -->
+<header class="site">
+  <div class="site-inner">
+    <div>
+      <div class="brand">VALOES <em>Yachting Advisors</em></div>
+      <div class="brand-sub">Marketing for Yacht Brokers</div>
+    </div>
+    <div class="site-meta">Compliance Documentation</div>
+  </div>
+</header>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">SMS Program Documentation</div>
+    <h1 class="title">SMS Consent &amp; <em>Opt-In Process</em></h1>
+    <p class="lede">
+      This page documents how Yachting Advisors collects express written consent from its business clients before sending SMS/text messages, and the information each client receives at the time of opt-in.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════ PROGRAM OVERVIEW ═══════ -->
+<section class="block">
+  <div class="wrap">
+    <div class="eyebrow">Section 01</div>
+    <h2>Program overview.</h2>
+    <ul class="bullets">
+      <li><b>Who receives messages.</b> Only existing, paying business clients of Yachting Advisors (yacht brokerages and yacht-industry businesses). This is a business-to-business communications program. No consumer-facing opt-ins, no purchased lists, no marketing blasts to the general public.</li>
+      <li><b>How consent is collected.</b> Each client completes an intake form during onboarding, after signing a service agreement. The intake form contains a dedicated SMS opt-in section (shown below) in which the client affirmatively checks a box and provides their mobile number. Consent is captured in writing and stored with the client's account record.</li>
+      <li><b>What messages contain.</b> Lead notifications (new inquiries generated by campaigns we manage), account updates (billing reminders, service milestones), and service communications (scheduling, reporting, operational updates from the client's dedicated marketing manager).</li>
+      <li><b>Expected message frequency.</b> Varies by account activity. Typically 1–10 messages per month per client. Across the full client base this is approximately 20 messages per day or fewer.</li>
+      <li><b>Opt-out method.</b> Clients may reply <span class="stop-key">STOP</span> to any message at any time to be unsubscribed, or reply <span class="stop-key">HELP</span> for support information. We also honor opt-out requests made directly to their account manager.</li>
+    </ul>
+
+    <div class="facts">
+      <div class="fact">
+        <div class="lbl">Audience</div>
+        <div class="val">Existing B2B clients only</div>
+      </div>
+      <div class="fact">
+        <div class="lbl">Typical Volume</div>
+        <div class="val">1–10 msgs / month / client</div>
+      </div>
+      <div class="fact">
+        <div class="lbl">Consent Method</div>
+        <div class="val">Written opt-in at onboarding</div>
+      </div>
+      <div class="fact">
+        <div class="lbl">Opt-Out</div>
+        <div class="val">Reply STOP (honored immediately)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ OPT-IN FORM MOCKUP ═══════ -->
+<section class="block">
+  <div class="wrap">
+    <div class="eyebrow">Section 02 · Representative example</div>
+    <h2>The SMS opt-in section of our client intake form.</h2>
+    <p style="color: var(--muted); max-width: 640px;">
+      The following is a visual representation of the SMS consent block as it appears inside the client onboarding intake form. Every client must actively check the box and enter a mobile number to enroll in SMS; the field is not pre-checked and is not required to use other Yachting Advisors services.
+    </p>
+
+    <div class="mockup-frame" role="img" aria-label="Representative SMS opt-in section from the Yachting Advisors client intake form">
+      <div class="mockup-bar">
+        <span class="dots"><span></span><span></span><span></span></span>
+        <span class="label">Client Intake Form · Section 7 of 9 · SMS Communications</span>
+      </div>
+      <div class="mockup-body">
+        <div class="mockup-section-title">SMS / Text Message Enrollment</div>
+        <div class="mockup-section-sub">Optional. Enroll to receive lead notifications and account updates by text.</div>
+
+        <div class="consent-row">
+          <input type="checkbox" class="consent-checkbox" aria-label="SMS consent checkbox" />
+          <div class="consent-text">
+            <strong>I consent to receive SMS/text messages from Yachting Advisors</strong> regarding lead notifications, service updates, and account communications.
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="mobile">Mobile Number</label>
+          <input id="mobile" type="tel" placeholder="(___) ___-____" autocomplete="tel" />
+        </div>
+
+        <div class="ack-title">By checking this box, I acknowledge:</div>
+        <ul class="acks">
+          <li>Message frequency varies based on account activity.</li>
+          <li>Message and data rates may apply.</li>
+          <li>I can reply <span class="stop-key">STOP</span> at any time to unsubscribe.</li>
+          <li>I can reply <span class="stop-key">HELP</span> for support.</li>
+          <li>Yachting Advisors will not share my mobile number with third parties.</li>
+          <li>I have read the <a href="/privacy-policy/">Privacy Policy</a> and <a href="/terms-and-conditions/">SMS Terms</a>.</li>
+        </ul>
+
+        <div class="mockup-note">
+          This block is reproduced here for carrier and regulatory review. The live intake form is delivered to clients privately during onboarding and is not publicly accessible.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ REQUIRED DISCLOSURES ═══════ -->
+<section class="block">
+  <div class="wrap">
+    <div class="eyebrow">Section 03</div>
+    <h2>Required disclosures.</h2>
+    <p style="color: var(--muted); max-width: 640px;">
+      The disclosures below are presented to every client at the point of opt-in and are repeated in our written SMS Terms. They are also summarized here for reviewer convenience.
+    </p>
+    <div class="disc-grid">
+      <div class="disc">
+        <div class="k">Frequency</div>
+        <div class="v">Message frequency varies.</div>
+      </div>
+      <div class="disc">
+        <div class="k">Rates</div>
+        <div class="v">Message and data rates may apply.</div>
+      </div>
+      <div class="disc">
+        <div class="k">Opt-Out</div>
+        <div class="v">Reply <span class="stop-key">STOP</span> at any time to unsubscribe. We honor opt-outs immediately.</div>
+      </div>
+      <div class="disc">
+        <div class="k">Help</div>
+        <div class="v">Reply <span class="stop-key">HELP</span> for support, or call 866-434-5909.</div>
+      </div>
+      <div class="disc">
+        <div class="k">Data Sharing</div>
+        <div class="v">Mobile numbers are never shared, sold, or transferred to third parties for marketing purposes.</div>
+      </div>
+      <div class="disc">
+        <div class="k">Policies</div>
+        <div class="v"><a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms-and-conditions/">Terms &amp; Conditions</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="site">
+  <div class="wrap">
+    <div class="doc-note">
+      This page is provided as documentation of our SMS consent flow for carrier and regulatory review purposes. It is not linked from site navigation and is intended for reviewers who have been given the direct URL.
+    </div>
+    <div class="biz">
+      <span><b>VALOES Yachting Advisors</b></span>
+      <span>Phone: <a href="tel:+18664345909">866-434-5909</a></span>
+      <span>Web: <a href="https://yachtingadvisors.com">yachtingadvisors.com</a></span>
+      <span>© <span id="yr"></span> Yachting Advisors. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>

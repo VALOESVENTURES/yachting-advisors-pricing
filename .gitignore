@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Vercel
+.vercel
+
+# Local Claude Code config
+.claude/settings.local.json
+
+# OS
+.DS_Store
+
+# monday-clone is its own repo (VALOESVENTURES/monday-clone) — not tracked here
+monday-clone/
