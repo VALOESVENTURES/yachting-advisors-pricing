@@ -2210,6 +2210,376 @@
   </div>
 </section>
 
+<!-- ════════ PLATFORM SHOWCASE (added) ════════ -->
+<style>
+  /* swap any placeholder: drop <img class="sc-img" src="URL" alt=""> inside its .sc-media */
+  .sc-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:4; }
+  .showcase { background: var(--paper); }
+  .showcase .wrap { max-width: 1180px; }
+  .sc-features { display:flex; flex-direction:column; }
+  .sc-feature {
+    display:grid; grid-template-columns:1.02fr 1fr; gap:64px; align-items:center;
+    padding:60px 0; border-top:1px solid var(--paper-line);
+  }
+  .sc-feature.rev .sc-media { order:2; }
+  .sc-feature h3 {
+    font-family:"Cormorant Garamond", serif; font-weight:300; font-size:40px;
+    line-height:1.05; letter-spacing:-0.02em; margin:0 0 18px;
+  }
+  .sc-feature h3 em { font-style:italic; color:var(--brass-dk); }
+  .sc-desc { color:var(--muted); font-size:17px; line-height:1.6; margin:0 0 22px; }
+  .sc-list { list-style:none; padding:0; margin:0 0 30px; display:grid; gap:11px; }
+  .sc-list li { position:relative; padding-left:26px; font-size:15px; line-height:1.4; }
+  .sc-list li::before { content:"→"; position:absolute; left:0; color:var(--brass); font-family:"Cormorant Garamond", serif; }
+  .sc-cta { width:auto !important; }
+  /* placeholder media frame */
+  .sc-media {
+    position:relative; border-radius:12px; overflow:hidden; aspect-ratio:4/3;
+    background:#0d1622; border:1px solid var(--ink-line);
+    box-shadow:0 30px 70px rgba(11,15,20,0.20);
+  }
+  .sc-chrome {
+    position:relative; z-index:3; display:flex; align-items:center; gap:7px;
+    height:34px; padding:0 14px; background:#0a1018; border-bottom:1px solid var(--ink-line);
+  }
+  .sc-chrome span { width:9px; height:9px; border-radius:50%; background:#2a3a4d; }
+  .sc-chrome span:first-child { background:#c8553d; } .sc-chrome span:nth-child(2){ background:#c9a14a; } .sc-chrome span:nth-child(3){ background:#5a8a5a; }
+  .sc-chrome i { margin-left:10px; font-family:"JetBrains Mono", monospace; font-size:10px; color:rgba(243,238,228,0.45); font-style:normal; letter-spacing:0.04em; }
+  .sc-screen {
+    position:absolute; left:0; right:0; bottom:0; top:34px; z-index:1;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:24px;
+    background:
+      radial-gradient(ellipse 90% 70% at 50% 28%, var(--g1, #1a3052) 0%, transparent 70%),
+      linear-gradient(180deg, #0e1a2a 0%, #0a0f17 100%);
+  }
+  .sc-screen-title { font-family:"Cormorant Garamond", serif; font-weight:300; font-size:24px; color:#F3EEE4; line-height:1.2; max-width:80%; }
+  .sc-screen-sub { margin-top:10px; font-family:"Instrument Sans", sans-serif; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--brass); }
+  .sc-cards { display:flex; gap:10px; margin-top:18px; }
+  .sc-cards b { width:30px; height:30px; border-radius:8px; background:rgba(243,238,228,0.08); display:flex; align-items:center; justify-content:center; font-size:13px; color:#cfd8e2; }
+  .sc-ph-note { position:absolute; bottom:10px; left:0; right:0; z-index:3; text-align:center; font-family:"JetBrains Mono", monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(243,238,228,0.28); }
+  /* founder */
+  .sc-founder-sec { background:var(--ink); color:var(--paper); }
+  .sc-founder { display:grid; grid-template-columns:300px 1fr; gap:56px; align-items:center; }
+  .sc-founder-photo { position:relative; aspect-ratio:1/1; border-radius:12px; overflow:hidden; border:1px solid var(--ink-line);
+    background:radial-gradient(ellipse 80% 70% at 50% 30%, #20406a 0%, #0c1420 75%); display:flex; align-items:flex-end; justify-content:center; }
+  .sc-founder-photo span { position:relative; z-index:3; margin-bottom:18px; font-family:"JetBrains Mono", monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(243,238,228,0.4); }
+  .sc-founder blockquote { margin:0; font-family:"Cormorant Garamond", serif; font-weight:300; font-style:italic; font-size:34px; line-height:1.22; letter-spacing:-0.01em; }
+  .sc-founder blockquote em { color:var(--brass); font-style:italic; }
+  .sc-founder-name { margin-top:24px; font-family:"Instrument Sans", sans-serif; }
+  .sc-founder-name b { font-size:16px; letter-spacing:0.02em; }
+  .sc-founder-name span { color:var(--brass); }
+  .sc-founder-prev { margin-top:8px; color:var(--muted); font-size:13px; letter-spacing:0.04em; line-height:1.6; }
+  /* partner pricing */
+  .sc-partner { background:var(--paper-2); }
+  .sc-tier-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--paper-line); background:var(--paper-line); }
+  .sc-tier { background:var(--paper); padding:38px 32px; display:flex; flex-direction:column; }
+  .sc-tier.feat { background:var(--ink); color:var(--paper); }
+  .sc-tier-name { font-family:"Cormorant Garamond", serif; font-size:30px; font-weight:300; }
+  .sc-tier-aud { font-family:"Instrument Sans", sans-serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-top:4px; }
+  .sc-tier.feat .sc-tier-aud { color:rgba(243,238,228,0.55); }
+  .sc-tier-price { font-family:"Cormorant Garamond", serif; font-size:38px; margin:18px 0 4px; color:var(--brass-dk); }
+  .sc-tier.feat .sc-tier-price { color:var(--brass); }
+  .sc-tier-price small { font-size:15px; color:var(--muted); }
+  .sc-tier-plus { font-style:italic; font-family:"Cormorant Garamond", serif; font-size:16px; color:var(--muted); margin:20px 0 12px; }
+  .sc-tier.feat .sc-tier-plus { color:rgba(243,238,228,0.7); }
+  .sc-tier ul { list-style:none; padding:0; margin:8px 0 28px; display:grid; gap:9px; }
+  .sc-tier li { position:relative; padding-left:22px; font-size:13.5px; line-height:1.45; }
+  .sc-tier li::before { content:"·"; position:absolute; left:6px; color:var(--brass); font-weight:700; }
+  .sc-tier .btn { margin-top:auto; }
+  .sc-partner-foot { text-align:center; margin-top:40px; }
+  .sc-partner-foot p { font-size:18px; color:var(--muted); margin:0 0 20px; }
+  .sc-partner-foot .btn-row { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  @media (max-width: 900px) {
+    .sc-feature { grid-template-columns:1fr; gap:32px; }
+    .sc-feature.rev .sc-media { order:0; }
+    .sc-founder { grid-template-columns:1fr; gap:32px; }
+    .sc-founder-photo { max-width:260px; }
+    .sc-tier-grid { grid-template-columns:1fr; }
+    .sc-founder blockquote { font-size:26px; }
+  }
+</style>
+
+<section class="showcase" id="platform">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Everything included</div>
+        <h2>One platform,<br/><em>end&nbsp;to&nbsp;end.</em></h2>
+      </div>
+      <p>Your custom broker site, done-for-you content, social, articles, email, an always-on AI chat, and a human concierge — every piece working together to put leads in your inbox.</p>
+    </div>
+
+    <div class="sc-features">
+
+      <!-- 1 · Custom Broker Site -->
+      <div class="sc-feature">
+        <div class="sc-media">
+          <!-- swap: <img class="sc-img" src="URL" alt="Custom broker website"> -->
+          <div class="sc-chrome"><span></span><span></span><span></span><i>yourbrokerage.com</i></div>
+          <div class="sc-screen" style="--g1:#1b3a5e;">
+            <div class="sc-screen-title">Expert Advice. Exclusive Listings. Unmatched Luxury.</div>
+            <div class="sc-screen-sub">Featured Yachts</div>
+          </div>
+          <div class="sc-ph-note">image placeholder</div>
+        </div>
+        <div class="sc-body">
+          <h3>Custom <em>Broker Site</em></h3>
+          <p class="sc-desc">Establish your personal brand &amp; credibility. Display your listings, sold yachts, testimonials, industry news &amp; more — on your own personal website.</p>
+          <ul class="sc-list">
+            <li>Any boat feed</li>
+            <li>World-class designs — no templates</li>
+            <li>Optimized for AI engines &amp; search engines</li>
+            <li>Fully managed &amp; hosted</li>
+          </ul>
+          <a class="btn brass sc-cta" href="https://link.waveapps.com/3vz866-ffyxmc" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- 2 · Done-For-You Content -->
+      <div class="sc-feature rev">
+        <div class="sc-media">
+          <!-- swap: <img class="sc-img" src="URL" alt="Done-for-you content"> -->
+          <div class="sc-chrome"><span></span><span></span><span></span><i>yourbrokerage.com / news</i></div>
+          <div class="sc-screen" style="--g1:#244a3a;">
+            <div class="sc-screen-title">Columbus Yachts Unveils Atlantique 37 Megayacht</div>
+            <div class="sc-screen-sub">Auto-published · Hand-selected</div>
+          </div>
+          <div class="sc-ph-note">image placeholder</div>
+        </div>
+        <div class="sc-body">
+          <h3>Done-For-You <em>Content</em></h3>
+          <p class="sc-desc">Our AI monitors the latest industry news &amp; listings, then publishes uniquely-written articles on your site.</p>
+          <ul class="sc-list">
+            <li>Fresh content on autopilot</li>
+            <li>Hand-selected news aligned with your brand</li>
+          </ul>
+          <a class="btn brass sc-cta" href="https://link.waveapps.com/3vz866-ffyxmc" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- 3 · Social Media Posts -->
+      <div class="sc-feature">
+        <div class="sc-media">
+          <!-- swap: <img class="sc-img" src="URL" alt="Social media posts"> -->
+          <div class="sc-chrome"><span></span><span></span><span></span><i>your social channels</i></div>
+          <div class="sc-screen" style="--g1:#2b3f63;">
+            <div class="sc-screen-title">Shared across every channel</div>
+            <div class="sc-cards"><b>f</b><b>◎</b><b>in</b><b>✕</b></div>
+            <div class="sc-screen-sub" style="margin-top:14px;">AI captions &amp; hashtags</div>
+          </div>
+          <div class="sc-ph-note">image placeholder</div>
+        </div>
+        <div class="sc-body">
+          <h3>Social Media <em>Posts</em></h3>
+          <p class="sc-desc">Web articles are shared across all of your social media accounts. Captions are written with AI for real-time trending hashtags &amp; engagement.</p>
+          <ul class="sc-list">
+            <li>Posted to Facebook, Instagram, LinkedIn &amp; X</li>
+            <li>Real-time trending hashtags</li>
+            <li>Cross-posted to all your accounts</li>
+          </ul>
+          <a class="btn brass sc-cta" href="https://link.waveapps.com/3vz866-ffyxmc" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- 4 · Instant Articles -->
+      <div class="sc-feature rev">
+        <div class="sc-media">
+          <!-- swap: <img class="sc-img" src="URL" alt="Instant articles"> -->
+          <div class="sc-chrome"><span></span><span></span><span></span><i>dashboard / instant articles</i></div>
+          <div class="sc-screen" style="--g1:#3a2f5e;">
+            <div class="sc-screen-title">Prompt any topic — generate an SEO article</div>
+            <div class="sc-screen-sub">Powered by ChatGPT</div>
+          </div>
+          <div class="sc-ph-note">image placeholder</div>
+        </div>
+        <div class="sc-body">
+          <h3>Instant <em>Articles</em></h3>
+          <p class="sc-desc">Leverage the power of ChatGPT inside your website dashboard. Prompt any topic to generate SEO articles.</p>
+          <ul class="sc-list">
+            <li>Write SEO content in seconds</li>
+            <li>Published straight to your site</li>
+          </ul>
+          <a class="btn brass sc-cta" href="https://link.waveapps.com/3vz866-ffyxmc" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- 5 · Email Campaigns -->
+      <div class="sc-feature">
+        <div class="sc-media">
+          <!-- swap: <img class="sc-img" src="URL" alt="Email campaigns"> -->
+          <div class="sc-chrome"><span></span><span></span><span></span><i>inbox · your newsletter</i></div>
+          <div class="sc-screen" style="--g1:#1f3a5a;">
+            <div class="sc-screen-title">Broker Name Newsletter</div>
+            <div class="sc-screen-sub">Monthly digest · Yachting updates</div>
+          </div>
+          <div class="sc-ph-note">image placeholder</div>
+        </div>
+        <div class="sc-body">
+          <h3>Email <em>Campaigns</em></h3>
+          <p class="sc-desc">Send prospects monthly digests with your latest news to stay top-of-mind. Categorize your contacts based on their interests &amp; buyer-profile.</p>
+          <ul class="sc-list">
+            <li>Automated monthly digests</li>
+            <li>Segmented by interest &amp; buyer profile</li>
+          </ul>
+          <a class="btn brass sc-cta" href="https://link.waveapps.com/3vz866-ffyxmc" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- 6 · AI Chat -->
+      <div class="sc-feature rev">
+        <div class="sc-media">
+          <!-- swap: <img class="sc-img" src="URL" alt="AI chat"> -->
+          <div class="sc-chrome"><span></span><span></span><span></span><i>yourbrokerage.com</i></div>
+          <div class="sc-screen" style="--g1:#244a4a;">
+            <div class="sc-screen-title">"Welcome aboard — how may I help you today?"</div>
+            <div class="sc-screen-sub">AI Chat · capturing leads 24/7</div>
+          </div>
+          <div class="sc-ph-note">image placeholder</div>
+        </div>
+        <div class="sc-body">
+          <h3>AI <em>Chat</em></h3>
+          <p class="sc-desc">Your website AI is active in every time zone — "answering the phone" and capturing contact information for all inquiries, bringing you the leads directly.</p>
+          <ul class="sc-list">
+            <li>Always on, every time zone</li>
+            <li>Captures contact details on every inquiry</li>
+          </ul>
+          <a class="btn brass sc-cta" href="https://link.waveapps.com/3vz866-ffyxmc" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- 7 · Listing Showcase -->
+      <div class="sc-feature">
+        <div class="sc-media">
+          <!-- swap: <img class="sc-img" src="URL" alt="Listing showcase"> -->
+          <div class="sc-chrome"><span></span><span></span><span></span><i>yourbrokerage.com / listings</i></div>
+          <div class="sc-screen" style="--g1:#2c3c5e;">
+            <div class="sc-screen-title">127' Custom Line 2018</div>
+            <div class="sc-screen-sub">Off-Market Special · Co-Brokerage</div>
+          </div>
+          <div class="sc-ph-note">image placeholder</div>
+        </div>
+        <div class="sc-body">
+          <h3>Listing <em>Showcase</em></h3>
+          <p class="sc-desc">Display any listing on your website — including off-market and co-brokerage opportunities your clients won't find anywhere else.</p>
+          <ul class="sc-list">
+            <li>Off-market specials</li>
+            <li>Co-brokerage listings</li>
+          </ul>
+          <a class="btn brass sc-cta" href="https://link.waveapps.com/3vz866-ffyxmc" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- 8 · Human Concierge -->
+      <div class="sc-feature rev">
+        <div class="sc-media">
+          <!-- swap: <img class="sc-img" src="URL" alt="Human concierge"> -->
+          <div class="sc-chrome"><span></span><span></span><span></span><i>your marketing manager</i></div>
+          <div class="sc-screen" style="--g1:#3a3050;">
+            <div class="sc-screen-title">A dedicated human, proofing &amp; publishing for you</div>
+            <div class="sc-screen-sub">Human Concierge</div>
+          </div>
+          <div class="sc-ph-note">image placeholder</div>
+        </div>
+        <div class="sc-body">
+          <h3>Human <em>Concierge</em></h3>
+          <p class="sc-desc">We assign a human marketing manager to proof &amp; publish content across your website, social media and email campaigns for you.</p>
+          <ul class="sc-list">
+            <li>Dedicated marketing manager</li>
+            <li>Proofs &amp; publishes across every channel</li>
+          </ul>
+          <a class="btn brass sc-cta" href="https://link.waveapps.com/3vz866-ffyxmc" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FOUNDER ════════ -->
+<section class="sc-founder-sec">
+  <div class="wrap">
+    <div class="sc-founder">
+      <div class="sc-founder-photo">
+        <!-- swap: <img class="sc-img" src="URL" alt="Josh Valoes"> -->
+        <span>Josh Valoes · IYBA panel</span>
+      </div>
+      <div>
+        <div class="eyebrow" style="color:var(--brass); margin-bottom:18px;">From the founder</div>
+        <blockquote>"Chart your own course to success. We empower you with the marketing to <em>lead your market.</em>"</blockquote>
+        <div class="sc-founder-name"><b>Josh Valoes</b> <span>/ Founder</span></div>
+        <div class="sc-founder-prev">Previously: Marketing Director, Denison Yachting&nbsp;&nbsp;//&nbsp;&nbsp;VP &amp; CMO, YATCO</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ MARKETING PARTNER ════════ -->
+<section class="sc-partner" id="marketing-partner">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Our team integrates into yours</div>
+        <h2>Marketing <em>Partner.</em></h2>
+      </div>
+      <p>Beyond the Individual plan — full-service partnership for brokerages ready to scale. We embed in your team and run the entire marketing engine.</p>
+    </div>
+    <div class="sc-tier-grid">
+      <div class="sc-tier">
+        <div class="sc-tier-name">Startup</div>
+        <div class="sc-tier-aud">New brokerage</div>
+        <div class="sc-tier-price">$4,995<small>/mo</small></div>
+        <ul>
+          <li>Custom website</li>
+          <li>CRM setup &amp; optimization</li>
+          <li>AI integration across your business</li>
+          <li>Social media marketing</li>
+          <li>Email marketing</li>
+          <li>Monthly performance reports &amp; recommendations</li>
+          <li>Up to $500k/year ad management</li>
+          <li>Positioning &amp; storytelling guidance</li>
+          <li>Unlimited support via calls, emails &amp; texts</li>
+        </ul>
+        <a class="btn brass sc-cta" href="https://link.waveapps.com/3vz866-ffyxmc" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+      </div>
+      <div class="sc-tier feat">
+        <div class="sc-tier-name">Established</div>
+        <div class="sc-tier-aud">Small-to-mid brokerage</div>
+        <div class="sc-tier-price">$10,000<small>/mo</small></div>
+        <div class="sc-tier-plus">Everything in Startup, plus:</div>
+        <ul>
+          <li>Monthly strategy sessions</li>
+          <li>Advanced reporting dashboards</li>
+          <li>Collaboration with your contractors &amp; content teams</li>
+          <li>Brand amplification through PR, influencer partnerships &amp; press outreach</li>
+        </ul>
+        <a class="btn brass sc-cta" href="https://link.waveapps.com/3vz866-ffyxmc" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+      </div>
+      <div class="sc-tier">
+        <div class="sc-tier-name">Enterprise</div>
+        <div class="sc-tier-aud">Multi-office</div>
+        <div class="sc-tier-price">$20,000<small>/mo</small></div>
+        <div class="sc-tier-plus">Everything in Established, plus:</div>
+        <ul>
+          <li>Josh operates as a company executive</li>
+          <li>Custom AI development projects</li>
+          <li>Team marketing — boat shows &amp; open houses</li>
+          <li>White-glove campaign management</li>
+          <li>Access to the VALOES Partner Network</li>
+        </ul>
+        <a class="btn brass sc-cta" href="https://link.waveapps.com/3vz866-ffyxmc" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+      </div>
+    </div>
+    <div class="sc-partner-foot">
+      <p>Struggling to integrate AI into your business? We'll handle it for you.</p>
+      <div class="btn-row">
+        <a class="btn brass" href="#pricing" style="width:auto;">Schedule a call <span class="arrow">→</span></a>
+        <a class="btn ghost" href="#platform" style="width:auto;">Learn more <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ════════ FINAL CTA ════════ -->
 <section class="final">
   <div class="eyebrow" style="color: var(--brass);">Launch Now</div>
