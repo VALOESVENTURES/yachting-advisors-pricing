@@ -2221,6 +2221,8 @@
   .sc-media:has(img.sc-img) .sc-ph-note { display:none; }
   /* concierge headshot is a transparent cut-out — show it on white, not the dark frame */
   .sc-media:has(img[src*="human-concierge"]) { background:#ffffff; border-color:var(--paper-line); }
+  /* portrait headshot — keep the frame size but fit the whole person inside (no crop) */
+  img.sc-img[src*="human-concierge"] { object-fit: contain; object-position: center bottom; }
   .showcase { background: var(--paper); }
   .showcase .wrap { max-width: 1180px; }
   .sc-features { display:flex; flex-direction:column; }
