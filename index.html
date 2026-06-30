@@ -262,6 +262,10 @@
     margin-bottom: 6px;
   }
   .card.featured .price .price-prefix { color: var(--brass); }
+  .price-extras { max-width: 760px; margin: 26px auto 0; text-align: center; display: grid; gap: 7px; }
+  .price-extras p { margin: 0; font-family: "Instrument Sans", sans-serif; font-size: 12.5px; line-height: 1.55; color: var(--muted); }
+  .price-extras .pe-name { font-weight: 600; color: var(--ink); }
+  .price-extras .pe-price { font-weight: 600; color: var(--brass-dk); }
   .card .price .cents { font-size: 36px; vertical-align: 30px; color: var(--brass-dk); letter-spacing: 0; }
   .card .price small {
     font-family: "Instrument Sans", sans-serif;
@@ -489,6 +493,10 @@
     line-height: 1.6;
     margin: 0;
   }
+
+  /* ───── INTRO VIDEO ───── */
+  .intro-video { background: var(--ink); display: flex; justify-content: center; align-items: center; }
+  .intro-video-el { width: 100%; height: auto; max-height: 92vh; object-fit: contain; display: block; background: #000; }
 
   /* ───── FLEET HEADER VIDEO ───── */
   .fleet {
@@ -1926,6 +1934,13 @@
   </div>
 </nav>
 
+<!-- ════════ INTRO VIDEO ════════ -->
+<section class="intro-video">
+  <video class="intro-video-el"
+         src="https://yachtingadvisors.s3.us-east-1.amazonaws.com/YachtingAdvisors.com+Video.MP4"
+         controls playsinline autoplay muted loop preload="metadata"></video>
+</section>
+
 <!-- ════════ FLEET HEADER VIDEO ════════ -->
 
 <section class="fleet" id="fleet" aria-label="Marketing fleet header">
@@ -2258,7 +2273,7 @@
         <div class="idx">03 / ADS</div>
         <h3>Targeted Ads</h3>
         <div class="sub">Instagram &amp; Facebook paid</div>
-        <div class="price"><span class="cents">$</span>99<small>/mo</small></div>
+        <div class="price"><span class="price-prefix">Starting at</span><span class="cents">$</span>99<small>/mo</small></div>
         <ul>
           <li>2 ongoing targeted ads — managed monthly</li>
           <li>Buyer-intent audience targeting</li>
@@ -2283,7 +2298,7 @@
         <div class="idx">02 / SOCIAL</div>
         <h3>Organic Socials</h3>
         <div class="sub">Content engine, on autopilot</div>
-        <div class="price"><span class="cents">$</span>99<small>/mo</small></div>
+        <div class="price"><span class="price-prefix">Starting at</span><span class="cents">$</span>99<small>/mo</small></div>
         <ul>
           <li>2 weekly social posts — video reels + news</li>
           <li>2 weekly SEO articles on your website</li>
@@ -2298,6 +2313,11 @@
         </div>
       </article>
 
+    </div>
+
+    <div class="price-extras">
+      <p><span class="pe-name">Email Blasts</span> <span class="pe-price">$99/mo</span> — designed to target a niche audience. Send prospects monthly digests with your latest news to stay top-of-mind.</p>
+      <p><span class="pe-name">Custom CRM</span> — Setup, AI integration, automation, &amp; ongoing management to organize and nurture leads.</p>
     </div>
 
     <!-- Live bundle rail -->
