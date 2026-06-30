@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Yachting Advisors · Proposal for Liam MacVittie — The Brokerage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B0F14; --ink-soft:#121923; --ink-line:#1C2836;
+    --paper:#F3EEE4; --paper-2:#E9E2D3; --paper-line:#D9CFB9;
+    --azure:#2F7DD8; --azure-dk:#1E5FAC;
+    --brass:#B89766; --brass-dk:#8E7348;
+    --muted:#6B7682; --ok:#3A8F6B;
+  }
+  *{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:"Instrument Sans",system-ui,sans-serif;
+    background:#05080c;color:var(--ink);font-size:16px;line-height:1.5;
+  }
+  .serif{font-family:"Cormorant Garamond","Times New Roman",serif;font-weight:400;letter-spacing:-0.01em;}
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace;}
+  em{font-style:italic;}
+
+  /* ───────── deck scaffold ───────── */
+  .deck{scroll-snap-type:y mandatory;height:100vh;overflow-y:scroll;scroll-behavior:smooth;}
+  .slide{
+    position:relative;scroll-snap-align:start;
+    min-height:100vh;width:100%;
+    display:flex;flex-direction:column;
+    padding:30px 8.5vw;overflow:hidden;
+  }
+  .slide-inner{max-width:1080px;width:100%;margin:auto;padding:18px 0;}
+
+  .ink{background:var(--ink);color:var(--paper);}
+  .ink-soft{background:radial-gradient(120% 120% at 80% 0%,#15202c 0%,var(--ink) 60%);color:var(--paper);}
+  .paper{background:var(--paper);color:var(--ink);}
+  .paper-2{background:var(--paper-2);color:var(--ink);}
+
+  /* top + bottom chrome inside each slide */
+  .slide-top,.slide-foot{
+    flex:none;width:100%;
+    display:flex;align-items:center;justify-content:space-between;
+    font-size:11px;letter-spacing:0.22em;text-transform:uppercase;
+  }
+  .ink .slide-top,.ink .slide-foot,.ink-soft .slide-top,.ink-soft .slide-foot{color:#8A97A4;}
+  .paper .slide-top,.paper .slide-foot,.paper-2 .slide-top,.paper-2 .slide-foot{color:var(--muted);}
+  .wordmark{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:15px;letter-spacing:0.3em;text-transform:uppercase;}
+  .wordmark b{font-weight:600;}
+  .pagenum{font-family:"JetBrains Mono",monospace;letter-spacing:0.1em;}
+
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:0.24em;font-size:11px;font-weight:600;
+    color:var(--brass);margin-bottom:22px;display:flex;align-items:center;gap:12px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--brass);display:inline-block;}
+  .paper .eyebrow,.paper-2 .eyebrow{color:var(--brass-dk);}
+  .paper .eyebrow::before,.paper-2 .eyebrow::before{background:var(--brass-dk);}
+
+  h1.display{font-family:"Cormorant Garamond",serif;font-weight:400;font-size:clamp(40px,6.4vw,82px);line-height:1.02;letter-spacing:-0.015em;margin:0;}
+  h2.display{font-family:"Cormorant Garamond",serif;font-weight:400;font-size:clamp(32px,4.6vw,58px);line-height:1.05;letter-spacing:-0.01em;margin:0 0 8px;}
+  .display em{color:var(--brass);font-style:italic;}
+  .paper .display em,.paper-2 .display em{color:var(--brass-dk);}
+  .lede{font-size:clamp(16px,1.45vw,20px);line-height:1.6;max-width:60ch;color:#C9D2DB;}
+  .paper .lede,.paper-2 .lede{color:#3C4650;}
+
+  .kicker{font-size:13px;letter-spacing:0.04em;}
+
+  /* cover */
+  .cover-meta{display:flex;gap:48px;flex-wrap:wrap;margin-top:42px;}
+  .cover-meta .cm{border-left:1px solid var(--ink-line);padding-left:16px;}
+  .cover-meta .cm .l{font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:#7A8794;margin-bottom:6px;}
+  .cover-meta .cm .v{font-size:15px;color:var(--paper);font-weight:500;}
+  .cover-logo{height:40px;width:auto;margin-bottom:auto;}
+
+  /* generic two-column */
+  .cols{display:grid;grid-template-columns:1.05fr 0.95fr;gap:54px;align-items:center;}
+  .cols.narrow{grid-template-columns:1fr 1fr;}
+  @media(max-width:880px){.cols,.cols.narrow{grid-template-columns:1fr;gap:30px;}}
+
+  ul.ticks{list-style:none;margin:26px 0 0;padding:0;}
+  ul.ticks li{position:relative;padding:11px 0 11px 30px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15.5px;}
+  .paper ul.ticks li,.paper-2 ul.ticks li{border-bottom:1px solid var(--paper-line);}
+  ul.ticks li::before{content:"";position:absolute;left:0;top:18px;width:9px;height:9px;border:1.5px solid var(--brass);transform:rotate(45deg);}
+  ul.ticks li b{font-weight:600;}
+  ul.ticks li .sub{display:block;color:var(--muted);font-size:13px;margin-top:2px;}
+  .paper ul.ticks li .sub{color:#76808b;}
+
+  /* "what we heard" chips */
+  .heard-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:30px;}
+  @media(max-width:880px){.heard-grid{grid-template-columns:1fr;}}
+  .heard{background:rgba(255,255,255,0.035);border:1px solid var(--ink-line);border-radius:3px;padding:20px 22px;}
+  .heard .h{font-family:"Cormorant Garamond",serif;font-size:21px;color:var(--paper);margin-bottom:5px;}
+  .heard .p{font-size:13.5px;color:#9AA6B2;line-height:1.5;}
+  .heard .tag{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--brass);margin-bottom:11px;}
+
+  /* hero price block */
+  .price-hero{display:flex;align-items:baseline;gap:14px;margin:6px 0 4px;}
+  .price-hero .amt{font-family:"Cormorant Garamond",serif;font-size:clamp(64px,9vw,116px);line-height:0.9;color:var(--brass);font-weight:500;}
+  .price-hero .per{font-size:18px;color:#9AA6B2;letter-spacing:0.02em;}
+  .pill{display:inline-flex;align-items:center;gap:9px;font-size:12px;letter-spacing:0.06em;border:1px solid var(--brass);color:var(--brass);border-radius:999px;padding:7px 15px;text-transform:uppercase;font-weight:600;}
+  .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--brass);box-shadow:0 0 0 4px rgba(184,151,102,0.18);}
+
+  /* split / breakdown card */
+  .math{background:#0d141c;border:1px solid var(--ink-line);border-radius:5px;padding:30px 32px;color:var(--paper);}
+  .math h4{margin:0 0 18px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#8A97A4;font-weight:600;}
+  .mrow{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;padding:15px 0;border-top:1px dashed rgba(255,255,255,0.12);}
+  .mrow:first-of-type{border-top:none;}
+  .mrow .lbl{font-size:14.5px;color:var(--paper);}
+  .mrow .lbl .s{display:block;color:#9AA6B2;font-size:12px;margin-top:3px;max-width:34ch;}
+  .mrow .val{font-family:"Cormorant Garamond",serif;font-size:30px;line-height:1;white-space:nowrap;color:var(--paper);}
+  .mrow.eq{border-top:1.5px solid var(--brass);margin-top:6px;padding-top:18px;}
+  .mrow.eq .lbl{font-weight:600;letter-spacing:0.02em;}
+  .mrow.eq .val{color:var(--brass);font-size:38px;}
+  .guarantee-badge{margin-top:20px;display:flex;gap:13px;align-items:flex-start;background:rgba(58,143,107,0.10);border:1px solid rgba(58,143,107,0.45);border-radius:4px;padding:14px 16px;}
+  .guarantee-badge .g{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ok);background:rgba(58,143,107,0.18);border-radius:3px;padding:5px 8px;white-space:nowrap;}
+  .guarantee-badge .t{font-size:13.5px;color:#2c5343;line-height:1.45;}
+  .ink .guarantee-badge .t,.ink-soft .guarantee-badge .t{color:#CFE3D8;}
+
+  /* option cards row */
+  .opt-card{background:rgba(255,255,255,0.04);border:1px solid var(--ink-line);border-radius:5px;padding:30px 30px 26px;height:100%;}
+  .paper .opt-card{background:#fff;border-color:var(--paper-line);}
+  .opt-card .idx{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:0.18em;color:var(--brass);margin-bottom:14px;}
+  .opt-card h3{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:30px;margin:0 0 4px;}
+  .opt-card .pr{font-family:"Cormorant Garamond",serif;font-size:26px;color:var(--brass);margin:0 0 14px;}
+  .opt-card .pr small{font-size:13px;color:var(--muted);font-family:"Instrument Sans";}
+
+  /* tier compare */
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px;}
+  @media(max-width:880px){.tiers{grid-template-columns:1fr;}}
+  .tier{border:1px solid var(--ink-line);border-radius:5px;padding:20px 22px;background:rgba(255,255,255,0.03);}
+  .paper .tier{background:#fff;border-color:var(--paper-line);}
+  .tier.feat{border-color:var(--brass);background:linear-gradient(180deg,rgba(184,151,102,0.10),rgba(184,151,102,0.02));position:relative;}
+  .tier.feat::after{content:"Recommended";position:absolute;top:-11px;left:24px;background:var(--brass);color:#1a1206;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border-radius:3px;}
+  .tier .tn{font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+  .tier .tp{font-family:"Cormorant Garamond",serif;font-size:42px;line-height:1;margin-bottom:4px;}
+  .tier .tp small{font-size:14px;color:var(--muted);font-family:"Instrument Sans";}
+  .tier .td{font-size:13px;color:#9AA6B2;min-height:30px;}
+  .paper .tier .td{color:#6b757f;}
+  .tier ul{list-style:none;margin:12px 0 0;padding:12px 0 0;border-top:1px solid var(--ink-line);font-size:13.5px;}
+  .paper .tier ul{border-top-color:var(--paper-line);}
+  .tier ul li{padding:6px 0 6px 18px;position:relative;}
+  .tier ul li::before{content:"–";position:absolute;left:0;color:var(--brass);}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:34px;}
+  @media(max-width:880px){.steps{grid-template-columns:1fr;}}
+  .step .n{font-family:"Cormorant Garamond",serif;font-size:30px;color:var(--brass);border-bottom:1px solid var(--ink-line);padding-bottom:12px;margin-bottom:14px;}
+  .paper .step .n{border-bottom-color:var(--paper-line);}
+  .step h4{margin:0 0 8px;font-size:16px;}
+  .step p{margin:0;font-size:13.5px;color:#9AA6B2;line-height:1.5;}
+  .paper .step p{color:#6b757f;}
+
+  /* founder */
+  .founder{display:flex;gap:30px;align-items:center;margin-top:30px;background:rgba(255,255,255,0.04);border:1px solid var(--ink-line);border-radius:6px;padding:26px 30px;}
+  .founder img{width:104px;height:104px;border-radius:50%;object-fit:cover;flex:none;border:1px solid var(--brass);}
+  .founder blockquote{margin:0;font-family:"Cormorant Garamond",serif;font-size:24px;line-height:1.3;}
+  .founder .who{margin-top:10px;font-size:13px;color:var(--muted);}
+  .founder .who b{color:var(--paper);}
+
+  /* next steps list */
+  .next{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:30px;}
+  @media(max-width:880px){.next{grid-template-columns:1fr;}}
+  .next .ni{border-top:2px solid var(--brass);padding-top:16px;}
+  .next .ni .nn{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--brass);margin-bottom:8px;}
+  .next .ni h4{margin:0 0 6px;font-size:16px;}
+  .next .ni p{margin:0;font-size:13.5px;color:#9AA6B2;}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:40px;}
+  .btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;font-size:14px;letter-spacing:0.02em;padding:15px 26px;border-radius:3px;}
+  .btn.brass{background:var(--brass);color:#1a1206;}
+  .btn.ghost{border:1px solid rgba(255,255,255,0.3);color:var(--paper);}
+  .paper .btn.ghost{border-color:var(--ink-line);color:var(--ink);}
+
+  .contact{display:flex;gap:40px;flex-wrap:wrap;margin-top:34px;font-size:14px;}
+  .contact .c .l{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+  .contact .c a{color:var(--brass);text-decoration:none;}
+
+  /* progress + nav */
+  .progress{position:fixed;top:0;left:0;height:3px;background:var(--brass);width:0;z-index:50;transition:width .2s ease;}
+  .nav-dots{position:fixed;right:20px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:11px;z-index:50;}
+  .nav-dots a{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.28);border:1px solid rgba(255,255,255,0.25);transition:all .2s;}
+  .nav-dots a.on{background:var(--brass);border-color:var(--brass);transform:scale(1.35);}
+  .hint{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.5);z-index:50;animation:fade 2.6s ease-in-out infinite;}
+  @keyframes fade{0%,100%{opacity:.35}50%{opacity:.85}}
+  .dl-btn{position:fixed;left:22px;bottom:16px;z-index:55;display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--brass);background:rgba(11,15,20,0.72);border:1px solid var(--brass);border-radius:999px;padding:9px 16px;text-decoration:none;backdrop-filter:blur(6px);transition:background .2s,color .2s;}
+  .dl-btn:hover{background:var(--brass);color:#1a1206;}
+
+  @media print{
+    @page{size:13.333in 7.5in;margin:0;}
+    body{background:#fff;}
+    .deck{height:auto;overflow:visible;display:block;}
+    .slide{height:720px;min-height:720px;page-break-after:always;break-after:page;}
+    /* lock multi-column layouts so a narrow render can never collapse them */
+    .cols{grid-template-columns:1.05fr 0.95fr;gap:54px;}
+    .cols.narrow{grid-template-columns:1fr 1fr;}
+    .heard-grid{grid-template-columns:repeat(2,1fr);}
+    .tiers{grid-template-columns:repeat(3,1fr);}
+    .steps{grid-template-columns:repeat(3,1fr);}
+    .next{grid-template-columns:repeat(3,1fr);}
+    .progress,.nav-dots,.hint,.dl-btn{display:none!important;}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<nav class="nav-dots" id="dots"></nav>
+<div class="hint" id="hint">↓ scroll &nbsp;·&nbsp; → next</div>
+<a class="dl-btn" href="Yachting-Advisors-Proposal-Liam-MacVittie.pdf" download title="Download this proposal as a PDF">↓ Download PDF</a>
+
+<div class="deck" id="deck">
+
+  <!-- 1 · COVER -->
+  <section class="slide ink-soft" id="s1">
+    <div class="slide-top">
+      <img class="cover-logo" src="../../assets/valoes-logo-white.png" alt="VALOES Yachting Advisors" style="height:34px" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span class=&quot;wordmark&quot;><b>Valoes</b> Yachting Advisors</span>')">
+      <span class="pagenum">01 / 11</span>
+    </div>
+    <div class="slide-inner">
+      <div class="eyebrow">A marketing proposal · June 2026</div>
+      <h1 class="display">Put your boats in front of<br/>the <em>right buyers.</em></h1>
+      <p class="lede" style="margin-top:24px;">A growth engine built for a modern brokerage — targeted social advertising, a flagship website, and a content engine, all run for you by a human concierge plus our AI stack.</p>
+      <div class="cover-meta">
+        <div class="cm"><div class="l">Prepared for</div><div class="v">Liam MacVittie</div></div>
+        <div class="cm"><div class="l">Brokerage</div><div class="v">The Brokerage · Portland, ME</div></div>
+        <div class="cm"><div class="l">From</div><div class="v">Yachting Advisors</div></div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="wordmark"><b>Valoes</b> Yachting Advisors</span><span>yachtingadvisors.com</span></div>
+  </section>
+
+  <!-- 2 · WHAT WE HEARD -->
+  <section class="slide ink" id="s2">
+    <div class="slide-top"><span class="wordmark"><b>Valoes</b> Yachting Advisors</span><span class="pagenum">02 / 11</span></div>
+    <div class="slide-inner">
+      <div class="eyebrow">What we heard from you</div>
+      <h2 class="display">Your business, <em>as you described it.</em></h2>
+      <p class="lede">So this proposal speaks to where you actually are — not a generic pitch.</p>
+      <div class="heard-grid">
+        <div class="heard">
+          <div class="tag">The move</div>
+          <div class="h">A new brokerage, premium focus</div>
+          <div class="p">Newer, larger vessels and new builds — with the used inventory from your brokerage feeding your pipeline.</div>
+        </div>
+        <div class="heard">
+          <div class="tag">The flagships</div>
+          <div class="h">Evo 60 &amp; VMG Puffin</div>
+          <div class="p">The carbon-fibre Evo 60 catamaran and VMG's Scandinavian aluminium Puffin 42s &amp; 50s — distinctive boats that deserve distinctive marketing.</div>
+        </div>
+        <div class="heard">
+          <div class="tag">Today's channels</div>
+          <div class="h">Paper &amp; marina presence</div>
+          <div class="p">Print advertising plus sponsorships and exclusive placement in members-only lounges at Yacht Haven Charlestown &amp; BMS.</div>
+        </div>
+        <div class="heard">
+          <div class="tag">What you want next</div>
+          <div class="h">Targeted reach to HNW buyers</div>
+          <div class="p">Precise targeting and geofencing to reach high-net-worth buyers — plus the short-form social you've already started building.</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot"><span>Proposal · Liam MacVittie</span><span>The Brokerage</span></div>
+  </section>
+
+  <!-- 3 · THE GAP -->
+  <section class="slide paper" id="s3">
+    <div class="slide-top"><span class="wordmark"><b>Valoes</b> Yachting Advisors</span><span class="pagenum">03 / 11</span></div>
+    <div class="slide-inner cols">
+      <div>
+        <div class="eyebrow">The opportunity</div>
+        <h2 class="display">Presence is good.<br/><em>Precision</em> sells boats.</h2>
+        <p class="lede">Print and marina placements build credibility with whoever happens to walk by. They can't choose <em>who</em> sees your Evo 60, and they can't tell you what worked.</p>
+        <p class="lede" style="margin-top:14px;">Paid social closes both gaps — we put your exact listings in front of the exact buyer profile, in the cruising grounds and ZIP codes you choose, and report on every dollar.</p>
+      </div>
+      <div>
+        <ul class="ticks">
+          <li><b>Target by intent, not luck</b><span class="sub">Reach people actively shopping large sail &amp; power, not a random readership.</span></li>
+          <li><b>Geofence the right water</b><span class="sub">Yacht clubs, marinas, boat shows and affluent ZIP codes — New England and beyond.</span></li>
+          <li><b>Creative from your own boats</b><span class="sub">Your Evo 60 &amp; Puffins become the ads — not stock imagery.</span></li>
+          <li><b>Every dollar is measured</b><span class="sub">Monthly reporting on spend, reach and leads. No more guessing.</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-foot"><span>Proposal · Liam MacVittie</span><span>The Brokerage</span></div>
+  </section>
+
+  <!-- 4 · THE RECOMMENDED OFFER -->
+  <section class="slide ink-soft" id="s4">
+    <div class="slide-top"><span class="wordmark"><b>Valoes</b> Yachting Advisors</span><span class="pagenum">04 / 11</span></div>
+    <div class="slide-inner cols">
+      <div>
+        <div class="eyebrow">What we showed you · Recommended</div>
+        <h2 class="display">Targeted Social Ads,<br/>the <em>lead engine.</em></h2>
+        <div class="price-hero"><span class="amt">$500</span><span class="per">/ month · all-in</span></div>
+        <span class="pill"><span class="dot"></span>Lead Guarantee included</span>
+        <p class="lede" style="margin-top:22px;">The package you saw in our meeting — built so the only thing you have to think about is which lead to call back first. Month-to-month, no contract.</p>
+      </div>
+      <div>
+        <ul class="ticks">
+          <li><b>2 ongoing targeted ad campaigns</b><span class="sub">Built and managed every month on Instagram &amp; Facebook.</span></li>
+          <li><b>Buyer-intent &amp; geofenced audiences</b><span class="sub">Reaching high-net-worth buyers in the regions you choose.</span></li>
+          <li><b>Creative built from your listings</b><span class="sub">Your Evo 60, Puffin 42 &amp; 50, and brokerage inventory.</span></li>
+          <li><b>Re-engagement of warm prospects</b><span class="sub">We follow up with people who already showed interest.</span></li>
+          <li><b>Monthly performance reporting</b><span class="sub">Reach, spend and leads — delivered by your concierge.</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-foot"><span>Proposal · Liam MacVittie</span><span>The Brokerage</span></div>
+  </section>
+
+  <!-- 5 · WHERE THE $500 GOES -->
+  <section class="slide paper-2" id="s5">
+    <div class="slide-top"><span class="wordmark"><b>Valoes</b> Yachting Advisors</span><span class="pagenum">05 / 11</span></div>
+    <div class="slide-inner cols">
+      <div>
+        <div class="eyebrow">Where your $500 goes</div>
+        <h2 class="display">Simple, honest <em>math.</em></h2>
+        <p class="lede">Most of your budget goes to work you can see, and the rest is real media spend that goes straight to Meta — never marked up.</p>
+        <p class="lede" style="margin-top:14px;"><b>~$300</b> builds &amp; runs everything; <b>$200</b> is paid directly to Meta as ad spend. At that level, we guarantee leads.</p>
+        <div class="guarantee-badge">
+          <span class="g">Guaranteed</span>
+          <span class="t">Leads land in your inbox — or we keep working at no extra cost until they do.</span>
+        </div>
+      </div>
+      <div class="math">
+        <h4>Monthly investment · breakdown</h4>
+        <div class="mrow"><div class="lbl">Build &amp; management<span class="s">Website, content &amp; ad creative, targeting, optimisation, and your human concierge — AI-powered.</span></div><div class="val">~$300</div></div>
+        <div class="mrow"><div class="lbl">Meta ad spend<span class="s">Paid directly to Instagram / Facebook as media — this is what activates the guarantee.</span></div><div class="val">$200</div></div>
+        <div class="mrow eq"><div class="lbl">Total per month</div><div class="val">$500</div></div>
+      </div>
+    </div>
+    <div class="slide-foot"><span>Proposal · Liam MacVittie</span><span>The Brokerage</span></div>
+  </section>
+
+  <!-- 6 · OPTION A — WEBSITE -->
+  <section class="slide ink" id="s6">
+    <div class="slide-top"><span class="wordmark"><b>Valoes</b> Yachting Advisors</span><span class="pagenum">06 / 11</span></div>
+    <div class="slide-inner cols">
+      <div>
+        <div class="eyebrow">Your option · 01</div>
+        <h2 class="display">A flagship <em>website</em><br/>of your own.</h2>
+        <div class="price-hero"><span class="amt" style="font-size:clamp(48px,7vw,84px)">$99</span><span class="per">/ month · or part of the bundle</span></div>
+        <p class="lede" style="margin-top:18px;">A custom broker site — no templates — that makes your new brokerage look as premium as the boats you sell, and captures leads around the clock.</p>
+        <ul class="ticks">
+          <li><b>Custom-designed broker site</b> &amp; any-boat MLS feed</li>
+          <li><b>Listing showcase</b> — including off-market &amp; co-brokerage</li>
+          <li><b>24/7 AI chat</b> trained on yachting, capturing every inquiry</li>
+          <li><b>Built for AI &amp; search</b> — fully managed &amp; hosted</li>
+        </ul>
+      </div>
+      <div>
+        <img src="../../assets/custom-broker-site.webp" alt="Custom broker website" style="width:100%;border-radius:6px;border:1px solid var(--ink-line);display:block;">
+        <p class="kicker" style="color:#8A97A4;margin-top:14px;">A home base for the Evo 60, the Puffin range, and every listing your brokerage feeds you.</p>
+      </div>
+    </div>
+    <div class="slide-foot"><span>Proposal · Liam MacVittie</span><span>The Brokerage</span></div>
+  </section>
+
+  <!-- 7 · OPTION B — SOCIAL MANAGEMENT -->
+  <section class="slide ink" id="s7">
+    <div class="slide-top"><span class="wordmark"><b>Valoes</b> Yachting Advisors</span><span class="pagenum">07 / 11</span></div>
+    <div class="slide-inner cols">
+      <div>
+        <div class="eyebrow">Your option · 02</div>
+        <h2 class="display">Social media,<br/><em>managed for you.</em></h2>
+        <div class="price-hero"><span class="amt" style="font-size:clamp(48px,7vw,84px)">$99</span><span class="per">/ month · or part of the bundle</span></div>
+        <p class="lede" style="margin-top:18px;">You've already started shooting short-form — this keeps the feed full without it ever landing back on your plate.</p>
+        <ul class="ticks">
+          <li><b>1 post a week</b> — a video reel or curated industry news</li>
+          <li><b>1 SEO article a week</b> published to your site</li>
+          <li><b>AI captions &amp; trending hashtags</b>, cross-posted to FB, IG, LinkedIn &amp; X</li>
+          <li><b>A human concierge proofs &amp; publishes</b> — nothing goes out unchecked</li>
+        </ul>
+      </div>
+      <div>
+        <img src="../../assets/social-media-posts.jpg" alt="Social media management" style="width:100%;border-radius:6px;border:1px solid var(--ink-line);display:block;">
+        <p class="kicker" style="color:#8A97A4;margin-top:14px;">Stay top-of-mind between deals — and feed the same audiences your ads are warming up.</p>
+      </div>
+    </div>
+    <div class="slide-foot"><span>Proposal · Liam MacVittie</span><span>The Brokerage</span></div>
+  </section>
+
+  <!-- 8 · PUT IT TOGETHER -->
+  <section class="slide paper" id="s8">
+    <div class="slide-top"><span class="wordmark"><b>Valoes</b> Yachting Advisors</span><span class="pagenum">08 / 11</span></div>
+    <div class="slide-inner">
+      <div class="eyebrow">Choose your altitude</div>
+      <h2 class="display">Start with ads — or run the <em>whole engine.</em></h2>
+      <p class="lede" style="color:#3C4650;">Every service is $99/mo on its own. Run all three together with $200/mo in Meta spend and your <b>Lead Guarantee</b> switches on — that's the $500 all-in package.</p>
+      <div class="tiers">
+        <div class="tier">
+          <div class="tn">À la carte</div>
+          <div class="tp">$99<small>/mo each</small></div>
+          <div class="td">Pick any single service and add the rest whenever you're ready.</div>
+          <ul>
+            <li>Targeted Ads (+ your Meta spend)</li>
+            <li>Flagship Website</li>
+            <li>Social Media Management</li>
+          </ul>
+        </div>
+        <div class="tier feat">
+          <div class="tn">The complete engine</div>
+          <div class="tp">$500<small>/mo all-in</small></div>
+          <div class="td">Website + socials + targeted ads, ~$300 build &amp; $200 to Meta.</div>
+          <ul>
+            <li>All three services, fully managed</li>
+            <li>$200 Meta spend included</li>
+            <li><b>Lead Guarantee active</b></li>
+            <li>Dedicated human concierge</li>
+          </ul>
+        </div>
+        <div class="tier">
+          <div class="tn">Just the lead engine</div>
+          <div class="tp">$300<small>/mo</small></div>
+          <div class="td">Targeted ads only — $99 management + $200 Meta spend.</div>
+          <ul>
+            <li>2 managed ad campaigns</li>
+            <li>Buyer-intent &amp; geofencing</li>
+            <li>Add website / socials anytime</li>
+          </ul>
+        </div>
+      </div>
+      <p class="kicker" style="color:var(--muted);margin-top:14px;">Month-to-month through every option. Cancel anytime with two weeks' notice — no setup fees.</p>
+    </div>
+    <div class="slide-foot"><span>Proposal · Liam MacVittie</span><span>The Brokerage</span></div>
+  </section>
+
+  <!-- 9 · WHY US -->
+  <section class="slide ink-soft" id="s9">
+    <div class="slide-top"><span class="wordmark"><b>Valoes</b> Yachting Advisors</span><span class="pagenum">09 / 11</span></div>
+    <div class="slide-inner">
+      <div class="eyebrow">Why Yachting Advisors</div>
+      <h2 class="display">Yacht people, <em>not</em> a generic agency.</h2>
+      <div class="cols" style="margin-top:14px;align-items:start;">
+        <div>
+          <ul class="ticks">
+            <li><b>A dedicated human concierge</b><span class="sub">A real marketing manager backed by our AI stack — they proof &amp; publish everything.</span></li>
+            <li><b>Live in 10–14 days</b><span class="sub">Site ships in under two weeks; organic posts start immediately; ads launch once your pixel is learning.</span></li>
+            <li><b>Month-to-month, no contract</b><span class="sub">Stay because it works, not because you're locked in.</span></li>
+          </ul>
+        </div>
+        <div class="founder">
+          <img src="../../assets/founder-josh-valoes.jpg" alt="Josh Valoes">
+          <div>
+            <blockquote>"Chart your own course to success. We empower you with the marketing to <em style="color:var(--brass)">lead your market.</em>"</blockquote>
+            <div class="who"><b>Josh Valoes</b> · Founder &nbsp;—&nbsp; ex-Marketing Director, Denison Yachting · VP &amp; CMO, YATCO</div>
+          </div>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="n">I.</div><h4>Kickoff call</h4><p>Within 48 hours your concierge gathers your brand, listings and target buyers.</p></div>
+        <div class="step"><div class="n">II.</div><h4>We build</h4><p>Site, creative and campaigns assembled around the Evo 60, Puffins and your inventory.</p></div>
+        <div class="step"><div class="n">III.</div><h4>Launch &amp; iterate</h4><p>Everything goes live, and we optimise on real numbers every month.</p></div>
+      </div>
+    </div>
+    <div class="slide-foot"><span>Proposal · Liam MacVittie</span><span>The Brokerage</span></div>
+  </section>
+
+  <!-- 10 · NEXT STEPS -->
+  <section class="slide ink" id="s10">
+    <div class="slide-top"><span class="wordmark"><b>Valoes</b> Yachting Advisors</span><span class="pagenum">10 / 11</span></div>
+    <div class="slide-inner">
+      <div class="eyebrow">Next steps</div>
+      <h2 class="display">Let's get your first<br/>campaign <em>in the water.</em></h2>
+      <div class="next">
+        <div class="ni"><div class="nn">01</div><h4>Quick 30-minute follow-up</h4><p>We pick up where the call dropped and finalise targeting for your boats.</p></div>
+        <div class="ni"><div class="nn">02</div><h4>We bring the plan</h4><p>Sample targeted ad, buyer profiles for the Evo 60 &amp; Puffins, and a geofencing map.</p></div>
+        <div class="ni"><div class="nn">03</div><h4>Activate &amp; launch</h4><p>Approve, check out in minutes, and your concierge has you live within two weeks.</p></div>
+      </div>
+      <div class="cta-row">
+        <a class="btn brass" href="https://yachtingadvisors.com/" target="_blank" rel="noopener">Start the $500 package <span>→</span></a>
+        <a class="btn ghost" href="https://yachtingadvisors.com/" target="_blank" rel="noopener">See it all at yachtingadvisors.com <span>→</span></a>
+      </div>
+      <div class="contact">
+        <div class="c"><div class="l">Your contact</div><div>The Yachting Advisors team</div></div>
+        <div class="c"><div class="l">Web</div><a href="https://yachtingadvisors.com">yachtingadvisors.com</a></div>
+        <div class="c"><div class="l">Prepared for</div><div>Liam MacVittie · The Brokerage</div></div>
+      </div>
+    </div>
+    <div class="slide-foot"><span>Proposal · Liam MacVittie</span><span>The Brokerage</span></div>
+  </section>
+
+  <!-- 11 · CLOSE -->
+  <section class="slide ink-soft" id="s11">
+    <div class="slide-top">
+      <img class="cover-logo" src="../../assets/valoes-logo-white.png" alt="VALOES Yachting Advisors" style="height:30px" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span class=&quot;wordmark&quot;><b>Valoes</b> Yachting Advisors</span>')">
+      <span class="pagenum">11 / 11</span>
+    </div>
+    <div class="slide-inner" style="text-align:center;">
+      <h1 class="display" style="font-size:clamp(34px,5vw,64px)">"Chart your own course<br/>to <em>success.</em>"</h1>
+      <p class="lede" style="margin:24px auto 0;text-align:center;">Thank you, Liam. We're ready when you are.</p>
+      <div class="cta-row" style="justify-content:center;">
+        <a class="btn brass" href="https://yachtingadvisors.com/" target="_blank" rel="noopener">yachtingadvisors.com <span>→</span></a>
+      </div>
+    </div>
+    <div class="slide-foot" style="justify-content:center;left:0;right:0;"><span class="wordmark"><b>Valoes</b> Yachting Advisors &nbsp;·&nbsp; © 2026</span></div>
+  </section>
+
+</div>
+
+<script>
+  const deck=document.getElementById('deck');
+  const slides=[...document.querySelectorAll('.slide')];
+  const progress=document.getElementById('progress');
+  const dotsWrap=document.getElementById('dots');
+  const hint=document.getElementById('hint');
+
+  slides.forEach((s,i)=>{
+    const a=document.createElement('a');
+    a.href='#'+s.id;a.dataset.i=i;
+    a.addEventListener('click',e=>{e.preventDefault();s.scrollIntoView({behavior:'smooth'});});
+    dotsWrap.appendChild(a);
+  });
+  const dots=[...dotsWrap.children];
+
+  function onScroll(){
+    const top=deck.scrollTop, h=deck.clientHeight;
+    const idx=Math.round(top/h);
+    progress.style.width=((top/(deck.scrollHeight-h))*100)+'%';
+    dots.forEach((d,i)=>d.classList.toggle('on',i===idx));
+    if(top>40&&hint){hint.style.display='none';}
+  }
+  deck.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  function go(dir){
+    const h=deck.clientHeight;
+    const idx=Math.round(deck.scrollTop/h);
+    const next=Math.min(slides.length-1,Math.max(0,idx+dir));
+    slides[next].scrollIntoView({behavior:'smooth'});
+  }
+  window.addEventListener('keydown',e=>{
+    if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();go(1);}
+    if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(-1);}
+    if(e.key==='Home'){e.preventDefault();slides[0].scrollIntoView({behavior:'smooth'});}
+    if(e.key==='End'){e.preventDefault();slides[slides.length-1].scrollIntoView({behavior:'smooth'});}
+  });
+</script>
+</body>
+</html>
