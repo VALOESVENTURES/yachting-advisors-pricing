@@ -2073,7 +2073,7 @@
             <li>Optimized for AI engines &amp; search engines</li>
             <li>Fully managed &amp; hosted</li>
           </ul>
-          <a class="btn brass sc-cta" href="https://link.waveapps.com/3b95an-jy2gbf" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+          <button type="button" class="btn brass sc-cta" onclick="addToBundle('web')">Add to bundle <span class="arrow">→</span></button>
         </div>
       </div>
 
@@ -2095,7 +2095,7 @@
             <li>Fresh content on autopilot</li>
             <li>Hand-selected news aligned with your brand</li>
           </ul>
-          <a class="btn brass sc-cta" href="https://link.waveapps.com/3b95an-jy2gbf" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+          <button type="button" class="btn brass sc-cta" onclick="addToBundle('social')">Add to bundle <span class="arrow">→</span></button>
         </div>
       </div>
 
@@ -2119,7 +2119,7 @@
             <li>Real-time trending hashtags</li>
             <li>Cross-posted to all your accounts</li>
           </ul>
-          <a class="btn brass sc-cta" href="https://link.waveapps.com/3b95an-jy2gbf" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+          <button type="button" class="btn brass sc-cta" onclick="addToBundle('social')">Add to bundle <span class="arrow">→</span></button>
         </div>
       </div>
 
@@ -2141,7 +2141,7 @@
             <li>Write SEO content in seconds</li>
             <li>Published straight to your site</li>
           </ul>
-          <a class="btn brass sc-cta" href="https://link.waveapps.com/3b95an-jy2gbf" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+          <span class="sc-cta sc-included">Included</span>
         </div>
       </div>
 
@@ -2163,7 +2163,7 @@
             <li>Automated monthly digests</li>
             <li>Segmented by interest &amp; buyer profile</li>
           </ul>
-          <a class="btn brass sc-cta" href="https://link.waveapps.com/3b95an-jy2gbf" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+          <button type="button" class="btn brass sc-cta" onclick="addToBundle('email')">Add to bundle <span class="arrow">→</span></button>
         </div>
       </div>
 
@@ -2185,7 +2185,7 @@
             <li>Always on, every time zone</li>
             <li>Captures contact details on every inquiry</li>
           </ul>
-          <a class="btn brass sc-cta" href="https://link.waveapps.com/3b95an-jy2gbf" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+          <span class="sc-cta sc-included">Included</span>
         </div>
       </div>
 
@@ -2207,7 +2207,7 @@
             <li>Off-market specials</li>
             <li>Co-brokerage listings</li>
           </ul>
-          <a class="btn brass sc-cta" href="https://link.waveapps.com/3b95an-jy2gbf" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+          <span class="sc-cta sc-included">Included</span>
         </div>
       </div>
 
@@ -2229,7 +2229,7 @@
             <li>Dedicated marketing manager</li>
             <li>Proofs &amp; publishes across every channel</li>
           </ul>
-          <a class="btn brass sc-cta" href="https://link.waveapps.com/3b95an-jy2gbf" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+          <span class="sc-cta sc-included">Included</span>
         </div>
       </div>
 
@@ -2494,6 +2494,21 @@
   .sc-list li { position:relative; padding-left:26px; font-size:15px; line-height:1.4; }
   .sc-list li::before { content:"→"; position:absolute; left:0; color:var(--brass); font-family:"Cormorant Garamond", serif; }
   .sc-cta { width:auto !important; }
+  /* "Included" badge — non-actionable state for features that come with the bundle */
+  .sc-included {
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 22px;
+    background:transparent;
+    border:1px solid var(--brass);
+    color:var(--brass-dk);
+    font-family:"Instrument Sans", sans-serif;
+    font-size:13px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase;
+    cursor:default;
+  }
+  .sc-included::before {
+    content:"✓"; font-size:12px; color:var(--brass);
+    font-weight:700;
+  }
   /* placeholder media frame */
   .sc-media {
     position:relative; border-radius:12px; overflow:hidden; aspect-ratio:4/3;
@@ -3169,6 +3184,16 @@
     bundleModal.addEventListener('click', (e) => { if (e.target === bundleModal) closeBundleLead(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeBundleLead(); });
   }
+  // Check a service in the Build-Your-Bundle builder and jump to it
+  function addToBundle(svc){
+    const input = document.querySelector('[data-svc-input="' + svc + '"]');
+    if (input && !input.checked) {
+      input.checked = true;
+      input.dispatchEvent(new Event('change'));
+    }
+    const dest = document.getElementById('pricing');
+    if (dest) dest.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
   async function submitBundleLead(e){
     e.preventDefault();
     const btn = document.getElementById('bl-submit');
@@ -3228,7 +3253,7 @@
     const panels = Array.from(document.querySelectorAll('.sc-features .sc-feature'));
     if (!section || !tabs.length || !panels.length) return;
 
-    const DELAY = 4000;
+    const DELAY = 2000;
     const count = tabs.length;
     let current = 0, timer = null, inView = false, hovering = false;
 
