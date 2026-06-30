@@ -1792,6 +1792,8 @@
   .modal input[type=text],
   .modal input[type=email],
   .modal input[type=tel],
+  .modal input[type=date],
+  .modal select,
   .modal textarea {
     width: 100%;
     padding: 14px 16px;
@@ -1804,6 +1806,8 @@
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
     box-sizing: border-box;
   }
+  .modal input[type=date], .modal select { -webkit-appearance: none; appearance: none; cursor: pointer; }
+  .modal select:focus, .modal input[type=date]:focus { border-color: var(--azure); box-shadow: 0 0 0 3px rgba(78, 125, 150, 0.15); }
   .modal textarea {
     resize: vertical;
     min-height: 84px;
@@ -2515,13 +2519,6 @@
         <a class="btn brass sc-cta" href="https://link.waveapps.com/spfnrz-57uxyt" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
       </div>
     </div>
-    <div class="sc-partner-foot">
-      <p>Struggling to integrate AI into your business? We'll handle it for you.</p>
-      <div class="btn-row">
-        <a class="btn brass" href="#pricing" style="width:auto;">Schedule a call <span class="arrow">→</span></a>
-        <a class="btn ghost" href="#platform" style="width:auto;">Learn more <span class="arrow">→</span></a>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -2529,8 +2526,7 @@
 <section class="final">
   <h2>Struggling to integrate AI into your business?<br/><em>We'll handle it for you.</em></h2>
   <div class="btn-row">
-    <a class="btn brass" href="#marketing-partner" style="padding:18px 36px;">Schedule a call <span class="arrow">→</span></a>
-    <a class="btn ghost" href="#platform" style="padding:18px 32px; color: var(--paper); border-color: rgba(255,255,255,0.3);">Learn more <span class="arrow">→</span></a>
+    <button type="button" class="btn brass" onclick="openSchedule()" style="padding:18px 40px; width:auto; cursor:pointer;">Schedule a call <span class="arrow">→</span></button>
   </div>
 </section>
 
@@ -2861,6 +2857,43 @@
   </div>
 </div>
 
+<!-- ════════ SCHEDULE A CALL MODAL ════════ -->
+<div class="modal-scrim" id="schedule-modal" role="dialog" aria-modal="true" aria-labelledby="sched-title">
+  <div class="modal">
+    <button class="modal-close" aria-label="Close" onclick="closeSchedule()">×</button>
+    <div class="modal-body" id="sched-body">
+      <div class="eyebrow" style="color: var(--brass);">Let's talk</div>
+      <h3 id="sched-title">Schedule <em>a call.</em></h3>
+      <p>Tell us who you are and when works — we'll call you back to map out how AI fits your business. No commitment.</p>
+      <form id="schedule-form" onsubmit="submitSchedule(event)">
+        <div class="form-grid">
+          <input type="text" name="first_name" required placeholder="First name" autocomplete="given-name" id="sc-first" />
+          <input type="text" name="last_name" required placeholder="Last name" autocomplete="family-name" id="sc-last" />
+          <input type="email" name="email" required placeholder="you@yourbusiness.com" autocomplete="email" id="sc-email" />
+          <input type="tel" name="phone" required placeholder="Phone number" autocomplete="tel" id="sc-phone" />
+          <input type="date" name="callback_date" required id="sc-date" aria-label="Preferred callback date" />
+          <select name="callback_time" required id="sc-time" aria-label="Preferred callback time">
+            <option value="" disabled selected>Preferred time</option>
+            <option>9:00 AM</option><option>9:30 AM</option>
+            <option>10:00 AM</option><option>10:30 AM</option>
+            <option>11:00 AM</option><option>11:30 AM</option>
+            <option>12:00 PM</option><option>12:30 PM</option>
+            <option>1:00 PM</option><option>1:30 PM</option>
+            <option>2:00 PM</option><option>2:30 PM</option>
+            <option>3:00 PM</option><option>3:30 PM</option>
+            <option>4:00 PM</option><option>4:30 PM</option>
+            <option>5:00 PM</option><option>5:30 PM</option>
+            <option>6:00 PM</option><option>6:30 PM</option>
+            <option>7:00 PM</option>
+          </select>
+        </div>
+        <button type="submit" id="sc-submit">Request my call</button>
+      </form>
+      <div class="fine">We'll only use your details to schedule and confirm your call.</div>
+    </div>
+  </div>
+</div>
+
 <script>
   // ─── EXIT INTENT ───
   let modalShown = false;
@@ -2942,6 +2975,71 @@
       submitBtn.disabled = false;
       submitBtn.textContent = originalLabel;
       alert("Sorry — we couldn't send that just now. Please email Shawn@yachtingadvisors.com directly and we'll get your sample started.");
+    }
+  }
+
+  // ─── SCHEDULE A CALL MODAL ───
+  const schedModal = document.getElementById('schedule-modal');
+  function openSchedule() {
+    schedModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    const d = document.getElementById('sc-date');
+    if (d && !d.min) { try { d.min = new Date().toISOString().split('T')[0]; } catch (e) {} }
+  }
+  function closeSchedule() {
+    schedModal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  if (schedModal) {
+    schedModal.addEventListener('click', (e) => { if (e.target === schedModal) closeSchedule(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSchedule(); });
+  }
+
+  async function submitSchedule(e) {
+    e.preventDefault();
+    const btn = document.getElementById('sc-submit');
+    const first = document.getElementById('sc-first').value.trim();
+    const last  = document.getElementById('sc-last').value.trim();
+    const email = document.getElementById('sc-email').value.trim();
+    const phone = document.getElementById('sc-phone').value.trim();
+    const date  = document.getElementById('sc-date').value;
+    const time  = document.getElementById('sc-time').value;
+    const body  = document.getElementById('sched-body');
+
+    btn.disabled = true;
+    const orig = btn.textContent;
+    btn.textContent = 'Sending…';
+
+    const payload = {
+      name: (first + ' ' + last).trim(),
+      email,
+      phone,
+      callback_date: date,
+      callback_time: time,
+      _subject: `New Call Request — ${first} ${last}`.trim(),
+      _template: 'table',
+      _captcha: 'false'
+    };
+
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/Shawn@yachtingadvisors.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error('Network response was not ok');
+
+      body.innerHTML = `
+        <div class="success">
+          <div class="eyebrow" style="color: var(--ok);">Call requested</div>
+          <h3>Talk soon, <em>${first ? first : 'there'}.</em></h3>
+          <p>We'll call <b>${phone}</b> around <b>${time}</b> on <b>${date}</b> — watch for a text to confirm.</p>
+          <a class="btn brass" style="width:auto;padding:14px 24px;" href="javascript:void(0)" onclick="closeSchedule()">Close</a>
+        </div>`;
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = orig;
+      alert("Sorry — we couldn't send that just now. Please email Shawn@yachtingadvisors.com directly and we'll set up your call.");
     }
   }
 
