@@ -496,18 +496,20 @@
   }
 
   /* ───── HERO VIDEO TRIGGER + POPUP ───── */
-  .fleet-vtrigger {
-    display:inline-flex; align-items:center; gap:11px; margin-top:18px;
-    padding:7px 16px 7px 7px; background:rgba(11,15,20,0.4);
-    border:1px solid rgba(184,151,102,0.4); border-radius:999px; cursor:pointer;
-    color:var(--paper); font-family:"Instrument Sans",sans-serif; transition:all .2s ease;
+  .fleet-watch {
+    display:inline-flex; align-items:center; gap:11px; margin:2px auto 26px;
+    background:none; border:none; cursor:pointer; padding:4px 2px;
+    color:#D9E0E8; font-family:"Instrument Sans",sans-serif;
+    font-size:16px; font-weight:500; letter-spacing:0.05em; transition:color .2s ease;
   }
-  .fleet-vtrigger:hover { background:rgba(11,15,20,0.7); border-color:var(--brass); transform:translateY(-1px); }
-  .fvt-thumb { position:relative; width:62px; height:38px; border-radius:7px; overflow:hidden; flex:none; background:#000; }
-  .fvt-prev { width:100%; height:100%; object-fit:cover; display:block; }
-  .fvt-play { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.18); }
-  .fvt-play::before { content:""; width:0;height:0; border-style:solid; border-width:6px 0 6px 10px; border-color:transparent transparent transparent #fff; margin-left:2px; filter:drop-shadow(0 1px 2px rgba(0,0,0,.6)); }
-  .fvt-text { font-size:13px; font-weight:600; letter-spacing:0.05em; white-space:nowrap; }
+  .fleet-watch:hover { color:var(--paper); }
+  .fleet-watch-icon {
+    display:inline-flex; align-items:center; justify-content:center; flex:none;
+    width:28px; height:28px; border-radius:50%; color:var(--brass);
+    border:1px solid rgba(184,151,102,0.6); transition:all .2s ease;
+  }
+  .fleet-watch-icon::before { content:""; width:0;height:0; border-style:solid; border-width:5px 0 5px 8px; border-color:transparent transparent transparent currentColor; margin-left:2px; }
+  .fleet-watch:hover .fleet-watch-icon { background:var(--brass); border-color:var(--brass); color:var(--ink); }
   #video-modal .video-modal { position:relative; width:94vw; max-width:1400px; }
   #video-modal .video-modal-el { width:100%; height:auto; max-height:86vh; display:block; background:#000; border:1px solid rgba(184,151,102,0.3); }
   #video-modal .video-close {
@@ -1972,7 +1974,10 @@
     <div class="fleet-tagline-inner" data-tilt>
       <div class="fleet-eyebrow">Yacht Marketing on Autopilot</div>
       <h2 class="fleet-headline">You no longer need a middleman to find a buyer — <em>own the&nbsp;system.</em></h2>
-      <div class="fleet-sub">Everything a modern yacht broker needs</div>
+      <button type="button" class="fleet-watch" onclick="openVideo()" aria-label="Watch explainer video">
+        <span class="fleet-watch-icon" aria-hidden="true"></span>
+        Watch Explainer Video
+      </button>
       <div class="fleet-cta-row">
         <a href="#individual" class="fleet-cta fleet-cta--brass">
           <span class="fleet-cta-main">Individuals</span>
@@ -1983,13 +1988,6 @@
           <span class="fleet-cta-sub">Starting at $4,990/mo</span>
         </a>
       </div>
-      <button type="button" class="fleet-vtrigger" onclick="openVideo()" aria-label="Watch the film">
-        <span class="fvt-thumb">
-          <video class="fvt-prev" src="https://yachtingadvisors.s3.us-east-1.amazonaws.com/YachtingAdvisors.com+Video.MP4" muted loop autoplay playsinline preload="metadata"></video>
-          <span class="fvt-play" aria-hidden="true"></span>
-        </span>
-        <span class="fvt-text">Watch the film</span>
-      </button>
     </div>
   </div>
 
