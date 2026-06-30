@@ -189,10 +189,17 @@
   .dl-btn:hover{background:var(--brass);color:#1a1206;}
 
   @media print{
-    @page{size:1280px 720px;margin:0;}
+    @page{size:13.333in 7.5in;margin:0;}
     body{background:#fff;}
     .deck{height:auto;overflow:visible;display:block;}
     .slide{height:720px;min-height:720px;page-break-after:always;break-after:page;}
+    /* lock multi-column layouts so a narrow render can never collapse them */
+    .cols{grid-template-columns:1.05fr 0.95fr;gap:54px;}
+    .cols.narrow{grid-template-columns:1fr 1fr;}
+    .heard-grid{grid-template-columns:repeat(2,1fr);}
+    .tiers{grid-template-columns:repeat(3,1fr);}
+    .steps{grid-template-columns:repeat(3,1fr);}
+    .next{grid-template-columns:repeat(3,1fr);}
     .progress,.nav-dots,.hint,.dl-btn{display:none!important;}
     *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   }
