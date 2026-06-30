@@ -1801,6 +1801,9 @@
   #schedule-modal .modal { max-width: 680px; }
   #schedule-modal .modal-body { padding: 26px 0 0; max-height: 88vh; overflow-y: auto; }
   #schedule-modal iframe { display: block; }
+  .bundle-summary { border:1px solid var(--paper-line); background:#FBF8F1; padding:12px 16px; margin:0 0 16px; font-family:"Instrument Sans", sans-serif; }
+  .bundle-summary .bs-row { display:flex; justify-content:space-between; gap:12px; font-size:14px; padding:5px 0; color:var(--ink); }
+  .bundle-summary .bs-total { border-top:1px solid var(--paper-line); margin-top:5px; padding-top:9px; font-weight:700; }
   .modal .eyebrow { color: var(--brass-dk); }
   .modal h3 {
     font-family: "Cormorant Garamond", serif;
@@ -2260,7 +2263,6 @@
           <span class="svc-check" aria-hidden="true"></span>
           <span class="svc-label">Include</span>
         </label>
-        <div class="idx">01 / WEB</div>
         <h3>Website</h3>
         <div class="sub">Your personal broker site</div>
         <div class="price"><span class="price-prefix">Starting at</span><span class="cents">$</span>99<small>/mo</small></div>
@@ -2271,11 +2273,6 @@
           <li>Website AI chat trained on yachting</li>
           <li>Fully managed &amp; hosted</li>
         </ul>
-        <div class="btn-row">
-          <a class="btn ghost" href="https://link.waveapps.com/vtardy-xxsd4j" target="_blank">
-            Activate Now <span class="arrow">→</span>
-          </a>
-        </div>
       </article>
 
       <!-- Card 2 - featured -->
@@ -2286,7 +2283,6 @@
           <span class="svc-label">Include</span>
         </label>
         <div class="ribbon">Popular</div>
-        <div class="idx">03 / ADS</div>
         <h3>Targeted Ads</h3>
         <div class="sub">Instagram &amp; Facebook paid</div>
         <div class="price"><span class="price-prefix">Starting at</span><span class="cents">$</span>99<small>/mo</small></div>
@@ -2297,11 +2293,6 @@
           <li>Re-engagement of qualified prospects</li>
           <li>Monthly performance reporting</li>
         </ul>
-        <div class="btn-row">
-          <a class="btn" href="https://link.waveapps.com/7tttu3-nrzz48" target="_blank">
-            Activate Now <span class="arrow">→</span>
-          </a>
-        </div>
       </article>
 
       <!-- Card 3 -->
@@ -2311,7 +2302,6 @@
           <span class="svc-check" aria-hidden="true"></span>
           <span class="svc-label">Include</span>
         </label>
-        <div class="idx">02 / SOCIAL</div>
         <h3>Organic Socials</h3>
         <div class="sub">Content engine, on autopilot</div>
         <div class="price"><span class="price-prefix">Starting at</span><span class="cents">$</span>99<small>/mo</small></div>
@@ -2322,19 +2312,18 @@
           <li>Cross-posted to all your accounts</li>
           <li>Human concierge proofs &amp; publishes</li>
         </ul>
-        <div class="btn-row">
-          <a class="btn ghost" href="https://link.waveapps.com/rkywhx-d2z27e" target="_blank">
-            Activate Now <span class="arrow">→</span>
-          </a>
-        </div>
       </article>
 
     </div>
 
     <div class="price-grid price-grid-extra">
       <!-- Add-on · Email Blasts -->
-      <article class="card">
-        <div class="idx">04 / EMAIL</div>
+      <article class="card bundle-card" data-svc="email" data-price="99">
+        <label class="svc-toggle" aria-label="Include Email Blasts in bundle">
+          <input type="checkbox" data-svc-input="email" />
+          <span class="svc-check" aria-hidden="true"></span>
+          <span class="svc-label">Include</span>
+        </label>
         <h3>Email Blasts</h3>
         <div class="sub">Targeted niche campaigns</div>
         <div class="price"><span class="price-prefix">Starting at</span><span class="cents">$</span>99<small>/mo</small></div>
@@ -2343,25 +2332,23 @@
           <li>Monthly digests with your latest news</li>
           <li>Keeps you top-of-mind with prospects</li>
         </ul>
-        <div class="btn-row">
-          <button type="button" class="btn ghost" onclick="openSchedule()" style="cursor:pointer;">Get started <span class="arrow">→</span></button>
-        </div>
       </article>
 
       <!-- Add-on · Custom CRM -->
-      <article class="card">
-        <div class="idx">05 / CRM</div>
+      <article class="card bundle-card" data-svc="crm" data-price="99">
+        <label class="svc-toggle" aria-label="Include Custom CRM in bundle">
+          <input type="checkbox" data-svc-input="crm" />
+          <span class="svc-check" aria-hidden="true"></span>
+          <span class="svc-label">Include</span>
+        </label>
         <h3>Custom CRM</h3>
         <div class="sub">Organize &amp; nurture leads</div>
-        <div class="price"><span class="price-prefix">Investment</span><span class="price-custom">Custom</span></div>
+        <div class="price"><span class="price-prefix">Starting at</span><span class="cents">$</span>99<small>/mo</small></div>
         <ul>
           <li>Setup &amp; AI integration</li>
           <li>Automation &amp; workflows</li>
           <li>Ongoing management</li>
         </ul>
-        <div class="btn-row">
-          <button type="button" class="btn ghost" onclick="openSchedule()" style="cursor:pointer;">Get started <span class="arrow">→</span></button>
-        </div>
       </article>
     </div>
 
@@ -2372,26 +2359,16 @@
           <div class="eyebrow">Your bundle</div>
           <div class="bundle-rail-hint" id="bundle-hint">Toggle services above to build your plan</div>
         </div>
-        <div class="bundle-rail-items" id="bundle-items">
-          <div class="bundle-rail-item placeholder" data-svc="web">
-            <span class="tag">01 · WEB</span><span class="amt">— — —</span>
-          </div>
-          <div class="bundle-rail-item placeholder" data-svc="social">
-            <span class="tag">02 · SOCIAL</span><span class="amt">— — —</span>
-          </div>
-          <div class="bundle-rail-item placeholder" data-svc="ads">
-            <span class="tag">03 · ADS</span><span class="amt">— — —</span>
-          </div>
-        </div>
+        <div class="bundle-rail-items" id="bundle-items"></div>
         <div class="bundle-rail-total">
           <div class="bundle-rail-total-lbl">Total / mo</div>
           <div class="bundle-rail-total-val">
             <span class="currency">$</span><span class="odometer" id="bundle-total">0</span><small>/mo</small>
           </div>
         </div>
-        <a class="btn brass bundle-rail-cta" id="bundle-cta" href="#pricing">
+        <button type="button" class="btn brass bundle-rail-cta" id="bundle-cta" onclick="openBundleLead()">
           <span id="bundle-cta-label">Select a service</span> <span class="arrow">→</span>
-        </a>
+        </button>
       </div>
       <div class="bundle-rail-bonus" id="bundle-bonus" hidden>
         <span class="dot"></span>
@@ -2974,6 +2951,30 @@
   </div>
 </div>
 
+<!-- ════════ BUILD-YOUR-BUNDLE LEAD MODAL ════════ -->
+<div class="modal-scrim" id="bundle-modal" role="dialog" aria-modal="true" aria-labelledby="bundle-modal-title">
+  <div class="modal">
+    <button class="modal-close" aria-label="Close" onclick="closeBundleLead()">×</button>
+    <div class="modal-body" id="bundle-modal-body">
+      <div class="eyebrow" style="color: var(--brass);">Your plan</div>
+      <h3 id="bundle-modal-title">Let's get you <em>set&nbsp;up.</em></h3>
+      <p>Here's what you picked — drop your details and we'll email you to finalize. No payment taken here.</p>
+      <div class="bundle-summary" id="bundle-summary"></div>
+      <form id="bundle-form" onsubmit="submitBundleLead(event)">
+        <div class="form-grid">
+          <input type="text" name="first_name" required placeholder="First name" autocomplete="given-name" id="bl-first" />
+          <input type="text" name="last_name" required placeholder="Last name" autocomplete="family-name" id="bl-last" />
+          <input type="email" name="email" required placeholder="you@business.com" autocomplete="email" id="bl-email" />
+          <input type="tel" name="phone" required placeholder="Phone number" autocomplete="tel" id="bl-phone" />
+        </div>
+        <textarea name="notes" rows="2" placeholder="Anything else? (optional)" id="bl-notes"></textarea>
+        <button type="submit" id="bl-submit">Send my plan</button>
+      </form>
+      <div class="fine">We'll only use your details to set up your plan and follow up.</div>
+    </div>
+  </div>
+</div>
+
 <!-- ════════ SCHEDULE A CALL MODAL ════════ -->
 <div class="modal-scrim" id="schedule-modal" role="dialog" aria-modal="true" aria-labelledby="sched-title">
   <div class="modal">
@@ -3103,6 +3104,74 @@
   if (videoModal) {
     videoModal.addEventListener('click', (e) => { if (e.target === videoModal) closeVideo(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeVideo(); });
+  }
+
+  // ─── BUILD-YOUR-BUNDLE LEAD POPUP ───
+  const bundleModal = document.getElementById('bundle-modal');
+  function bundleSelectedList(){
+    const N = { web:'Website', social:'Organic Socials', ads:'Targeted Ads', email:'Email Blasts', crm:'Custom CRM' };
+    const out = [];
+    document.querySelectorAll('[data-svc-input]').forEach(i => { if (i.checked) { const k = i.getAttribute('data-svc-input'); out.push(N[k] || k); } });
+    return out;
+  }
+  function openBundleLead(){
+    if (!bundleModal) return;
+    const picked = bundleSelectedList();
+    if (!picked.length) return; // nothing selected yet
+    const total = picked.length * 99;
+    const sum = document.getElementById('bundle-summary');
+    if (sum) {
+      sum.innerHTML =
+        picked.map(p => '<div class="bs-row"><span>' + p + '</span><span>$99/mo</span></div>').join('') +
+        '<div class="bs-row bs-total"><span>Estimated total</span><span>$' + total + '/mo</span></div>';
+    }
+    bundleModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeBundleLead(){
+    if (!bundleModal) return;
+    bundleModal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  if (bundleModal) {
+    bundleModal.addEventListener('click', (e) => { if (e.target === bundleModal) closeBundleLead(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeBundleLead(); });
+  }
+  async function submitBundleLead(e){
+    e.preventDefault();
+    const btn = document.getElementById('bl-submit');
+    const first = document.getElementById('bl-first').value.trim();
+    const last  = document.getElementById('bl-last').value.trim();
+    const email = document.getElementById('bl-email').value.trim();
+    const phone = document.getElementById('bl-phone').value.trim();
+    const notes = document.getElementById('bl-notes').value.trim();
+    const picked = bundleSelectedList();
+    const total = picked.length * 99;
+    const body = document.getElementById('bundle-modal-body');
+    btn.disabled = true; const orig = btn.textContent; btn.textContent = 'Sending…';
+    const payload = {
+      name: (first + ' ' + last).trim(),
+      email, phone,
+      services_selected: picked.join(', '),
+      estimated_total: '$' + total + '/mo',
+      notes,
+      _subject: 'New Bundle Plan Request — ' + (first || email),
+      _template: 'table', _captcha: 'false'
+    };
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/Shawn@yachtingadvisors.com', {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error('Network response was not ok');
+      body.innerHTML =
+        '<div class="success"><div class="eyebrow" style="color: var(--ok);">Plan received</div>' +
+        '<h3>Thanks, <em>' + (first ? first : 'there') + '.</em></h3>' +
+        '<p>We\'ll email <b>' + email + '</b> to finalize your plan — <b>' + (picked.join(', ') || '—') + '</b>. Talk soon.</p>' +
+        '<a class="btn brass" style="width:auto;padding:14px 24px;" href="javascript:void(0)" onclick="closeBundleLead()">Close</a></div>';
+    } catch (err) {
+      btn.disabled = false; btn.textContent = orig;
+      alert("Sorry — we couldn't send that just now. Please email Shawn@yachtingadvisors.com directly.");
+    }
   }
 
   // ─── SCHEDULE A CALL MODAL ───
@@ -3332,14 +3401,12 @@ Tone: warm, direct, concise. Write like a thoughtful industry pro, not a salespe
 
   // ─── LIVE BUNDLE BUILDER ───
   (function bundleBuilder(){
-    const WAVE_BUNDLE = 'https://link.waveapps.com/3b95an-jy2gbf';
-    const WAVE_WEB    = 'https://link.waveapps.com/vtardy-xxsd4j';
-    const WAVE_SOCIAL = 'https://link.waveapps.com/rkywhx-d2z27e';
-    const WAVE_ADS    = 'https://link.waveapps.com/7tttu3-nrzz48';
     const SERVICES = {
-      web:    { label: 'Website',          tag: '01 · WEB',    price: 99, link: WAVE_WEB },
-      social: { label: 'Organic Socials',  tag: '02 · SOCIAL', price: 99, link: WAVE_SOCIAL },
-      ads:    { label: 'Targeted Ads',     tag: '03 · ADS',    price: 99, link: WAVE_ADS },
+      web:    { label: 'Website',         tag: 'Website',         price: 99 },
+      social: { label: 'Organic Socials', tag: 'Organic Socials', price: 99 },
+      ads:    { label: 'Targeted Ads',    tag: 'Targeted Ads',    price: 99 },
+      email:  { label: 'Email Blasts',    tag: 'Email Blasts',    price: 99 },
+      crm:    { label: 'Custom CRM',      tag: 'Custom CRM',      price: 99 },
     };
 
     const rail = document.getElementById('bundle-rail');
@@ -3350,7 +3417,7 @@ Tone: warm, direct, concise. Write like a thoughtful industry pro, not a salespe
     const bonus = document.getElementById('bundle-bonus');
     if (!rail) return;
 
-    const state = { web: false, social: false, ads: false };
+    const state = { web: false, social: false, ads: false, email: false, crm: false };
 
     const cards = document.querySelectorAll('.bundle-card');
     cards.forEach(card => {
@@ -3411,25 +3478,13 @@ Tone: warm, direct, concise. Write like a thoughtful industry pro, not a salespe
       const count = selected.length;
       const total = count * 99;
 
-      // Rail items
-      document.querySelectorAll('.bundle-rail-item').forEach(item => {
-        const svc = item.dataset.svc;
-        const active = state[svc];
-        const wasActive = item.classList.contains('active');
-        item.classList.toggle('active', active);
-        item.classList.toggle('placeholder', !active);
-        const amt = item.querySelector('.amt');
-        if (active) {
-          amt.textContent = '$99';
-          if (!wasActive) {
-            item.classList.remove('pop');
-            void item.offsetWidth; // restart
-            item.classList.add('pop');
-          }
-        } else {
-          amt.textContent = '— — —';
-        }
-      });
+      // Rail items (built from current selection)
+      const itemsEl = document.getElementById('bundle-items');
+      if (itemsEl) {
+        itemsEl.innerHTML = selected.map(k =>
+          '<div class="bundle-rail-item active"><span class="tag">' + SERVICES[k].tag + '</span><span class="amt">$99</span></div>'
+        ).join('');
+      }
 
       // Total
       setTotal(total);
@@ -3439,28 +3494,16 @@ Tone: warm, direct, concise. Write like a thoughtful industry pro, not a salespe
       if (count === 0) {
         hint.textContent = 'Toggle services above to build your plan';
         ctaLabel.textContent = 'Select a service';
-        cta.href = '#pricing';
-      } else if (count === 1) {
-        const s = SERVICES[selected[0]];
-        hint.textContent = s.label + ' only — subscribe à la carte for $99/mo.';
-        ctaLabel.textContent = 'Check out — $99/mo';
-        cta.href = s.link;
-        cta.target = '_blank';
-        cta.rel = 'noopener';
-      } else if (count === 2) {
-        const names = selected.map(k => SERVICES[k].label).join(' + ');
-        hint.textContent = names + ' — two services, $' + total + '/mo. Add the third to activate the lead guarantee.';
-        ctaLabel.textContent = 'Check out — $' + total + '/mo';
-        cta.href = WAVE_BUNDLE;
-        cta.target = '_blank';
       } else {
-        hint.textContent = 'The full bundle — three services, launched in 14 days, covered by our lead guarantee.';
-        ctaLabel.textContent = 'Commission the bundle — $297/mo';
-        cta.href = WAVE_BUNDLE;
-        cta.target = '_blank';
+        const names = selected.map(k => SERVICES[k].label).join(' + ');
+        hint.textContent = (count === 1)
+          ? names + ' — $99/mo. Add more to build your plan.'
+          : names + ' — ' + count + ' services, $' + total + '/mo.';
+        ctaLabel.textContent = 'Get my plan — $' + total + '/mo';
       }
 
-      bonus.hidden = count < 3;
+      // Lead-guarantee note shows once the 3 core services are all in
+      bonus.hidden = !(state.web && state.social && state.ads);
     }
 
     render();
