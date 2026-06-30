@@ -3025,16 +3025,47 @@
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSchedule(); });
   }
 
-  // ─── PLATFORM FEATURE TABS ───
+  // ─── PLATFORM FEATURE TABS (auto-advance, in-view + hover aware) ───
   (function platformTabs(){
+    const section = document.getElementById('platform');
     const tabs = Array.from(document.querySelectorAll('.sc-tab'));
     const panels = Array.from(document.querySelectorAll('.sc-features .sc-feature'));
-    if (!tabs.length || !panels.length) return;
+    if (!section || !tabs.length || !panels.length) return;
+
+    const DELAY = 4000;
+    const count = tabs.length;
+    let current = 0, timer = null, inView = false, hovering = false;
+
     function activate(idx){
-      tabs.forEach(t => t.classList.toggle('is-active', t.dataset.panel === String(idx)));
-      panels.forEach(p => p.classList.toggle('is-active', p.dataset.panel === String(idx)));
+      current = ((idx % count) + count) % count;
+      tabs.forEach(t => t.classList.toggle('is-active', +t.dataset.panel === current));
+      panels.forEach(p => p.classList.toggle('is-active', +p.dataset.panel === current));
     }
-    tabs.forEach(t => t.addEventListener('click', () => activate(t.dataset.panel)));
+    function start(){
+      // only auto-advance while the section is on screen and not hovered;
+      // the first slide fires DELAY ms after this starts, so the current
+      // tab is always shown for the full interval before moving on
+      if (timer || hovering || !inView) return;
+      timer = setInterval(() => activate(current + 1), DELAY);
+    }
+    function stop(){ if (timer) { clearInterval(timer); timer = null; } }
+    function restart(){ stop(); start(); }
+
+    // manual click: switch and reset the 4s window so it doesn't jump immediately
+    tabs.forEach(t => t.addEventListener('click', () => { activate(+t.dataset.panel); restart(); }));
+
+    // pause while hovered, resume (fresh 4s) on leave
+    section.addEventListener('mouseenter', () => { hovering = true; stop(); });
+    section.addEventListener('mouseleave', () => { hovering = false; start(); });
+
+    // start cycling only once the section is actually seen
+    if ('IntersectionObserver' in window){
+      new IntersectionObserver((entries) => {
+        entries.forEach(e => { inView = e.isIntersecting; inView ? start() : stop(); });
+      }, { threshold: 0.4 }).observe(section);
+    } else {
+      inView = true; start();
+    }
   })();
 
   // ─── CHAT WIDGET (Elena) ───
