@@ -495,8 +495,9 @@
   }
 
   /* ───── INTRO VIDEO ───── */
-  .intro-video { background: var(--ink); display: flex; justify-content: center; align-items: center; }
-  .intro-video-el { width: 100%; height: auto; max-height: 92vh; object-fit: contain; display: block; background: #000; }
+  .intro-video { background: var(--paper); padding: 28px 0; }
+  .intro-video .wrap { max-width: 1180px; }
+  .intro-video-el { width: 100%; height: auto; max-height: 88vh; object-fit: contain; display: block; background: #000; border-radius: 12px; }
 
   /* ───── FLEET HEADER VIDEO ───── */
   .fleet {
@@ -1936,9 +1937,11 @@
 
 <!-- ════════ INTRO VIDEO ════════ -->
 <section class="intro-video">
-  <video class="intro-video-el"
-         src="https://yachtingadvisors.s3.us-east-1.amazonaws.com/YachtingAdvisors.com+Video.MP4"
-         controls playsinline autoplay muted loop preload="metadata"></video>
+  <div class="wrap">
+    <video class="intro-video-el"
+           src="https://yachtingadvisors.s3.us-east-1.amazonaws.com/YachtingAdvisors.com+Video.MP4"
+           controls playsinline autoplay muted loop preload="metadata"></video>
+  </div>
 </section>
 
 <!-- ════════ FLEET HEADER VIDEO ════════ -->
