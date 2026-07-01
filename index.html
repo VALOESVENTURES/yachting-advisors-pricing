@@ -50,10 +50,36 @@
     background: var(--ink);
     color: var(--paper);
     border-bottom: 1px solid #000;
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    box-shadow: 0 10px 30px -18px rgba(0,0,0,0.8);
   }
   .nav-inner {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 22px 32px; max-width: 1280px; margin: 0 auto;
+    padding: 16px 32px; max-width: 1280px; margin: 0 auto;
+  }
+  .nav-actions { display: flex; align-items: center; gap: 12px; }
+  .nav-btn {
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
+    padding: 11px 20px;
+    border: 1px solid transparent;
+    cursor: pointer; text-decoration: none; white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  .nav-btn .arrow { transition: transform 0.2s ease; }
+  .nav-btn:hover .arrow { transform: translateX(3px); }
+  .nav-btn.ghost { color: var(--paper); border-color: rgba(255,255,255,0.3); background: transparent; }
+  .nav-btn.ghost:hover { border-color: var(--paper); background: rgba(255,255,255,0.06); }
+  .nav-btn.brass { background: var(--brass); color: var(--ink); border-color: var(--brass); }
+  .nav-btn.brass:hover { background: var(--brass-dk); border-color: var(--brass-dk); }
+  @media (max-width: 640px) {
+    .nav-inner { padding: 12px 18px; }
+    .logo img { height: 34px; }
+    .nav-actions { gap: 8px; }
+    .nav-btn { padding: 9px 13px; font-size: 12px; letter-spacing: 0.02em; }
   }
   .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
   .logo img {
@@ -1986,6 +2012,10 @@
     <a class="logo" href="#">
       <img src="https://yachtingadvisors.com/wp-content/uploads/2024/04/valoes-yachting-advisors-WHITE.png" alt="VALOES Yachting Advisors" />
     </a>
+    <div class="nav-actions">
+      <button type="button" class="nav-btn ghost" onclick="openSchedule()">Book Demo</button>
+      <a class="nav-btn brass" href="https://link.waveapps.com/3b95an-jy2gbf" target="_blank" rel="noopener">Activate Now <span class="arrow">→</span></a>
+    </div>
   </div>
 </nav>
 
