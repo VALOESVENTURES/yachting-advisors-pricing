@@ -3015,6 +3015,7 @@
           <input type="tel" name="phone" required placeholder="Phone number" autocomplete="tel" id="bl-phone" />
         </div>
         <textarea name="notes" rows="2" placeholder="Anything else? (optional)" id="bl-notes"></textarea>
+        <input type="text" id="bl-company" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
         <button type="submit" id="bl-submit">Send my plan</button>
       </form>
       <div class="fine">We'll only use your details to set up your plan and follow up.</div>
@@ -3194,6 +3195,14 @@
     const dest = document.getElementById('pricing');
     if (dest) dest.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+  // Yachting Advisors Suite (CRM) — public lead-intake RPC. The anon key is a
+  // public client key (RLS keeps the leads table locked; anon can only EXECUTE
+  // submit_bundle_lead, which inserts one specific client's website leads).
+  // The row lands with notified_at=null, so the CRM's auto-notify cron texts
+  // the super-admins (Shawn/Josh/Luciano) + round-robins Carlos/Danny within a
+  // minute — the same pipeline as every other lead.
+  const CRM_RPC_URL = 'https://cumbqakzsautofznmkxj.supabase.co/rest/v1/rpc/submit_bundle_lead';
+  const CRM_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1bWJxYWt6c2F1dG9mem5ta3hqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEyNjcxMDYsImV4cCI6MjA4Njg0MzEwNn0.RMYrnURQYlyYlSSG0DfrNeNSgFXXR-e0ffdVebtamCw';
   async function submitBundleLead(e){
     e.preventDefault();
     const btn = document.getElementById('bl-submit');
@@ -3202,24 +3211,47 @@
     const email = document.getElementById('bl-email').value.trim();
     const phone = document.getElementById('bl-phone').value.trim();
     const notes = document.getElementById('bl-notes').value.trim();
+    const hp    = (document.getElementById('bl-company') || {}).value || '';
     const picked = bundleSelectedList();
     const total = picked.length * 99;
     const body = document.getElementById('bundle-modal-body');
     btn.disabled = true; const orig = btn.textContent; btn.textContent = 'Sending…';
-    const payload = {
-      name: (first + ' ' + last).trim(),
-      email, phone,
-      services_selected: picked.join(', '),
-      estimated_total: '$' + total + '/mo',
-      notes,
-      _subject: 'New Bundle Plan Request — ' + (first || email),
-      _template: 'table', _captcha: 'false'
-    };
     try {
-      const res = await fetch('https://formsubmit.co/ajax/Shawn@yachtingadvisors.com', {
-        method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload)
+      // Primary: create the lead in the CRM so lead routing / Twilio fires.
+      const res = await fetch(CRM_RPC_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': CRM_ANON_KEY,
+          'Authorization': 'Bearer ' + CRM_ANON_KEY
+        },
+        body: JSON.stringify({
+          p_name: (first + ' ' + last).trim(),
+          p_email: email,
+          p_phone: phone,
+          p_services: picked.join(', '),
+          p_estimated_total: '$' + total + '/mo',
+          p_notes: notes,
+          p_hp: hp
+        })
       });
-      if (!res.ok) throw new Error('Network response was not ok');
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data || data.success === false) {
+        throw new Error((data && data.error) || 'Network response was not ok');
+      }
+
+      // Secondary (best-effort): plain email copy via formsubmit. Never blocks
+      // success — the CRM lead above is the source of truth.
+      fetch('https://formsubmit.co/ajax/Shawn@yachtingadvisors.com', {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name: (first + ' ' + last).trim(), email, phone,
+          services_selected: picked.join(', '), estimated_total: '$' + total + '/mo', notes,
+          _subject: 'New Bundle Plan Request — ' + (first || email),
+          _template: 'table', _captcha: 'false'
+        })
+      }).catch(() => {});
+
       body.innerHTML =
         '<div class="success"><div class="eyebrow" style="color: var(--ok);">Plan received</div>' +
         '<h3>Thanks, <em>' + (first ? first : 'there') + '.</em></h3>' +
