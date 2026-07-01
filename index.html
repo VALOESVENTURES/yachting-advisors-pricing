@@ -3176,6 +3176,18 @@
     videoModal.addEventListener('click', (e) => { if (e.target === videoModal) closeVideo(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeVideo(); });
   }
+  // Auto-open the explainer video when the link carries #watch / ?watch
+  // (shareable "watch the video" link). Browsers may block autoplay of
+  // sound without a gesture, so the video opens ready with its controls.
+  function maybeAutoplayVideo(){
+    const h = (location.hash || '').toLowerCase();
+    const q = (location.search || '').toLowerCase();
+    if (h === '#watch' || h === '#video' || /[?&](watch|video)(=|&|$)/.test(q)) {
+      openVideo();
+    }
+  }
+  maybeAutoplayVideo();
+  window.addEventListener('hashchange', maybeAutoplayVideo);
 
   // ─── BUILD-YOUR-BUNDLE LEAD POPUP ───
   const bundleModal = document.getElementById('bundle-modal');
