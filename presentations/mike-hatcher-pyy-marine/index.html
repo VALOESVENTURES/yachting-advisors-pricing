@@ -191,6 +191,25 @@
   .browser .view .lab .t{font-family:'Saira Semi Expanded',sans-serif;font-weight:700;text-transform:uppercase;font-size:16px;color:#fff;}
   .browser .view .lab .s{font-family:'Saira',sans-serif;font-size:11px;color:var(--buc);margin-top:5px;text-transform:uppercase;letter-spacing:0.04em;}
 
+  /* faithful recreation of the live pyymarine.com hero */
+  .browser .view.pyysite{background:#0a0a0b;display:block;overflow:hidden;padding:0;}
+  .browser .view.pyysite::after{display:none;}
+  .pyysite .ptop{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;position:relative;z-index:3;}
+  .pyysite .plogo{font-family:'Saira Semi Expanded',sans-serif;font-weight:700;font-size:12px;color:#fff;letter-spacing:0.02em;}
+  .pyysite .plogo b{color:#e23b2e;}
+  .pyysite .pnav{display:flex;gap:11px;font-family:'Saira',sans-serif;font-size:8px;font-weight:600;letter-spacing:0.08em;color:#d7dbe0;text-transform:uppercase;}
+  @media(max-width:520px){.pyysite .pnav{display:none;}}
+  .pyysite .pphone{font-family:'Saira Semi Expanded',sans-serif;font-weight:700;font-size:12px;color:#e23b2e;letter-spacing:0.01em;}
+  .pyysite .phero{position:relative;padding:20px 18px 16px;min-height:150px;}
+  .pyysite .pwm{position:absolute;right:6px;top:36%;transform:translateY(-50%);font-family:'Georgia',serif;font-style:italic;font-weight:700;font-size:56px;color:rgba(255,255,255,.06);white-space:nowrap;pointer-events:none;line-height:1;}
+  .pyysite .phead{font-family:'Saira Semi Expanded',sans-serif;font-weight:700;text-transform:uppercase;font-size:26px;line-height:.98;color:#fff;position:relative;z-index:2;letter-spacing:-0.01em;}
+  .pyysite .psince{display:flex;align-items:center;gap:12px;margin-top:8px;position:relative;z-index:2;font-family:'Saira',sans-serif;font-size:10px;letter-spacing:0.14em;color:#c9ced4;text-transform:uppercase;}
+  .pyysite .psince .prule{height:2px;width:120px;background:#e23b2e;display:block;}
+  .pyysite .pquick{display:flex;gap:26px;margin-top:20px;position:relative;z-index:2;}
+  .pyysite .pquick .q .ql{font-family:'Inter',sans-serif;font-size:8px;color:#cfd4da;}
+  .pyysite .pquick .q .qb{font-family:'Saira Semi Expanded',sans-serif;font-weight:700;text-transform:uppercase;font-size:13px;color:#3aa3d6;line-height:1;margin-top:1px;}
+  .pyysite .pquick .q .qh{margin-top:5px;width:34px;height:5px;background:repeating-linear-gradient(115deg,#3a4150 0 3px,transparent 3px 6px);}
+
   /* social audit cards */
   .soc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px;}
   @media(max-width:900px){.soc-grid{grid-template-columns:1fr;}}
@@ -261,21 +280,38 @@
     <div class="slide-inner cols">
       <div>
         <div class="eyebrow">Your website today</div>
-        <h2 class="display">A solid dealer — on a <em>dated</em> site.</h2>
-        <p class="lede">pyymarine.com does the job as a brochure, but it's a template that wasn't built to capture buyers, feed your social, or hold onto a lead once it arrives.</p>
+        <h2 class="display">A sharp storefront — that <em>waits</em> for buyers.</h2>
+        <p class="lede">pyymarine.com looks good and the bones are solid. The gap isn't the design — it's that a great storefront still has to sit there until someone decides to walk in. It doesn't create demand, and it doesn't capture the people your social reaches.</p>
         <ul class="ticks">
-          <li><b>Template, not a brand</b><span class="sub">Your five premium builders share one generic layout — no page that sells a Yellowfin the way it deserves.</span></li>
-          <li><b>Little lead capture</b><span class="sub">No always-on chat, thin forms — an after-hours inquiry has nowhere to land.</span></li>
-          <li><b>Disconnected from social</b><span class="sub">Your posts don't drive anywhere that captures the visitor or lets you retarget them.</span></li>
-          <li><b>Not built for search or AI</b><span class="sub">Buyers find you through the marketplaces instead of finding PYY directly.</span></li>
+          <li><b>It waits; it doesn't hunt</b><span class="sub">A destination people find. Nothing here goes out and puts a Yellowfin in front of a buyer who wasn't already looking.</span></li>
+          <li><b>Social is bolted on</b><span class="sub">Two icons in the corner — the site doesn't feed your feed, and your feed doesn't feed a captured, retargetable list.</span></li>
+          <li><b>Capture stops at "Text us"</b><span class="sub">A good start, but not an always-on assistant logging every inquiry into a CRM you can remarket from.</span></li>
+          <li><b>Each brand shares one stage</b><span class="sub">Yellowfin, Nor-Tech &amp; the rest deserve their own pages a campaign can point straight to.</span></li>
         </ul>
       </div>
       <div>
         <div class="browser">
           <div class="bar"><span class="bdots"><i></i><i></i><i></i></span><span class="url">https://www.pyymarine.com</span></div>
-          <div class="view"><span class="ph">Screenshot slot</span><div class="lab"><div class="t">pyymarine.com — today</div><div class="s">Drop in a current screenshot</div></div></div>
+          <div class="view pyysite">
+            <div class="ptop">
+              <span class="plogo">PYY&nbsp;<b>MARINE</b></span>
+              <span class="pnav"><span>Inventory</span><span>Service</span><span>Repower</span><span>Marina</span><span>About</span><span>Fishing</span><span>Contact</span></span>
+              <span class="pphone">410.255.1771</span>
+            </div>
+            <div class="phero">
+              <span class="pwm">Yellowfin</span>
+              <div class="phead">Your Trusted<br/>Marine Dealer</div>
+              <div class="psince">Since 2015 <span class="prule"></span></div>
+              <div class="pquick">
+                <span class="q"><span class="ql">New</span><div class="qb">Inventory</div><div class="qh"></div></span>
+                <span class="q"><span class="ql">Shop</span><div class="qb">Pre-Owned</div><div class="qh"></div></span>
+                <span class="q"><span class="ql">Schedule</span><div class="qb">Service</div><div class="qh"></div></span>
+                <span class="q"><span class="ql">Mercury</span><div class="qb">Repowers</div><div class="qh"></div></span>
+              </div>
+            </div>
+          </div>
         </div>
-        <p class="cap">Send me a screenshot of the live site and I'll place it here — annotated against what we'd rebuild.</p>
+        <p class="cap">Your live homepage, pyymarine.com — the storefront is strong. The plan makes it work <em>for</em> you between visits.</p>
       </div>
     </div>
     <div class="slide-foot"><span>Digital Growth Plan · 2026</span><span class="credit">Prepared by Yachting Advisors</span></div>
