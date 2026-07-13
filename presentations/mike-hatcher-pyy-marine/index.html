@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PYY Marine · Digital Growth Plan 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700&family=Saira+Semi+Expanded:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Valhalla / Viking 2026 brand palette */
+    --flag:#1D1F2A;            /* flag blue — primary dark surface */
+    --flag-2:#12141c;          /* deeper flag */
+    --shark:#393D47;           /* shark grey */
+    --navy:#002a43;            /* primary (buttons, heads on light) */
+    --navy-img:#0b1f30;        /* image placeholder bg (as used on-site) */
+    --sec:#00639a;             /* secondary blue */
+    --sec-lt:#51b2fe;          /* secondary container blue */
+    --stars:#165C7D;           /* stars & stripes blue */
+    --shimmer:#5F8FB4;
+    --buc:#99D6EA;             /* buc blue — light accent */
+    --surface:#fcf9f8;         /* light surface */
+    --surface-2:#f0eded;
+    --line:#c2c7ce;            /* outline variant */
+    --line-dk:#2a2e3a;         /* line on dark */
+    --text:#1b1c1c;            /* on-surface */
+    --label:#5b6570;           /* outline grey (labels) */
+    --ok:#2e7d5b; --warn:#b4552f;
+  }
+  *{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
+  html,body{margin:0;padding:0;}
+  body{font-family:'Inter',system-ui,sans-serif;background:#05070c;color:var(--text);font-size:16px;line-height:1.55;}
+  .head{font-family:'Saira Semi Expanded','Saira',sans-serif;}
+  .label-f{font-family:'Saira',sans-serif;}
+  .mono{font-family:'Saira',ui-monospace,monospace;}
+
+  /* ───────── deck scaffold ───────── */
+  .deck{scroll-snap-type:y mandatory;height:100vh;overflow-y:scroll;scroll-behavior:smooth;}
+  .slide{position:relative;scroll-snap-align:start;min-height:100vh;width:100%;display:flex;flex-direction:column;padding:30px 8vw;overflow:hidden;}
+  .slide-inner{max-width:1140px;width:100%;margin:auto;padding:16px 0;}
+
+  .flag{background:var(--flag);color:#fff;}
+  .flag-soft{background:radial-gradient(120% 120% at 82% 0%,#243a52 0%,var(--flag) 55%);color:#fff;}
+  .steel{background:linear-gradient(155deg,#12324a 0%,#15202e 45%,var(--flag) 100%);color:#fff;}
+  .light{background:var(--surface);color:var(--text);}
+  .light-2{background:var(--surface-2);color:var(--text);}
+
+  /* chrome: PYY leads, YA logo/credit in the foot */
+  .slide-top,.slide-foot{flex:none;width:100%;display:flex;align-items:center;justify-content:space-between;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-family:'Saira',sans-serif;font-weight:600;}
+  .flag .slide-top,.flag .slide-foot,.flag-soft .slide-top,.flag-soft .slide-foot,.steel .slide-top,.steel .slide-foot{color:#7d8a99;}
+  .light .slide-top,.light .slide-foot,.light-2 .slide-top,.light-2 .slide-foot{color:var(--label);}
+  .brandmark{font-family:'Saira Semi Expanded',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.26em;text-transform:uppercase;}
+  .pagenum{font-family:'Saira',monospace;letter-spacing:0.12em;}
+  .foot-logo{height:16px;width:auto;opacity:0.9;}
+  .credit{font-size:10px;letter-spacing:0.14em;display:inline-flex;align-items:center;gap:10px;}
+
+  .eyebrow{font-family:'Saira',sans-serif;text-transform:uppercase;letter-spacing:0.22em;font-size:11px;font-weight:700;color:var(--sec-lt);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+  .eyebrow::before{content:"";width:24px;height:2px;background:var(--sec-lt);display:inline-block;}
+  .light .eyebrow,.light-2 .eyebrow{color:var(--sec);}
+  .light .eyebrow::before,.light-2 .eyebrow::before{background:var(--sec);}
+
+  h1.display,h2.display{font-family:'Saira Semi Expanded','Saira',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:-0.005em;margin:0;line-height:1.02;}
+  h1.display{font-size:clamp(36px,5.6vw,74px);}
+  h2.display{font-size:clamp(28px,4vw,52px);line-height:1.05;margin-bottom:6px;}
+  .display em{font-style:normal;color:var(--buc);}
+  .light .display em,.light-2 .display em{color:var(--sec);}
+  .lede{font-size:clamp(15px,1.4vw,19px);line-height:1.62;max-width:60ch;color:#c3ccd6;}
+  .light .lede,.light-2 .lede{color:#3d454d;}
+  .kicker{font-size:12.5px;letter-spacing:0.02em;}
+
+  /* cover */
+  .cover-logo{height:30px;width:auto;}
+  .cover-meta{display:flex;gap:40px;flex-wrap:wrap;margin-top:38px;}
+  .cover-meta .cm{border-left:2px solid var(--stars);padding-left:15px;}
+  .cover-meta .cm .l{font-family:'Saira',sans-serif;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:#8391a0;margin-bottom:6px;font-weight:600;}
+  .cover-meta .cm .v{font-size:14px;color:#fff;font-weight:600;}
+
+  /* two-column */
+  .cols{display:grid;grid-template-columns:1.05fr 0.95fr;gap:52px;align-items:center;}
+  .cols.narrow{grid-template-columns:1fr 1fr;}
+  @media(max-width:900px){.cols,.cols.narrow{grid-template-columns:1fr;gap:28px;}}
+
+  ul.ticks{list-style:none;margin:22px 0 0;padding:0;}
+  ul.ticks li{position:relative;padding:11px 0 11px 28px;border-bottom:1px solid rgba(255,255,255,0.09);font-size:15px;}
+  .light ul.ticks li,.light-2 ul.ticks li{border-bottom:1px solid var(--line);}
+  ul.ticks li::before{content:"";position:absolute;left:0;top:17px;width:10px;height:10px;background:var(--sec-lt);}
+  .light ul.ticks li::before,.light-2 ul.ticks li::before{background:var(--sec);}
+  ul.ticks li b{font-weight:600;font-family:'Saira',sans-serif;letter-spacing:0.01em;}
+  ul.ticks li .sub{display:block;color:#8b97a4;font-size:12.5px;margin-top:3px;font-family:'Inter';}
+  .light ul.ticks li .sub,.light-2 ul.ticks li .sub{color:#6b757f;}
+
+  /* image helpers */
+  .imgframe{width:100%;border-radius:6px;border:1px solid var(--line-dk);display:block;object-fit:cover;}
+  .light .imgframe,.light-2 .imgframe{border-color:var(--line);}
+  .cap{font-family:'Saira',sans-serif;font-size:11.5px;letter-spacing:0.03em;color:#8391a0;margin-top:12px;}
+  .light .cap,.light-2 .cap{color:#6b757f;}
+
+  /* photo slot */
+  .slot{position:relative;width:100%;border-radius:6px;overflow:hidden;border:1px solid rgba(153,214,234,0.16);
+     background:linear-gradient(155deg,#123049 0%,var(--navy-img) 60%,#08141d 100%);}
+  .slot::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 20% 0%,rgba(81,178,254,0.16),transparent 60%);}
+  .slot .lab{position:absolute;left:15px;bottom:13px;z-index:2;}
+  .slot .lab .brand{font-family:'Saira Semi Expanded',sans-serif;font-weight:700;text-transform:uppercase;font-size:19px;color:#fff;line-height:1;letter-spacing:0.02em;}
+  .slot .lab .model{font-family:'Saira',sans-serif;font-size:11px;color:var(--buc);margin-top:6px;letter-spacing:0.04em;text-transform:uppercase;}
+  .slot .ph{position:absolute;top:11px;right:12px;z-index:2;font-family:'Saira',sans-serif;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.22);border-radius:2px;padding:3px 7px;font-weight:600;}
+
+  /* brand wall */
+  .brandwall{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px;}
+  @media(max-width:900px){.brandwall{grid-template-columns:1fr 1fr;}}
+  .brandwall .slot{aspect-ratio:4/3;}
+
+  /* owned vs rented */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px;}
+  @media(max-width:900px){.vs{grid-template-columns:1fr;}}
+  .vscard{border-radius:6px;padding:22px 24px;border:1px solid var(--line);background:#fff;}
+  .vscard.bad{background:#fbf1ec;border-color:#e2c3b6;}
+  .vscard.good{background:#eef6f2;border-color:#bcdccb;}
+  .vscard .vh{font-family:'Saira',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:12px;font-weight:700;}
+  .vscard.bad .vh{color:var(--warn);}
+  .vscard.good .vh{color:var(--ok);}
+  .vscard .vt{font-family:'Saira Semi Expanded',sans-serif;font-weight:700;text-transform:uppercase;font-size:20px;color:var(--navy);margin-bottom:12px;line-height:1.1;letter-spacing:-0.01em;}
+  .vscard ul{list-style:none;margin:0;padding:0;}
+  .vscard li{font-size:13.5px;padding:7px 0 7px 22px;position:relative;color:#3d454d;border-top:1px solid rgba(0,0,0,0.07);}
+  .vscard li:first-child{border-top:none;}
+  .vscard.bad li::before{content:"✕";position:absolute;left:0;color:var(--warn);font-size:12px;top:8px;font-weight:700;}
+  .vscard.good li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-size:12px;top:8px;font-weight:700;}
+
+  /* CRM funnel */
+  .funnel{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px;}
+  @media(max-width:900px){.funnel{grid-template-columns:1fr 1fr;}}
+  .fstep{position:relative;border:1px solid var(--line-dk);border-radius:6px;padding:18px 18px 20px;background:rgba(255,255,255,0.04);border-top:3px solid var(--sec-lt);}
+  .fstep .fn{font-family:'Saira',sans-serif;font-size:10px;letter-spacing:0.16em;color:var(--buc);margin-bottom:11px;font-weight:700;text-transform:uppercase;}
+  .fstep h4{font-family:'Saira Semi Expanded',sans-serif;font-weight:700;text-transform:uppercase;font-size:16px;margin:0 0 8px;color:#fff;letter-spacing:-0.01em;}
+  .fstep p{margin:0;font-size:12.5px;line-height:1.5;color:#93a0ad;}
+  .fstep .arrow{position:absolute;right:-9px;top:50%;transform:translateY(-50%);color:var(--sec-lt);font-size:15px;z-index:3;font-weight:700;}
+  @media(max-width:900px){.fstep .arrow{display:none;}}
+
+  /* feature grid */
+  .feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px;}
+  @media(max-width:900px){.feat-grid{grid-template-columns:1fr;}}
+  .fcell{display:flex;gap:15px;align-items:flex-start;background:rgba(255,255,255,0.04);border:1px solid var(--line-dk);border-radius:6px;padding:15px;}
+  .fcell img{width:118px;height:82px;object-fit:cover;border-radius:4px;flex:none;border:1px solid var(--line-dk);}
+  .fcell .ft h4{font-family:'Saira Semi Expanded',sans-serif;font-weight:700;text-transform:uppercase;font-size:16px;margin:0 0 5px;color:#fff;letter-spacing:-0.01em;}
+  .fcell .ft p{margin:0;font-size:12.5px;color:#93a0ad;line-height:1.5;}
+
+  /* results dashboard */
+  .dash{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px;}
+  @media(max-width:900px){.dash{grid-template-columns:repeat(2,1fr);}}
+  .stat{background:rgba(255,255,255,0.04);border:1px solid var(--line-dk);border-radius:6px;padding:20px;border-left:3px solid var(--buc);}
+  .stat .k{font-family:'Saira',sans-serif;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#8391a0;margin-bottom:10px;font-weight:600;}
+  .stat .v{font-family:'Saira Semi Expanded',sans-serif;font-weight:700;font-size:38px;line-height:1;color:var(--buc);}
+  .stat .d{font-size:11.5px;color:#93a0ad;margin-top:8px;line-height:1.45;}
+
+  /* next steps */
+  .next{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px;}
+  @media(max-width:900px){.next{grid-template-columns:1fr;}}
+  .next .ni{border-top:3px solid var(--sec);padding-top:15px;}
+  .next .ni .nn{font-family:'Saira',sans-serif;font-size:12px;color:var(--sec);margin-bottom:8px;font-weight:700;}
+  .next .ni h4{font-family:'Saira Semi Expanded',sans-serif;font-weight:700;text-transform:uppercase;margin:0 0 6px;font-size:15px;color:var(--navy);letter-spacing:-0.01em;}
+  .next .ni p{margin:0;font-size:13px;color:#5a636b;}
+
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px;}
+  .btn{font-family:'Saira',sans-serif;display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:700;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;padding:15px 26px;border-radius:4px;}
+  .btn.solid{background:var(--sec);color:#fff;}
+  .light .btn.solid{background:var(--navy);}
+  .btn.ghost{border:1px solid rgba(255,255,255,0.3);color:#fff;}
+  .light .btn.ghost{border-color:var(--line);color:var(--navy);}
+  .contact{display:flex;gap:34px;flex-wrap:wrap;margin-top:28px;font-size:14px;}
+  .contact .c .l{font-family:'Saira',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--label);margin-bottom:5px;font-weight:600;}
+  .contact .c a{color:var(--sec);text-decoration:none;font-weight:600;}
+
+  /* progress + nav */
+  .progress{position:fixed;top:0;left:0;height:3px;background:var(--sec-lt);width:0;z-index:50;transition:width .2s ease;}
+  .nav-dots{position:fixed;right:20px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:11px;z-index:50;}
+  .nav-dots a{width:8px;height:8px;background:rgba(255,255,255,0.28);border:1px solid rgba(255,255,255,0.25);transition:all .2s;}
+  .nav-dots a.on{background:var(--buc);border-color:var(--buc);transform:scale(1.35);}
+  .hint{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);font-family:'Saira',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.5);z-index:50;animation:fade 2.6s ease-in-out infinite;}
+  @keyframes fade{0%,100%{opacity:.35}50%{opacity:.85}}
+
+  /* browser frame (current website) */
+  .browser{border:1px solid var(--line-dk);border-radius:8px;overflow:hidden;background:#0e1420;box-shadow:0 24px 50px -30px rgba(0,0,0,.7);}
+  .browser .bar{display:flex;align-items:center;gap:10px;padding:9px 13px;background:#171d29;border-bottom:1px solid var(--line-dk);}
+  .browser .bdots{display:flex;gap:6px;}
+  .browser .bdots i{width:9px;height:9px;border-radius:50%;background:#3a4150;display:block;}
+  .browser .url{flex:1;background:#0b0f18;border:1px solid #2a2e3a;border-radius:4px;padding:6px 12px;font-family:'Saira',sans-serif;font-size:11px;color:#8391a0;letter-spacing:0.03em;}
+  .browser .view{position:relative;aspect-ratio:16/10;background:linear-gradient(155deg,#123049 0%,var(--navy-img) 60%,#08141d 100%);display:flex;align-items:flex-end;}
+  .browser .view::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 20% 0%,rgba(81,178,254,.14),transparent 60%);}
+  .browser .view .ph{position:absolute;top:11px;right:12px;z-index:2;font-family:'Saira',sans-serif;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.22);border-radius:2px;padding:3px 7px;font-weight:600;}
+  .browser .view .lab{position:relative;z-index:2;padding:16px 18px;}
+  .browser .view .lab .t{font-family:'Saira Semi Expanded',sans-serif;font-weight:700;text-transform:uppercase;font-size:16px;color:#fff;}
+  .browser .view .lab .s{font-family:'Saira',sans-serif;font-size:11px;color:var(--buc);margin-top:5px;text-transform:uppercase;letter-spacing:0.04em;}
+
+  /* faithful recreation of the live pyymarine.com hero */
+  .browser .view.pyysite{background:#0a0a0b;display:block;overflow:hidden;padding:0;}
+  .browser .view.pyysite::after{display:none;}
+  .pyysite .ptop{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;position:relative;z-index:3;}
+  .pyysite .plogo{font-family:'Saira Semi Expanded',sans-serif;font-weight:700;font-size:12px;color:#fff;letter-spacing:0.02em;}
+  .pyysite .plogo b{color:#e23b2e;}
+  .pyysite .pnav{display:flex;gap:11px;font-family:'Saira',sans-serif;font-size:8px;font-weight:600;letter-spacing:0.08em;color:#d7dbe0;text-transform:uppercase;}
+  @media(max-width:520px){.pyysite .pnav{display:none;}}
+  .pyysite .pphone{font-family:'Saira Semi Expanded',sans-serif;font-weight:700;font-size:12px;color:#e23b2e;letter-spacing:0.01em;}
+  .pyysite .phero{position:relative;padding:20px 18px 16px;min-height:150px;}
+  .pyysite .pwm{position:absolute;right:6px;top:36%;transform:translateY(-50%);font-family:'Georgia',serif;font-style:italic;font-weight:700;font-size:56px;color:rgba(255,255,255,.06);white-space:nowrap;pointer-events:none;line-height:1;}
+  .pyysite .phead{font-family:'Saira Semi Expanded',sans-serif;font-weight:700;text-transform:uppercase;font-size:26px;line-height:.98;color:#fff;position:relative;z-index:2;letter-spacing:-0.01em;}
+  .pyysite .psince{display:flex;align-items:center;gap:12px;margin-top:8px;position:relative;z-index:2;font-family:'Saira',sans-serif;font-size:10px;letter-spacing:0.14em;color:#c9ced4;text-transform:uppercase;}
+  .pyysite .psince .prule{height:2px;width:120px;background:#e23b2e;display:block;}
+  .pyysite .pquick{display:flex;gap:26px;margin-top:20px;position:relative;z-index:2;}
+  .pyysite .pquick .q .ql{font-family:'Inter',sans-serif;font-size:8px;color:#cfd4da;}
+  .pyysite .pquick .q .qb{font-family:'Saira Semi Expanded',sans-serif;font-weight:700;text-transform:uppercase;font-size:13px;color:#3aa3d6;line-height:1;margin-top:1px;}
+  .pyysite .pquick .q .qh{margin-top:5px;width:34px;height:5px;background:repeating-linear-gradient(115deg,#3a4150 0 3px,transparent 3px 6px);}
+
+  /* social audit cards */
+  .soc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px;}
+  @media(max-width:900px){.soc-grid{grid-template-columns:1fr;}}
+  .soc{border:1px solid var(--line-dk);border-radius:6px;padding:20px 22px;background:rgba(255,255,255,.04);border-top:3px solid var(--sec-lt);}
+  .soc .net{font-family:'Saira',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:0.16em;color:#8391a0;font-weight:700;margin-bottom:14px;}
+  .soc .big{font-family:'Saira Semi Expanded',sans-serif;font-weight:700;font-size:34px;color:#fff;line-height:1;}
+  .soc .big small{font-family:'Saira',sans-serif;font-size:13px;color:#8391a0;font-weight:600;letter-spacing:0.04em;margin-left:6px;text-transform:uppercase;}
+  .soc .row2{margin-top:12px;font-size:12.5px;color:#93a0ad;display:flex;justify-content:space-between;gap:8px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px;}
+  .soc .row2 b{color:#c3ccd6;font-family:'Saira',sans-serif;}
+
+  /* proof stat tiles */
+  .proof{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px;}
+  @media(max-width:900px){.proof{grid-template-columns:repeat(2,1fr);}}
+  .ptile{position:relative;border:1px solid var(--line-dk);border-radius:6px;padding:22px 20px;background:rgba(255,255,255,.04);border-left:3px solid var(--buc);}
+  .ptile .v{font-family:'Saira Semi Expanded',sans-serif;font-weight:700;font-size:40px;line-height:1;color:var(--buc);}
+  .ptile .k{font-family:'Saira',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;color:#8391a0;margin-top:10px;font-weight:600;}
+  .ptile .fillme{position:absolute;top:10px;right:11px;font-family:'Saira',sans-serif;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:#c9922f;border:1px solid #6b5320;background:rgba(201,146,47,.1);border-radius:2px;padding:2px 6px;font-weight:700;}
+
+  @media print{
+    @page{size:13.333in 7.5in;margin:0;}
+    body{background:#fff;}
+    .deck{height:auto;overflow:visible;display:block;}
+    .slide{height:720px;min-height:720px;page-break-after:always;break-after:page;}
+    .cols{grid-template-columns:1.05fr 0.95fr;gap:52px;}
+    .cols.narrow{grid-template-columns:1fr 1fr;}
+    .brandwall{grid-template-columns:repeat(3,1fr);}
+    .vs{grid-template-columns:1fr 1fr;}
+    .funnel{grid-template-columns:repeat(4,1fr);}
+    .feat-grid{grid-template-columns:repeat(2,1fr);}
+    .dash{grid-template-columns:repeat(4,1fr);}
+    .soc-grid{grid-template-columns:repeat(3,1fr);}
+    .proof{grid-template-columns:repeat(4,1fr);}
+    .next{grid-template-columns:repeat(3,1fr);}
+    .progress,.nav-dots,.hint{display:none!important;}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<nav class="nav-dots" id="dots"></nav>
+<div class="hint" id="hint">↓ scroll &nbsp;·&nbsp; → next</div>
+
+<div class="deck" id="deck">
+
+  <!-- 1 · COVER -->
+  <section class="slide steel" id="s1">
+    <div class="slide-top">
+      <img class="cover-logo" src="../../assets/valoes-logo-white.png" alt="Yachting Advisors" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span class=&quot;brandmark&quot;>Yachting Advisors</span>')">
+      <span class="pagenum">01 / 12</span>
+    </div>
+    <div class="slide-inner">
+      <div class="eyebrow">PYY Marine · Digital Growth Plan 2026</div>
+      <h1 class="display">Turn your effort into an<br/><em>audience</em> — and leads.</h1>
+      <p class="lede" style="margin-top:22px;">You're already posting. This is a plan to make it compound — a real social engine for Yellowfin, Nor-Tech, Cape Horn, Jupiter and Premier that grows your following and feeds leads <em>you</em> own, not ones you rent from a marketplace.</p>
+      <div class="cover-meta">
+        <div class="cm"><div class="l">Prepared for</div><div class="v">Mike Hatcher · PYY Marine</div></div>
+        <div class="cm"><div class="l">Locations</div><div class="v">Pasadena &amp; Ocean City, MD</div></div>
+        <div class="cm"><div class="l">Focus</div><div class="v">Social growth &amp; owned leads</div></div>
+      </div>
+    </div>
+    <div class="slide-foot"><span>Digital Growth Plan · 2026</span><span class="credit"><img class="foot-logo" src="../../assets/valoes-logo-white.png" alt="" onerror="this.remove()">Prepared by Yachting Advisors</span></div>
+  </section>
+
+  <!-- 2 · YOUR WEBSITE TODAY -->
+  <section class="slide flag" id="s2">
+    <div class="slide-top"><span class="brandmark">PYY Marine</span><span class="pagenum">02 / 12</span></div>
+    <div class="slide-inner cols">
+      <div>
+        <div class="eyebrow">Your website today</div>
+        <h2 class="display">A sharp storefront — that <em>waits</em> for buyers.</h2>
+        <p class="lede">pyymarine.com looks good and the bones are solid. The gap isn't the design — it's that a great storefront still has to sit there until someone decides to walk in. It doesn't create demand, and it doesn't capture the people your social reaches.</p>
+        <ul class="ticks">
+          <li><b>It waits; it doesn't hunt</b><span class="sub">A destination people find. Nothing here goes out and puts a Yellowfin in front of a buyer who wasn't already looking.</span></li>
+          <li><b>Social is bolted on</b><span class="sub">Two icons in the corner — the site doesn't feed your feed, and your feed doesn't feed a captured, retargetable list.</span></li>
+          <li><b>Capture stops at "Text us"</b><span class="sub">A good start, but not an always-on assistant logging every inquiry into a CRM you can remarket from.</span></li>
+          <li><b>Each brand shares one stage</b><span class="sub">Yellowfin, Nor-Tech &amp; the rest deserve their own pages a campaign can point straight to.</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="browser">
+          <div class="bar"><span class="bdots"><i></i><i></i><i></i></span><span class="url">https://www.pyymarine.com</span></div>
+          <div class="view pyysite">
+            <div class="ptop">
+              <span class="plogo">PYY&nbsp;<b>MARINE</b></span>
+              <span class="pnav"><span>Inventory</span><span>Service</span><span>Repower</span><span>Marina</span><span>About</span><span>Fishing</span><span>Contact</span></span>
+              <span class="pphone">410.255.1771</span>
+            </div>
+            <div class="phero">
+              <span class="pwm">Yellowfin</span>
+              <div class="phead">Your Trusted<br/>Marine Dealer</div>
+              <div class="psince">Since 2015 <span class="prule"></span></div>
+              <div class="pquick">
+                <span class="q"><span class="ql">New</span><div class="qb">Inventory</div><div class="qh"></div></span>
+                <span class="q"><span class="ql">Shop</span><div class="qb">Pre-Owned</div><div class="qh"></div></span>
+                <span class="q"><span class="ql">Schedule</span><div class="qb">Service</div><div class="qh"></div></span>
+                <span class="q"><span class="ql">Mercury</span><div class="qb">Repowers</div><div class="qh"></div></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="cap">Your live homepage, pyymarine.com — the storefront is strong. The plan makes it work <em>for</em> you between visits.</p>
+      </div>
+    </div>
+    <div class="slide-foot"><span>Digital Growth Plan · 2026</span><span class="credit">Prepared by Yachting Advisors</span></div>
+  </section>
+
+  <!-- 3 · YOUR SOCIAL TODAY (AUDIT) -->
+  <section class="slide flag-soft" id="s3">
+    <div class="slide-top"><span class="brandmark">PYY Marine</span><span class="pagenum">03 / 12</span></div>
+    <div class="slide-inner">
+      <div class="eyebrow">Your social today</div>
+      <h2 class="display">You're doing the work. It's not <em>compounding.</em></h2>
+      <p class="lede">You've posted thousands of times — the effort is real. But the audience isn't growing to match, and none of it is wired to capture a lead. That's a fixable problem.</p>
+      <div class="soc-grid">
+        <div class="soc">
+          <div class="net">Instagram · @pyymarine</div>
+          <div class="big">2,187<small>followers</small></div>
+          <div class="row2"><span>Posts</span><b>2,484</b></div>
+          <div class="row2"><span>Ratio</span><b>&lt;1 follower / post</b></div>
+        </div>
+        <div class="soc">
+          <div class="net">Facebook · PYY Marine</div>
+          <div class="big">8,957<small>likes</small></div>
+          <div class="row2"><span>vs Instagram</span><b>~4× larger</b></div>
+          <div class="row2"><span>Signal</span><b>Audiences not linked</b></div>
+        </div>
+        <div class="soc">
+          <div class="net">LinkedIn</div>
+          <div class="big">95<small>followers</small></div>
+          <div class="row2"><span>Status</span><b>Effectively dormant</b></div>
+          <div class="row2"><span>Video</span><b>No reel engine</b></div>
+        </div>
+      </div>
+      <ul class="ticks" style="margin-top:20px;">
+        <li><b>Effort without reach</b><span class="sub">2,484 posts → 2,187 followers. Volume alone stopped moving the needle — the algorithm rewards short-form video now.</span></li>
+        <li><b>Nothing is captured</b><span class="sub">Posts don't route to a page that pixels the visitor or grabs a name — so you can't retarget the people who engage.</span></li>
+      </ul>
+    </div>
+    <div class="slide-foot"><span>Digital Growth Plan · 2026</span><span class="credit">Prepared by Yachting Advisors · public figures, Jul 2026</span></div>
+  </section>
+
+  <!-- 4 · HOW WE BUILD YOUR SOCIAL (FOCUS) -->
+  <section class="slide flag" id="s4">
+    <div class="slide-top"><span class="brandmark">PYY Marine</span><span class="pagenum">04 / 12</span></div>
+    <div class="slide-inner cols">
+      <div>
+        <div class="eyebrow">The fix · your social engine</div>
+        <h2 class="display">A real engine — <em>built and run</em> for you.</h2>
+        <p class="lede" style="margin-top:6px;">Not more random posts. A planned, video-first system that turns your inventory and your yard into content people actually follow — and that quietly builds a lead list underneath.</p>
+        <ul class="ticks">
+          <li><b>Short-form video, weekly</b><span class="sub">Reels from walkarounds, sea trials, delivery day and the service bay — where the reach is now.</span></li>
+          <li><b>Consistent, planned cadence</b><span class="sub">A content calendar a human concierge fills, proofs and publishes — it never lands on your team.</span></li>
+          <li><b>Cross-posted everywhere</b><span class="sub">Instagram, Facebook, TikTok, YouTube Shorts, LinkedIn &amp; X — with trending audio &amp; hashtags.</span></li>
+          <li><b>Every post drives to your site</b><span class="sub">So the follower becomes a captured, retargetable lead — not just a like.</span></li>
+        </ul>
+      </div>
+      <div>
+        <img class="imgframe" src="../../assets/social-media-posts.jpg" alt="Managed social posts">
+        <p class="cap">We produce, schedule and publish — you approve. The 2,484 posts of effort finally start compounding into audience and leads.</p>
+      </div>
+    </div>
+    <div class="slide-foot"><span>Digital Growth Plan · 2026</span><span class="credit">Prepared by Yachting Advisors</span></div>
+  </section>
+
+  <!-- 5 · PROOF — COLLABORATIVE POSTS -->
+  <section class="slide flag-soft" id="s5">
+    <div class="slide-top"><span class="brandmark">PYY Marine</span><span class="pagenum">05 / 12</span></div>
+    <div class="slide-inner">
+      <div class="eyebrow">Proof · the posts we've run together</div>
+      <h2 class="display">The collabs already <em>outperform.</em></h2>
+      <p class="lede">The collaborative posts we've produced with you are the preview — the same approach, run consistently, is the engine. Here's what they did.</p>
+      <div class="proof">
+        <div class="ptile"><span class="fillme">Your #</span><div class="v">—</div><div class="k">Total reach</div></div>
+        <div class="ptile"><span class="fillme">Your #</span><div class="v">—</div><div class="k">Engagements</div></div>
+        <div class="ptile"><span class="fillme">Your #</span><div class="v">—</div><div class="k">New followers</div></div>
+        <div class="ptile"><span class="fillme">Your #</span><div class="v">—</div><div class="k">DMs / leads</div></div>
+      </div>
+      <p class="cap">Placeholder tiles — I'll drop in the real numbers from our collab posts (reach, engagement rate, follower lift, top post) the moment you send them. Real figures land far harder than round claims.</p>
+    </div>
+    <div class="slide-foot"><span>Digital Growth Plan · 2026</span><span class="credit">Prepared by Yachting Advisors</span></div>
+  </section>
+
+  <!-- 6 · THE BRANDS -->
+  <section class="slide flag" id="s6">
+    <div class="slide-top"><span class="brandmark">PYY Marine</span><span class="pagenum">06 / 12</span></div>
+    <div class="slide-inner">
+      <div class="eyebrow">The lineup</div>
+      <h2 class="display">Five builders. Each deserves <em>its own stage.</em></h2>
+      <p class="lede">Your brands share one inventory list today. We give each builder a real page — its own story, styling and boats — and its own content stream, so a Yellowfin buyer and a Premier buyer each land somewhere built for them.</p>
+      <div class="brandwall">
+        <div class="slot"><span class="ph">Photo slot</span><div class="lab"><div class="brand">Yellowfin</div><div class="model">54 · 42 · 36 Offshore · 26 Hybrid</div></div></div>
+        <div class="slot"><span class="ph">Photo slot</span><div class="lab"><div class="brand">Nor-Tech</div><div class="model">390 Sport · 340 Sport</div></div></div>
+        <div class="slot"><span class="ph">Photo slot</span><div class="lab"><div class="brand">Cape Horn</div><div class="model">36XS &amp; the offshore range</div></div></div>
+        <div class="slot"><span class="ph">Photo slot</span><div class="lab"><div class="brand">Jupiter</div><div class="model">Offshore center consoles</div></div></div>
+        <div class="slot"><span class="ph">Photo slot</span><div class="lab"><div class="brand">Premier</div><div class="model">Luxury pontoons</div></div></div>
+        <div class="slot" style="background:linear-gradient(155deg,#1c2c1f,#0f1a12 60%,#0a120c);"><span class="ph">Service</span><div class="lab"><div class="brand">Service &amp; Storage</div><div class="model">Mercury · Yamaha · Suzuki · slips</div></div></div>
+      </div>
+      <p class="cap">Six brand pages, one live inventory feed behind them — every boat you list appears automatically and stays current.</p>
+    </div>
+    <div class="slide-foot"><span>Digital Growth Plan · 2026</span><span class="credit">Prepared by Yachting Advisors</span></div>
+  </section>
+
+  <!-- 7 · OWN VS RENT -->
+  <section class="slide light" id="s7">
+    <div class="slide-top"><span class="brandmark">PYY Marine</span><span class="pagenum">07 / 12</span></div>
+    <div class="slide-inner">
+      <div class="eyebrow">The core shift</div>
+      <h2 class="display">Stop <em>renting</em> your buyers from the marketplaces.</h2>
+      <p class="lede">Boats.com, Boat Trader and YachtWorld send leads — but you pay per lead, that lead is shared with every competitor on the page, and you never keep the buyer's data. The goal isn't to drop them; it's to stop <em>depending</em> on them.</p>
+      <div class="vs">
+        <div class="vscard bad">
+          <div class="vh label-f">Renting · today</div>
+          <div class="vt">Marketplace leads</div>
+          <ul>
+            <li>Pay per lead, every month, forever</li>
+            <li>The same buyer is sold to your competitors</li>
+            <li>No email, no pixel, no data you keep</li>
+            <li>You can't retarget or follow up on your own</li>
+          </ul>
+        </div>
+        <div class="vscard good">
+          <div class="vh label-f">Owning · the plan</div>
+          <div class="vt">Your own audience</div>
+          <ul>
+            <li>Leads come to your site, social &amp; CRM — exclusively yours</li>
+            <li>Every visitor is pixeled and re-targetable</li>
+            <li>Emails &amp; phone numbers you keep and remarket to</li>
+            <li>Cost per lead falls as your audience compounds</li>
+          </ul>
+        </div>
+      </div>
+      <p class="kicker" style="color:var(--label);margin-top:16px;">Keep the marketplaces as a top-of-funnel source — but make your own channels the engine that owns the buyer.</p>
+    </div>
+    <div class="slide-foot"><span>Digital Growth Plan · 2026</span><span class="credit">Prepared by Yachting Advisors</span></div>
+  </section>
+
+  <!-- 8 · CRM — TARGET & RETARGET -->
+  <section class="slide flag-soft" id="s8">
+    <div class="slide-top"><span class="brandmark">PYY Marine</span><span class="pagenum">08 / 12</span></div>
+    <div class="slide-inner">
+      <div class="eyebrow">The engine · CRM-driven ads</div>
+      <h2 class="display">Capture once. Target, retarget, <em>repeat.</em></h2>
+      <p class="lede">A CRM turns your social traffic into an asset. Every lead flows into one system — ours, or a <b>HubSpot</b> / <b>GoHighLevel</b> setup we build and run for you — and that data becomes the targeting behind smarter, cheaper ads.</p>
+      <div class="funnel">
+        <div class="fstep"><div class="fn">01 · Capture</div><h4>Every lead, one place</h4><p>Social, site forms, AI chat, calls and marketplace inquiries all land in the CRM — nothing slips through.</p><span class="arrow">→</span></div>
+        <div class="fstep"><div class="fn">02 · Segment</div><h4>Sort by boat &amp; intent</h4><p>Tag by builder and buyer profile — a Yellowfin 54 shopper vs. a Premier pontoon family.</p><span class="arrow">→</span></div>
+        <div class="fstep"><div class="fn">03 · Target</div><h4>Reach lookalikes</h4><p>Turn your best buyers into custom &amp; lookalike audiences on Meta — find more people just like them.</p><span class="arrow">→</span></div>
+        <div class="fstep"><div class="fn">04 · Retarget</div><h4>Follow up automatically</h4><p>Re-engage everyone who viewed a boat or a reel but didn't call — across Instagram, Facebook &amp; email.</p></div>
+      </div>
+      <p class="kicker" style="color:#8391a0;margin-top:22px;">The buyer who watched your Nor-Tech 390 reel at midnight sees it again tomorrow — with your name on it, not a marketplace's.</p>
+    </div>
+    <div class="slide-foot"><span>Digital Growth Plan · 2026</span><span class="credit">Prepared by Yachting Advisors</span></div>
+  </section>
+
+  <!-- 9 · THE WEBSITE WE'D BUILD -->
+  <section class="slide flag" id="s9">
+    <div class="slide-top"><span class="brandmark">PYY Marine</span><span class="pagenum">09 / 12</span></div>
+    <div class="slide-inner cols">
+      <div>
+        <div class="eyebrow">The rebuild · your hub</div>
+        <h2 class="display">The site your social <em>points to.</em></h2>
+        <p class="lede" style="margin-top:6px;">A modern, image-led dealer site is where every reel, post and email lands. It's the property you own — and the first place a buyer decides you're the right dealer.</p>
+        <ul class="ticks">
+          <li><b>A page per builder</b><span class="sub">Yellowfin, Nor-Tech, Cape Horn, Jupiter, Premier — plus service &amp; storage.</span></li>
+          <li><b>A live inventory feed</b><span class="sub">Every new &amp; brokerage boat, always current, with a sold archive.</span></li>
+          <li><b>24/7 AI chat</b><span class="sub">Captures the 11pm inquiry into your CRM instead of losing it.</span></li>
+          <li><b>Built for Google &amp; AI search</b><span class="sub">So buyers find PYY directly — not only through a marketplace.</span></li>
+        </ul>
+      </div>
+      <div>
+        <img class="imgframe" src="../../assets/custom-broker-site.webp" alt="Example dealer website">
+        <p class="cap">A representative build — we'd design PYY's around your five builders and your photography.</p>
+      </div>
+    </div>
+    <div class="slide-foot"><span>Digital Growth Plan · 2026</span><span class="credit">Prepared by Yachting Advisors</span></div>
+  </section>
+
+  <!-- 10 · PROOF (Valhalla) -->
+  <section class="slide light-2" id="s10">
+    <div class="slide-top"><span class="brandmark">PYY Marine</span><span class="pagenum">10 / 12</span></div>
+    <div class="slide-inner cols">
+      <div>
+        <div class="eyebrow">This isn't theory</div>
+        <h2 class="display">We already run this for a <em>multi-brand dealer.</em></h2>
+        <p class="lede">We build and operate the full engine for Valhalla Yacht Sales — a multi-brand dealer with your exact challenge: many builders, a live inventory feed, and a need to turn traffic into leads they own.</p>
+        <p class="lede" style="margin-top:12px;">Same playbook, tailored to PYY: a social engine, brand pages per builder, a live feed, and CRM-driven targeting and retargeting behind it all.</p>
+      </div>
+      <div>
+        <ul class="ticks">
+          <li><b>A page per builder</b><span class="sub">Each brand with its own story and boats — a natural home for the Yellowfin &amp; Nor-Tech push.</span></li>
+          <li><b>A live inventory feed</b><span class="sub">Every listing pulls in automatically and stays current.</span></li>
+          <li><b>CRM lead capture</b><span class="sub">Site, social, chat and ad inquiries land in one place, ready to retarget.</span></li>
+          <li><b>Run by yacht people</b><span class="sub">Led by Josh Valoes — ex-Marketing Director, Denison Yachting; VP &amp; CMO, YATCO.</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-foot"><span>Digital Growth Plan · 2026</span><span class="credit">Prepared by Yachting Advisors</span></div>
+  </section>
+
+  <!-- 11 · NEXT STEP -->
+  <section class="slide light" id="s11">
+    <div class="slide-top"><span class="brandmark">PYY Marine</span><span class="pagenum">11 / 12</span></div>
+    <div class="slide-inner">
+      <div class="eyebrow">Next step</div>
+      <h2 class="display">A half hour at your office, <em>next week.</em></h2>
+      <div class="next">
+        <div class="ni"><div class="nn">01</div><h4>We come to Pasadena</h4><p>Thirty minutes, in person — a working walkthrough, not a pitch for its own sake.</p></div>
+        <div class="ni"><div class="nn">02</div><h4>See the back-end live</h4><p>We open the real CRM, social calendar and dashboards we run for dealers and show exactly how it works.</p></div>
+        <div class="ni"><div class="nn">03</div><h4>The results you can expect</h4><p>The collab numbers, plus a first 90-day social plan for the Yellowfin &amp; Nor-Tech push.</p></div>
+      </div>
+      <div class="cta-row">
+        <a class="btn solid" href="https://yachtingadvisors.com/" target="_blank" rel="noopener">yachtingadvisors.com →</a>
+      </div>
+      <div class="contact">
+        <div class="c"><div class="l">Prepared for</div><div>Mike Hatcher · PYY Marine</div></div>
+        <div class="c"><div class="l">Prepared by</div><div>Yachting Advisors</div></div>
+        <div class="c"><div class="l">Web</div><a href="https://yachtingadvisors.com">yachtingadvisors.com</a></div>
+      </div>
+    </div>
+    <div class="slide-foot"><span>Digital Growth Plan · 2026</span><span class="credit">Prepared by Yachting Advisors</span></div>
+  </section>
+
+  <!-- 12 · CLOSE -->
+  <section class="slide steel" id="s12">
+    <div class="slide-top">
+      <img class="cover-logo" src="../../assets/valoes-logo-white.png" alt="Yachting Advisors" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span class=&quot;brandmark&quot;>Yachting Advisors</span>')">
+      <span class="pagenum">12 / 12</span>
+    </div>
+    <div class="slide-inner" style="text-align:center;">
+      <h1 class="display" style="font-size:clamp(30px,4.6vw,58px)">You're already posting.<br/>Let's make it <em>pay off.</em></h1>
+      <p class="lede" style="margin:22px auto 0;text-align:center;">Thank you, Mike. Half an hour next week and we'll show you exactly how it runs.</p>
+      <div class="cta-row" style="justify-content:center;">
+        <a class="btn solid" href="https://yachtingadvisors.com/" target="_blank" rel="noopener">yachtingadvisors.com →</a>
+      </div>
+    </div>
+    <div class="slide-foot" style="justify-content:center;left:0;right:0;"><span class="credit"><img class="foot-logo" src="../../assets/valoes-logo-white.png" alt="" onerror="this.remove()">Digital Growth Plan for PYY Marine · Prepared by Yachting Advisors · © 2026</span></div>
+  </section>
+
+</div>
+
+<script>
+  const deck=document.getElementById('deck');
+  const slides=[...document.querySelectorAll('.slide')];
+  const progress=document.getElementById('progress');
+  const dotsWrap=document.getElementById('dots');
+  const hint=document.getElementById('hint');
+  slides.forEach((s,i)=>{
+    const a=document.createElement('a');
+    a.href='#'+s.id;a.dataset.i=i;
+    a.addEventListener('click',e=>{e.preventDefault();s.scrollIntoView({behavior:'smooth'});});
+    dotsWrap.appendChild(a);
+  });
+  const dots=[...dotsWrap.children];
+  function onScroll(){
+    const top=deck.scrollTop, h=deck.clientHeight;
+    const idx=Math.round(top/h);
+    progress.style.width=((top/(deck.scrollHeight-h))*100)+'%';
+    dots.forEach((d,i)=>d.classList.toggle('on',i===idx));
+    if(top>40&&hint){hint.style.display='none';}
+  }
+  deck.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  function go(dir){
+    const h=deck.clientHeight;
+    const idx=Math.round(deck.scrollTop/h);
+    const next=Math.min(slides.length-1,Math.max(0,idx+dir));
+    slides[next].scrollIntoView({behavior:'smooth'});
+  }
+  window.addEventListener('keydown',e=>{
+    if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();go(1);}
+    if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(-1);}
+    if(e.key==='Home'){e.preventDefault();slides[0].scrollIntoView({behavior:'smooth'});}
+    if(e.key==='End'){e.preventDefault();slides[slides.length-1].scrollIntoView({behavior:'smooth'});}
+  });
+</script>
+</body>
+</html>
