@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+# Private client proposal decks — not for search engines
+Disallow: /presentations/
+# Compliance example page — not a public landing page
+Disallow: /sms-consent-example/
+
+Sitemap: https://yachtingadvisors.com/sitemap.xml
